@@ -10,6 +10,7 @@ import ExecutiveMembersPage from "./components/ExecutiveMembersPage"
 import PastMembersPage from "./components/PastMembersPage"
 import Nav from "./components/Nav"
 import Footer from "./components/Footer"
+import NoticeBoard from "./components/NoticeBoard"
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
             <Route path="/currentmembers" element={<CurrentMembersPage />} />
             <Route path="/executivemembers" element={<ExecutiveMembersPage />} />
             <Route path="/pastmembers" element={<PastMembersPage />} />
+            <Route path="/notice" element={<NoticeBoard />} />
           </Routes>
           <Footer />
         </BrowserRouter>
