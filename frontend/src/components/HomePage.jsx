@@ -1,8 +1,10 @@
 //user landing page
+import { useEffect,useState } from "react"
+import {useNavigate} from "react-router-dom"
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <div>HomePagehnn</div>
   )
 }
 

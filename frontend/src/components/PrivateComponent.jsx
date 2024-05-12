@@ -1,9 +1,8 @@
-//checks if admin is logged in or not - used to unhide admin landing page
+import { Navigate, Outlet } from 'react-router-dom'
 
 const PrivateComponent = () => {
-  return (
-    <div>PrivateComponent</div>
-  )
+  const auth = localStorage.getItem('admin');
+  return auth ? <Outlet/>:<Navigate to='/admin'/>
 }
 
 export default PrivateComponent
