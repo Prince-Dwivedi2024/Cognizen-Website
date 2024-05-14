@@ -30,6 +30,7 @@ const App = () => {
             <Route path="/executivemembers" element={<ExecutiveMembersPage />} />
             <Route path="/pastmembers" element={<PastMembersPage />} />
             <Route path="/notice" element={<NoticeBoard />} />
+            
           </Routes>
           <Footer />
         </BrowserRouter>
