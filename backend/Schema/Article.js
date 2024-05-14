@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const articleSchema = new mongoose.Schema({
+    id:{
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true,
@@ -15,11 +19,11 @@ const articleSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        required: true,
+        required: true,        // philoneist || opinion || others 
     },
     topic: {
         type: String,
-        required: true,
+        required: true,       // education || environment || politics
     },
     author: {
         type: String,

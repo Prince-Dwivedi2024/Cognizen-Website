@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 
 const pastMemberSchema = new mongoose.Schema({
-    type:{
+    id:{
         type: String,
-        default: "pastMember",
         required: true
     },
     name: {

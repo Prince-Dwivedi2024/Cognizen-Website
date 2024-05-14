@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const ebMemberSchema = new mongoose.Schema({
+    id:{
+        type: String,
+        required: true
+    },
     type:{
         type: String,
         default: "eBMember",

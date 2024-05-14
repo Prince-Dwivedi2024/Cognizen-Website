@@ -1,4 +1,4 @@
-//user landing page
+//user landing page for articles and notices
 import { useEffect,useState } from "react"
 import {useNavigate} from "react-router-dom"
 
