@@ -16,8 +16,9 @@ cloudinary.config({
     cloud_name: process.env.CLOUD,
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET,
-    secure: true
 });
+
+cloudinary.url("sample",{secure:true});
 
 const Jwt = require('jsonwebtoken');
 const jwtkey = 'cognizen';
@@ -86,12 +87,12 @@ app.post("/login", async (req, resp) => {
 app.post('/upload', async (req, res) => {
     const file = req.files.photo;
     try {
-        const result = await cloudinary.uploader.upload(file.tempFilePath);
+        const result = await cloudinary.uploader.upload(file.tempFilePath, { secure: true }); // Ensure secure URL
         let Item;
-        if (req.body.type === "currentMember") {
+        if (req.body.type === "CurrentMember") {
             Item = CurrentMember;
         }
-        else if (req.body.type === "pastMember") {
+        else if (req.body.type === "PastMember") {
             Item = PastMember;
         }
         else {
@@ -221,57 +222,8 @@ app.delete("/delete/:id", async (req, res) => {
     }
 });
 
-
-
-//search api
-// app.get("/search/:key", async (req, resp) => {
-//     let Item;
-//     if (req.query.type === "product") {
-//         Item = Product;
-//     }
-//     else {
-//         Item = DummyProduct;
-//     }
-//     let result = await Item.find({
-//         "$or": [
-//             { name: { $regex: req.params.key } },
-//             { ratings: { $regex: req.params.key } },         //can search in all listed fields
-//             { category: { $regex: req.params.key } },
-//             { price: { $regex: req.params.key } },
-//             { restaurant: { $regex: req.params.key } }
-//         ]
-//     });
-//     resp.send(result);
-// })
-
-//delete api
-// app.delete("/delete/:id", async (req, resp) => {
-//     try {
-//         const product = await DummyProduct.findById(req.params.id);
-
-//         if (!product) {
-//             return resp.status(404).json({ message: "Product not found" });
-//         }
-
-//         const result = await DummyProduct.deleteOne({ _id: req.params.id });
-
-//         if (result.deletedCount > 0) {
-
-//             const imageUrl = product.photo;
-//             await cloudinary.uploader.destroy(imageUrl);
-
-//             resp.status(200).json({ message: "Product deleted successfully" });
-//         } else {
-//             resp.status(404).json({ message: "Product not found" });
-//         }
-//     } catch (error) {
-//         console.error(error);
-//         resp.status(500).json({ message: "Error deleting product" });
-//     }
-// });
-
 app.get("/", (req, resp) => {
     resp.send("server is running");
-})
+});
 
 app.listen(PORT);
