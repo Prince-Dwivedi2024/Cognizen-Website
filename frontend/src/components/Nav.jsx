@@ -1,10 +1,13 @@
 //navigation section
-import React from 'react';
+import React, {useState} from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import CognizenLogo from '../assets/CognizenLogo.jpg'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 export default function Nav() {
+
+  const [showSearchBar, setShowSearchBar] = useState(false);
+  
   return (
     <header >
       <div className="bg-white ">
@@ -103,14 +106,16 @@ export default function Nav() {
             </NavLink>
                
             <div className="relative group">
-              <NavLink
-                to="/about-us"
-                className={({ isActive }) =>
-                  `text-[#FFFFFF] hover:text-orange-500 cursor-pointer font-medium text-sm px-4 py-2 ${isActive ? 'bg-[#222f3d]' : 'underline'}`
-                }
+              <div
+                
+                className=
+                  "text-[#FFFFFF] hover:text-orange-500 cursor-pointer font-medium text-sm px-4 py-2 flex items-center "
+                
               >
                 About us
-              </NavLink>
+                <i className="fas fa-caret-down ml-2"></i>
+              </div>
+
               <div className="absolute left-0 mt-2 w-40 bg-black text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <NavLink
                   to="/eb-members"
@@ -140,19 +145,30 @@ export default function Nav() {
             </div>
               
               {/* Search Pannel */}
-            <NavLink
-              to="/search"
-              className={(isActive) =>
-                `text-[#FFFFFF]  hover:text-orange-500 hover:underline cursor-pointer font-medium  text-sm px-4 py-2  ${isActive ? 'bg-[#222f3d]' : 'underline'
-                }`
-              }
-            >
-              <i className="fas fa-search mr-2"></i>
-            </NavLink>
+              <div className="relative group">
+              <div
+                className="text-[#FFFFFF] flex items-center hover:text-orange-500 cursor-pointer font-medium text-sm px-4 py-2"
+                onClick={() => setShowSearchBar(!showSearchBar)}
+              >
+                <i className="fas fa-search mr-2"></i>
+                Search
+              </div>
+              {showSearchBar && (
+                <div className="absolute left-0 mt-2 w-full bg-black p-2 flex items-center">
+                  <input
+                    type="text"
+                    className="bg-white text-black p-2 flex-grow"
+                    placeholder="Search..."
+                  />
+                  <button className="bg-orange-500 text-white p-2 ml-2">
+                    Search
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
-
     </header>
   );
 }
