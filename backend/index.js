@@ -5,9 +5,12 @@ require('./db/config');
 const PORT = 5000;
 const Admin = require('./Schema/Admin');
 const Article = require('./Schema/Article');
+const ArchieveArticle = require('./Schema/ArchieveArticle');
 const CurrentMember = require('./Schema/CurrentMember');
 const EBMember = require('./Schema/EBMember');
 const PastMember = require('./Schema/PastMember');
+const Achievement = require('./Schema/Achievement')
+const Notice = require('./Schema/Notice')
 const app = express();
 const fileUpload = require('express-fileupload');
 const cloudinary = require('cloudinary').v2; // Use 'cloudinary' package correctly
@@ -36,6 +39,10 @@ app.use(cors(corsOptions));
 app.use(fileUpload({
     useTempFiles: true
 }));
+
+
+
+
 
 // Admin signup API
 app.post('/register', async (req, res) => {
@@ -76,6 +83,10 @@ app.post("/login", async (req, res) => {
         res.status(500).send({ error: "Something went wrong" });
     }
 });
+
+
+
+
 
 // Upload member details with image
 app.post('/upload', async (req, res) => {
@@ -193,13 +204,23 @@ function getItemModel(type) {
     }
 }
 
+
+
+
 //create article
 app.post('/article', async (req, res) => {
     const file = req.files.photo;
     try {
         const result = await cloudinary.uploader.upload(file.tempFilePath);
+        let Item;
+        if (req.body.type == "Article") {
+            Item = Article;
+        }
+        else {
+            Item = ArchieveArticle;
+        }
 
-        const newArticle = new Article({
+        const newArticle = new Item({
             ...req.body,
             photo: result.secure_url, // Ensure secure URL is used
             id: generateRandomCode() // Assign random ID
@@ -207,28 +228,209 @@ app.post('/article', async (req, res) => {
 
         await newArticle.save();
         res.status(200).send({ message: "Image uploaded and article created successfully" });
-
-        //logic to push article title to author articles array
-        res.status(200).send({ message: "article title pushed to author articles array" });
-
     } catch (error) {
         console.error("Error uploading image and creating article:", error);
         res.status(500).send({ message: "Something went wrong" });
     }
 });
 
-//render article
-//delete article
-//update article
+// Render all articles
+app.get('/getarticle', async (req, res) => {
+    try {
+        let Item;
+        if (req.body.type == "Article") {
+            Item = Article;
+        }
+        else {
+            Item = ArchieveArticle;
+        }
+        const articles = await Item.find();
+
+        if (!articles.length) {
+            return res.status(404).json({ message: "No articles found" });
+        }
+
+        res.status(200).json(articles);
+    } catch (error) {
+        console.error("Error fetching articles:", error);
+        res.status(500).json({ message: "Something went wrong" });
+    }
+});
+
+// Delete article by ID
+app.delete('/deletearticle/:id', async (req, res) => {
+    try {
+        const articleId = req.params.id;
+        let Item;
+        if (req.body.type == "Article") {
+            Item = Article;
+        }
+        else {
+            Item = ArchieveArticle;
+        }
+
+        // Find the article by its custom ID
+        const article = await Item.findOne({ id: articleId });
+
+        if (!article) {
+            return res.status(404).json({ message: "Article not found" });
+        }
+
+        // Extract public ID from the photo URL
+        if (article.photo) {
+            const photoUrl = article.photo;
+            const publicId = photoUrl.split('/').pop().split('.')[0];
+
+            // Delete the photo from Cloudinary
+            await cloudinary.uploader.destroy(publicId);
+        }
+
+        // Delete the article from the database
+        await Item.deleteOne({ id: articleId });
+
+        res.status(200).json({ message: "Article and associated photo deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting article:", error);
+        res.status(500).json({ message: "Something went wrong" });
+    }
+});
+
+
+
 
 
 //create achievement
-//render achievement
-//delete achievement
+app.post('/achievement', async (req, res) => {
+    const file = req.files.photo;
+    try {
+        const result = await cloudinary.uploader.upload(file.tempFilePath);
+
+        const newAchievement = new Achievement({
+            ...req.body,
+            photo: result.secure_url, // Ensure secure URL is used
+            id: generateRandomCode() // Assign random ID
+        });
+
+        await newAchievement.save();
+        res.status(200).send({ message: "Image uploaded and achievement created successfully" });
+    } catch (error) {
+        console.error("Error uploading image and creating achievement:", error);
+        res.status(500).send({ message: "Something went wrong" });
+    }
+});
+
+//render all achievements
+app.get('/getachievement', async (req, res) => {
+    try {
+        const achievement = await Achievement.find();
+
+        res.status(200).json(achievement);
+    } catch (error) {
+        console.error("Error fetching achievements:", error);
+        res.status(500).json({ message: "Something went wrong" });
+    }
+});
+
+//delete achievement by ID
+app.delete('/deleteachievement/:id', async (req, res) => {
+    try {
+        const achievementId = req.params.id;
+
+        // Find the achievement by its custom ID
+        const achievement = await Achievement.findOne({ id: achievementId });
+
+        if (!achievement) {
+            return res.status(404).json({ message: "Article not found" });
+        }
+
+        // Extract public ID from the photo URL
+        if (achievement.photo) {
+            const photoUrl = achievement.photo;
+            const publicId = photoUrl.split('/').pop().split('.')[0];
+
+            // Delete the photo from Cloudinary
+            await cloudinary.uploader.destroy(publicId);
+        }
+
+        // Delete the article from the database
+        await Achievement.deleteOne({ id: achievementId });
+
+        res.status(200).json({ message: "achievement and associated photo deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting achievement:", error);
+        res.status(500).json({ message: "Something went wrong" });
+    }
+});
+
+
+
+
 
 //create notice
-//delete notice
-//render notice
+app.post('/notice', async (req, res) => {
+    const file = req.files.photo;
+    try {
+        const result = await cloudinary.uploader.upload(file.tempFilePath);
+
+        const newNotice = new Notice({
+            ...req.body,
+            photo: result.secure_url, // Ensure secure URL is used
+            id: generateRandomCode() // Assign random ID
+        });
+
+        await newNotice.save();
+        res.status(200).send({ message: "Image uploaded and notice created successfully" });
+    } catch (error) {
+        console.error("Error uploading image and creating notice:", error);
+        res.status(500).send({ message: "Something went wrong" });
+    }
+});
+
+//render all notices
+app.get('/getnotice', async (req, res) => {
+    try {
+        const notices = await Notice.find();
+
+        res.status(200).json(notices);
+    } catch (error) {
+        console.error("Error fetching notices:", error);
+        res.status(500).json({ message: "Something went wrong" });
+    }
+});
+
+//delete notice by ID
+app.delete('/deletenotice/:id', async (req, res) => {
+    try {
+        const noticeId = req.params.id;
+
+        // Find the article by its custom ID
+        const notice = await Notice.findOne({ id: noticeId });
+
+        if (!notice) {
+            return res.status(404).json({ message: "notice not found" });
+        }
+
+        // Extract public ID from the photo URL
+        if (notice.photo) {
+            const photoUrl = notice.photo;
+            const publicId = photoUrl.split('/').pop().split('.')[0];
+
+            // Delete the photo from Cloudinary
+            await cloudinary.uploader.destroy(publicId);
+        }
+
+        // Delete the article from the database
+        await Notice.deleteOne({ id: noticeId });
+
+        res.status(200).json({ message: "notice and associated photo deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting notice:", error);
+        res.status(500).json({ message: "Something went wrong" });
+    }
+});
+
+
+
 
 
 
