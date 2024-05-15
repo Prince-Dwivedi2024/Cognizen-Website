@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const articleSchema = new mongoose.Schema({
+const achievementSchema = new mongoose.Schema({
     id:{
         type: String,
         required: true
@@ -11,7 +11,6 @@ const articleSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true,
     },
     publishDate:{
         type:String,
@@ -21,19 +20,11 @@ const articleSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    category: {
-        type: String,
-        required: true,        // philoneist || opinion || others 
-    },
-    topic: {
-        type: String,
-        required: true,       // education || environment || politics
-    },
-    author: {
+    achievers: {
         type: [String],
         required: true,
     },
-    authorId:{                 //needed for author ID based article rendering
+    achieverId:{                 //needed for achiever ID based achievement rendering
         type:[String],
         required:true
     },
@@ -43,4 +34,4 @@ const articleSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model("Article", articleSchema);
+module.exports = mongoose.model("Achievement", achievementSchema);

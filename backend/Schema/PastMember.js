@@ -17,14 +17,16 @@ const pastMemberSchema = new mongoose.Schema({
         required:true,
         unique: true,
     },
+    phone:{
+        type:String,
+        required:true,
+        unique:true
+    },
     mediumId:{
         type: String
     },
     instagramID:{
         type:String
-    },
-    articles:{
-        type: [String] 
     },
     achievements: {
         type: [String]
