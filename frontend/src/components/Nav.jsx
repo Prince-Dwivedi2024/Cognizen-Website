@@ -1,5 +1,5 @@
 //navigation section
-import React, {useState} from 'react';
+import React, {useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import CognizenLogo from '../assets/CognizenLogo.jpg'
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -7,7 +7,26 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 export default function Nav() {
 
   const [showSearchBar, setShowSearchBar] = useState(false);
+  const searchBarRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
+      setShowSearchBar(false);
+    }
+  };
+
+  useEffect(() => {
+    if (showSearchBar) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
   
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showSearchBar]);
+
   return (
     <header >
       <div className="bg-white ">
@@ -30,8 +49,8 @@ export default function Nav() {
               </div>
         
 
-        <div className=" ">
-          <div className='bg-[#222f3d] h-12 flex items-center justify-center'>
+        <div className="bg-[#222f3d] h-12 flex items-center justify-center relative">
+          <div className="flex space-x-4">
             {/* Home section */}
             <NavLink
               to="/"
@@ -145,22 +164,22 @@ export default function Nav() {
             </div>
               
               {/* Search Pannel */}
-              <div className="relative group">
+              <div className="relative group" ref={searchBarRef}>
               <div
                 className="text-[#FFFFFF] flex items-center hover:text-orange-500 cursor-pointer font-medium text-sm px-4 py-2"
                 onClick={() => setShowSearchBar(!showSearchBar)}
               >
                 <i className="fas fa-search mr-2"></i>
-                Search
+                
               </div>
               {showSearchBar && (
-                <div className="absolute left-0 mt-2 w-full bg-black p-2 flex items-center">
+                <div className="absolute left-0 mt-2 w-full p-2 flex items-center bg-transparent">
                   <input
                     type="text"
-                    className="bg-white text-black p-2 flex-grow"
+                    className="bg-white text-black p-2 flex-grow focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-xl "
                     placeholder="Search..."
                   />
-                  <button className="bg-orange-500 text-white p-2 ml-2">
+                  <button className="bg-orange-500 text-white p-2 ml-2 rounded-xl ">
                     Search
                   </button>
                 </div>
