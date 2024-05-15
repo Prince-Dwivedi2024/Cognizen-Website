@@ -125,25 +125,25 @@ export default function Nav() {
               <div className="absolute left-0 mt-2 w-30 bg-black text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <NavLink
                   to="/eb-members"
-                  className="block px-4 py-2 hover:bg-orange-500 hover:text-black text-[25px]"
+                  className="block px-4 py-2 hover:bg-orange-500 hover:text-black text-[14px]"
                 >
-                  EB Members
+                  Leadership
                 </NavLink>
                 <NavLink
                   to="/current-members"
-                  className="block px-4 py-2 hover:bg-orange-500 hover:text-black"
+                  className="block px-4 py-2 hover:bg-orange-500 hover:text-black text-[14px]"
                 >
-                  Current Members
+                  Members
                 </NavLink>
                 <NavLink
                   to="/past-members"
-                  className="block px-4 py-2 hover:bg-orange-500 hover:text-black"
+                  className="block px-4 py-2 hover:bg-orange-500 hover:text-black text-[14px]"
                 >
-                  Past Members
+                  Alumni
                 </NavLink>
                 <NavLink
                   to="/more"
-                  className="block px-4 py-2 hover:bg-orange-500 hover:text-black"
+                  className="block px-4 py-2 hover:bg-orange-500 hover:text-black text-[14px]"
                 >
                   More
                 </NavLink>
