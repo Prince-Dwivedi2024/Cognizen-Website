@@ -122,10 +122,10 @@ export default function Nav() {
                 <i className="fas fa-caret-down ml-2"></i>
               </div>
 
-              <div className="absolute left-0 mt-2 w-40 bg-black text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute left-0 mt-2 w-30 bg-black text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <NavLink
                   to="/eb-members"
-                  className="block px-4 py-2 hover:bg-orange-500 hover:text-black"
+                  className="block px-4 py-2 hover:bg-orange-500 hover:text-black text-[25px]"
                 >
                   EB Members
                 </NavLink>
