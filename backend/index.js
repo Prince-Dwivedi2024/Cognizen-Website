@@ -5,6 +5,7 @@ require('./db/config');
 const PORT = 5000;
 const Admin = require('./Schema/Admin');
 const Article = require('./Schema/Article');
+const ArchieveArticle = require('./Schema/ArchieveArticle');
 const CurrentMember = require('./Schema/CurrentMember');
 const EBMember = require('./Schema/EBMember');
 const PastMember = require('./Schema/PastMember');
@@ -38,6 +39,10 @@ app.use(cors(corsOptions));
 app.use(fileUpload({
     useTempFiles: true
 }));
+
+
+
+
 
 // Admin signup API
 app.post('/register', async (req, res) => {
@@ -78,6 +83,10 @@ app.post("/login", async (req, res) => {
         res.status(500).send({ error: "Something went wrong" });
     }
 });
+
+
+
+
 
 // Upload member details with image
 app.post('/upload', async (req, res) => {
@@ -195,13 +204,23 @@ function getItemModel(type) {
     }
 }
 
+
+
+
 //create article
 app.post('/article', async (req, res) => {
     const file = req.files.photo;
     try {
         const result = await cloudinary.uploader.upload(file.tempFilePath);
+        let Item;
+        if (req.body.type == "Article") {
+            Item = Article;
+        }
+        else {
+            Item = ArchieveArticle;
+        }
 
-        const newArticle = new Article({
+        const newArticle = new Item({
             ...req.body,
             photo: result.secure_url, // Ensure secure URL is used
             id: generateRandomCode() // Assign random ID
@@ -218,7 +237,14 @@ app.post('/article', async (req, res) => {
 // Render all articles
 app.get('/getarticle', async (req, res) => {
     try {
-        const articles = await Article.find();
+        let Item;
+        if (req.body.type == "Article") {
+            Item = Article;
+        }
+        else {
+            Item = ArchieveArticle;
+        }
+        const articles = await Item.find();
 
         if (!articles.length) {
             return res.status(404).json({ message: "No articles found" });
@@ -235,9 +261,16 @@ app.get('/getarticle', async (req, res) => {
 app.delete('/deletearticle/:id', async (req, res) => {
     try {
         const articleId = req.params.id;
+        let Item;
+        if (req.body.type == "Article") {
+            Item = Article;
+        }
+        else {
+            Item = ArchieveArticle;
+        }
 
         // Find the article by its custom ID
-        const article = await Article.findOne({ id: articleId });
+        const article = await Item.findOne({ id: articleId });
 
         if (!article) {
             return res.status(404).json({ message: "Article not found" });
@@ -253,7 +286,7 @@ app.delete('/deletearticle/:id', async (req, res) => {
         }
 
         // Delete the article from the database
-        await Article.deleteOne({ id: articleId });
+        await Item.deleteOne({ id: articleId });
 
         res.status(200).json({ message: "Article and associated photo deleted successfully" });
     } catch (error) {
@@ -261,6 +294,9 @@ app.delete('/deletearticle/:id', async (req, res) => {
         res.status(500).json({ message: "Something went wrong" });
     }
 });
+
+
+
 
 
 //create achievement
@@ -326,6 +362,10 @@ app.delete('/deleteachievement/:id', async (req, res) => {
     }
 });
 
+
+
+
+
 //create notice
 app.post('/notice', async (req, res) => {
     const file = req.files.photo;
@@ -387,7 +427,11 @@ app.delete('/deletenotice/:id', async (req, res) => {
         console.error("Error deleting notice:", error);
         res.status(500).json({ message: "Something went wrong" });
     }
-}); 
+});
+
+
+
+
 
 
 function generateRandomCode(length = 10) {

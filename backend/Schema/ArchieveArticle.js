@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const articleSchema = new mongoose.Schema({
+const archieveSchema = new mongoose.Schema({
     id:{
         type: String,
         required: true
@@ -43,9 +43,9 @@ const articleSchema = new mongoose.Schema({
     },
     type:{
         type:String,
-        default:"Article",
+        default:"ArchieveArticle",
         required:true
     }
 });
 
-module.exports = mongoose.model("Article", articleSchema);
+module.exports = mongoose.model("ArchieveArticle", archieveSchema);

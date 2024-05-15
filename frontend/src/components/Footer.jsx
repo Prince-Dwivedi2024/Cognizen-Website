@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import CognizenLogo2 from '../assets/CognizenLogo2.png'
-import '@fortawesome/fontawesome-free/css/all.min.css';
+// import '@fontawesome/fontawesome-free/css/all.min.css';
 
 
 const Footer = () => {
