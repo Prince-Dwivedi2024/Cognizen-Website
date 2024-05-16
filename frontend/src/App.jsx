@@ -15,6 +15,7 @@ import NoticeBoard from "./components/NoticeBoard"
 const App = () => {
   return (
     <>
+      
       <div className='App'>
         <BrowserRouter>
           <Nav />
@@ -35,6 +36,7 @@ const App = () => {
           <Footer />
         </BrowserRouter>
       </div>
+      
     </>
   )
 }

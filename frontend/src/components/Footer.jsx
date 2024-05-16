@@ -8,29 +8,29 @@ import CognizenLogo2 from '../assets/CognizenLogo2.png'
 const Footer = () => {
   return (
     <footer className=" bg-green-900 text-white ">
-      <div className="container  ">
+      <div className="container ">
         <div className="flex justify-between items-start ">
           {/* Logo and description */}
-          <div className='flex  items-start'>
+          <div className='flex  items-center '>
           <Link to="/" className="bg-green-900 ">
           <img
             src={CognizenLogo2}
-            className="h-36 ml-"
+            className="h-40 w-full pl-[8vh]"
             alt="The Cognizen Logo"
           />
           </Link>
             {/* Discription */}
-            <div className='ml-4'>
-              <h1 className="text-2xl mb-2">Cognizen Club NITR</h1>
-              <p>The official politics and economics</p>
-              <p>awareness club of NIT Rourkela.</p>
+            <div className='ml-4 text-white flex flex-col items-center p-10 pl-[10vw]'>
+              <h1 className="text-4xl mb-2 font-extrabold font-jacquard">Cognizen Club NITR</h1>
+              <p className= "font-semibold font-serif text-mid ">The official politics and economics</p>
+              <p className= "font-semibold font-serif text-mid">awareness club of NIT Rourkela.</p>
               </div>
          
           </div>
 
           {/* Social Media Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
+            <h3 className=" font-extrabold mb-4 font-serif text-2xl">Follow Us</h3>
             <div className="flex space-x-4">
               <a href="https://www.facebook.com" className="text-[#FFFFFF] hover:text-orange-500">
                 <i className="fab fa-facebook-f"></i>

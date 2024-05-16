@@ -10,28 +10,28 @@ export default function Nav() {
 
   return (
     <header >
-      <div className="bg-white ">
+      <div className="bg-black ">
 
-        <div className="bg-black py-[3vh] flex items-center font-inter font-sans ">
+        <div className="bg-black py-[3vh] flex items-center  ">
           <Link to="/" >
             <img
               src={CognizenLogo}
-              className="h-36 pl-[8vw]"
+              className="h-40  pl-[8vw] "
               alt="The Cognizen Logo"
             />
           </Link>
 
           {/* Description */}
-          <div className='ml-4 text-white flex flex-col items-center'>
-            <h1 className="text-2xl mb-2 font-extrabold">Cognizen Club NITR</h1>
-            <p className='font-semibold'>The official politics and economics </p>
-            <p className='font-semibold'>awareness club of NIT Rourkela.</p>
+          <div className='ml-4 text-white flex flex-col items-center p-10 pl-[10vw]'>
+            <h1 className="text-6xl mb-2 font-extrabold font-jacquard">Cognizen Club NITR</h1>
+            <p className='font-semibold font-serif text-xl'>The official politics and economics </p>
+            <p className='font-semibold font-serif text-xl'>awareness club of NIT Rourkela.</p>
           </div>
         </div>
 
 
         <div className=" ">
-          <div className='bg-[#222f3d] h-12 flex items-center justify-center'>
+          <div className=' font-sans font-extrabold bg-[#222f3d] h-12 flex flex-col items-center  '>
             {/* Home section */}
             <NavLink
               to="/"
