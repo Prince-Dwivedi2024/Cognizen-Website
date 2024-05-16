@@ -1,7 +1,7 @@
 //navigation section
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import CognizenLogo from '../assets/CognizenLogo.jpg'
+import CognizenLogo2 from '../assets/CognizenLogo2.png'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 export default function Nav() {
@@ -15,7 +15,7 @@ export default function Nav() {
         <div className="bg-black py-[3vh] flex items-center font-inter font-sans ">
           <Link to="/" >
             <img
-              src={CognizenLogo}
+              src={CognizenLogo2}
               className="h-36 pl-[8vw]"
               alt="The Cognizen Logo"
             />
@@ -70,7 +70,7 @@ export default function Nav() {
                 }`
               }
             >
-              Politics
+              Reviews
             </NavLink>
 
             <NavLink
@@ -90,7 +90,7 @@ export default function Nav() {
                 }`
               }
             >
-              International-Relations
+              World
             </NavLink>
             <NavLink
               to="/articles"
@@ -124,31 +124,41 @@ export default function Nav() {
 
               <div className="absolute left-0 mt-2 w-30 bg-black text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <NavLink
-                  to="/eb-members"
-                  className="block px-4 py-2 hover:bg-orange-500 hover:text-black"
+                  to="/leadership"
+                  className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
                 >
                   Leadership
                 </NavLink>
                 <NavLink
-                  to="/current-members"
-                  className="block px-4 py-2 hover:bg-orange-500 hover:text-black text-[14px]"
+                  to="/team"
+                  className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
                 >
-                  Members
+                  Team
                 </NavLink>
                 <NavLink
-                  to="/past-members"
-                  className="block px-4 py-2 hover:bg-orange-500 hover:text-black text-[14px]"
+                  to="/alumni"
+                  className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
                 >
                   Alumni
                 </NavLink>
                 <NavLink
                   to="/more"
-                  className="block px-4 py-2 hover:bg-orange-500 hover:text-black text-[14px]"
+                  className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
                 >
                   More
                 </NavLink>
               </div>
             </div>
+
+            <NavLink
+              to="/adminlogin"
+              className={(isActive) =>
+                `text-[#FFFFFF]  hover:text-orange-500 hover:underline cursor-pointer font-medium  text-sm px-4 py-2  ${isActive ? 'bg-[#222f3d]' : 'underline'
+                }`
+              }
+            >
+              Admin
+            </NavLink>
 
 
           </div>

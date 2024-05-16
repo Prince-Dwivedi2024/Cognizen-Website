@@ -7,25 +7,27 @@ import CognizenLogo2 from '../assets/CognizenLogo2.png'
 
 const Footer = () => {
   return (
-    <footer className=" bg-green-900 text-white ">
-      <div className="container  ">
-        <div className="flex justify-between items-start ">
+    <footer className=" bg-[#c9c6c6] text-black p-[3vh] font-inter font-sans">
+      <div className="container flex justify-between ">
+        <div className="flex justify-between ">
+
           {/* Logo and description */}
-          <div className='flex  items-start'>
-          <Link to="/" className="bg-green-900 ">
-          <img
-            src={CognizenLogo2}
-            className="h-36 ml-"
-            alt="The Cognizen Logo"
-          />
-          </Link>
+          <div className='flex items-center'>
+            <Link to="/" className=" ">
+              <img
+                src={CognizenLogo2}
+                className="h-36 ml-"
+                alt="The Cognizen Logo"
+              />
+            </Link>
             {/* Discription */}
             <div className='ml-4'>
               <h1 className="text-2xl mb-2">Cognizen Club NITR</h1>
               <p>The official politics and economics</p>
               <p>awareness club of NIT Rourkela.</p>
-              </div>
-         
+              <p>Contact us: <span className='font-semibold cursor-pointer text-teal-950'>cognizenclub.nitr@gmail.com</span></p>
+            </div>
+
           </div>
 
           {/* Social Media Links */}
@@ -50,13 +52,13 @@ const Footer = () => {
             </div>
           </div>
 
-          
+
         </div>
 
-        <div className="mt-8 border-t border-gray-700 pt-4 text-center">
+      </div>
+        <div className="mt-8  border-gray-700 pt-4 text-center">
           <p className="text-sm">&copy; 2024 Cognizen Club NITR. All rights reserved.</p>
         </div>
-      </div>
     </footer>
   );
 };
