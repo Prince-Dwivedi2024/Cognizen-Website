@@ -6,26 +6,25 @@ import CognizenLogo2 from '../assets/CognizenLogo2.png';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#c9c6c6] text-black">
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center">
-
+    <footer className=" bg-green-900 text-white ">
+      <div className="container  ">
+        <div className="flex justify-between items-start ">
           {/* Logo and description */}
-          <div className="flex items-center">
-            <Link to="/" className="bg-[#c9c6c6]">
-              <img
-                src={CognizenLogo2}
-                className="h-40 w-full pl-[8vh]"
-                alt="The Cognizen Logo"
-              />
-            </Link>
-            {/* Description */}
-            <div className="ml-4  flex flex-col items-center p-10 pl-[10vw]">
-              <h1 className="text-4xl mb-2 font-extrabold font-jacquard">Cognizen Club NITR</h1>
-              <p className="font-semibold font-serif text-mid">The official politics and economics</p>
-              <p className="font-semibold font-serif text-mid">awareness club of NIT Rourkela.</p>
-              <p className="font-semibold font-serif text-mid">Contact us: <span className="font-semibold cursor-pointer text-teal-950">cognizenclub.nitr@gmail.com</span></p>
-            </div>
+          <div className='flex  items-start'>
+          <Link to="/" className="bg-green-900 ">
+          <img
+            src={CognizenLogo2}
+            className="h-36 ml-"
+            alt="The Cognizen Logo"
+          />
+          </Link>
+            {/* Discription */}
+            <div className='ml-4'>
+              <h1 className="text-2xl mb-2">Cognizen Club NITR</h1>
+              <p>The official politics and economics</p>
+              <p>awareness club of NIT Rourkela.</p>
+              </div>
+         
           </div>
 
           {/* Social Media Links */}
@@ -49,10 +48,13 @@ const Footer = () => {
               </a>
             </div>
           </div>
+
+          
         </div>
-      </div>
-      <div className="mt-8 border-gray-700 pt-4 text-center">
-        <p className="text-sm">&copy; 2024 Cognizen Club NITR. All rights reserved.</p>
+
+        <div className="mt-8 border-t border-gray-700 pt-4 text-center">
+          <p className="text-sm">&copy; 2024 Cognizen Club NITR. All rights reserved.</p>
+        </div>
       </div>
     </footer>
   );
