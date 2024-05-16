@@ -31,7 +31,7 @@ export default function Nav() {
 
 
         <div className=" ">
-          <div className=' font-sans font-extrabold bg-[#222f3d] h-12 flex flex-col items-center  '>
+          <div className=' font-sans font-extrabold bg-[#222f3d] h-12 flex items-center justify-center'>
             {/* Home section */}
             <NavLink
               to="/"
