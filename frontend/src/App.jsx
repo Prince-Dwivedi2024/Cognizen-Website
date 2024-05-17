@@ -11,6 +11,12 @@ import PastMembersPage from "./components/PastMembersPage"
 import Nav from "./components/Nav"
 import Footer from "./components/Footer"
 import NoticeBoard from "./components/NoticeBoard"
+import Philoneist from "./components/Philoneist"
+import Opinion from "./components/Opinion"
+import Politics from "./components/Politics"
+import History from "./components/History"
+import International from "./components/International"
+import Archieves from "./components/Archives"
 
 const App = () => {
   return (
@@ -23,11 +29,15 @@ const App = () => {
             <Route element={<PrivateComponent />}>
               <Route path="/admin" element={<AdminPage />} />
             </Route>
-
-            <Route path="/" element={<HomePage />} />
-            <Route path="/adminlogin" element={<AdminLogin />} />
-            <Route path="/article" element={<Article />} />
-            <Route path="/team" element={<CurrentMembersPage />} />
+             
+            
+            <Route path="" element={<HomePage />} />
+            <Route path="philoneist" element={<Philoneist />} />
+            <Route path="opinion" element={<Opinion />} />
+            <Route path="politics" element={<Politics />} />
+            <Route path="history" element={<History />} />
+            <Route path="international" element={<International />} />
+            <Route path="archives" element={< Archieves />} />
             <Route path="/leadership" element={<ExecutiveMembersPage />} />
             <Route path="/alumni" element={<PastMembersPage />} />
             <Route path="/notice" element={<NoticeBoard />} />

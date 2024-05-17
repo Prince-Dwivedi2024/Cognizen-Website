@@ -1,18 +1,20 @@
-//user landing page for articles and notices
+//user landing page for articles related to Pheloneist topic
+
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Phe from '../assets/Phe.jpeg';
 
 const articles = [
   { type: 'Pheloneist', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Prince Dwivedi', date: '2024-05-16' },
-  { type: 'Opinion', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
-  { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Raj Dwivedi', date: '2024-05-14' },
-  { type: 'Pheloneist', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Raj', date: '2024-05-16' },
-  { type: 'Opinion', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Raj Naam To..', date: '2024-05-15' },
-  { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Sachin Tendulkar', date: '2024-05-14' },
-  { type: 'Pheloneist', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Shahrukh Khan', date: '2024-05-16' },
-  { type: 'Opinion', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'SRK', date: '2024-05-15' },
-  { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Big B', date: '2024-05-14' },
+  { type: 'Pheloneist', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Prince Dwivedi', date: '2024-05-16' },
+  { type: 'Pheloneist', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Prince Dwivedi', date: '2024-05-16' },
+  { type: 'Pheloneist', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Prince Dwivedi', date: '2024-05-16' },
+  { type: 'Pheloneist', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Prince Dwivedi', date: '2024-05-16' },
+  { type: 'Pheloneist', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Prince Dwivedi', date: '2024-05-16' },
+  { type: 'Pheloneist', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Prince Dwivedi', date: '2024-05-16' },
+  { type: 'Pheloneist', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Prince Dwivedi', date: '2024-05-16' },
+  { type: 'Pheloneist', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Prince Dwivedi', date: '2024-05-16' },
 ];
 
 const Card = ({ type, highlight, imageUrl, author, date }) => {
@@ -42,7 +44,7 @@ const Card = ({ type, highlight, imageUrl, author, date }) => {
   );
 };
 
-const HomePage = () => {
+const Philoneist = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
@@ -81,4 +83,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Philoneist;
