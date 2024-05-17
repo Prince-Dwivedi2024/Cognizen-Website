@@ -1,12 +1,11 @@
 //user landing page for articles and notices
-// src/Home/HomePage.jsx
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Phe from '../assets/Phe.jpeg'
+import Phe from '../assets/Phe.jpeg';
 
 const articles = [
-  { type: 'Pheloneist', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims" , imageUrl: Phe, author: 'Prince Dwivedi', date: '2024-05-16' },
+  { type: 'Pheloneist', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Prince Dwivedi', date: '2024-05-16' },
   { type: 'Opinion', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
   { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Raj Dwivedi', date: '2024-05-14' },
   { type: 'Pheloneist', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Raj', date: '2024-05-16' },
@@ -19,17 +18,15 @@ const articles = [
 
 const Card = ({ type, highlight, imageUrl, author, date }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden ">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden">
       <div className="bg-gray-200 px-4 py-2" style={{ height: '36px' }}>
         <h1 className="text-left text-xl font-bold font-sans" style={{ color: '#212121' }}>{type}</h1>
       </div>
-      
       <div className="h-56 bg-cover bg-center" style={{ backgroundImage: `url(${imageUrl})`, height: '224.45px' }}>
         {/* Image section */}
       </div>
       <div className="px-4 py-2" style={{ height: '75px' }}>
         <h2 className="text-mid font-semibold mb-1 font-sans" style={{ color: '#212121' }}>{highlight}</h2>
-        
       </div>
       <div className="bg-gray-200 px-4 py-1 flex justify-between items-center" style={{ height: '20.6px' }}>
         <div className="text-sm" style={{ color: '#212121' }}>
