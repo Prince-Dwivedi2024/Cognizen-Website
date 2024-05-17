@@ -64,25 +64,25 @@ app.post('/register', async (req, res) => {
 });
 
 // Admin login API
-app.post("/login", async (req, res) => {
+app.post('/login', async (req, res) => {
     try {
-        const { userID, password } = req.body;
-        if (!userID || !password) {
-            return res.status(400).send({ error: "User ID and password are required" });
-        }
-
-        const result = await Admin.findOne({ userID });
-        if (!result || result.password !== password) {
-            return res.status(401).send({ error: "Invalid user or password" });
-        }
-
-        const token = Jwt.sign({ user: result }, jwtkey, { expiresIn: "2h" });
-        res.send({ result, auth: token });
+      const { userID, password } = req.body;
+      if (!userID || !password) {
+        return res.status(400).send({ error: "User ID and password are required" });
+      }
+  
+      const result = await Admin.findOne({ userID });
+      if (!result || result.password !== password) {
+        return res.status(401).send({ error: "Invalid user or password" });
+      }
+  
+      const token = Jwt.sign({ user: result }, jwtkey, { expiresIn: "2h" });
+      res.send({ result, auth: token });
     } catch (error) {
-        console.error(error);
-        res.status(500).send({ error: "Something went wrong" });
+      console.error(error);
+      res.status(500).send({ error: "Something went wrong" });
     }
-});
+  });
 
 
 

@@ -1,4 +1,4 @@
-//page for all active members
+//page for all active members / Team
 import { useEffect,useState } from "react"
 import {useNavigate} from "react-router-dom"
 
