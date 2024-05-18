@@ -16,7 +16,7 @@ import AdminPage from "./adminComponents/AdminPage"
 import AdminTeam from "./adminComponents/AdminTeam"
 import Philoneist from "./components/Philoneist"
 import Opinion from "./components/Opinion"
-import Politics from "./components/Politics"
+import Reviews from './components/Reviews'
 import History from "./components/History"
 import International from "./components/International"
 import Archieves from "./components/Archives"
@@ -44,7 +44,7 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="philoneist" element={<Philoneist />} />
             <Route path="opinion" element={<Opinion />} />
-            <Route path="politics" element={<Politics />} />
+            <Route path="reviews" element={<Reviews />} />
             <Route path="history" element={<History />} />
             <Route path="international" element={<International />} />
             <Route path="archives" element={< Archieves />} />
