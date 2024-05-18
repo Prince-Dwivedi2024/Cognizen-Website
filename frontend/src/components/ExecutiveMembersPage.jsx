@@ -1,4 +1,4 @@
-//page for all current EB members
+//page for all current EB members/Leadership
 import { useEffect,useState } from "react"
 import {useNavigate} from "react-router-dom"
 

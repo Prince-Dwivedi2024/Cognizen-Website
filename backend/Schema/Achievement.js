@@ -14,7 +14,7 @@ const achievementSchema = new mongoose.Schema({
     },
     publishDate:{
         type:String,
-        required:True
+        required:true
     },
     content: {
         type: String,

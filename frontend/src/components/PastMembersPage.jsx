@@ -1,4 +1,4 @@
-//page for all past members
+//page for all past members/Alumni
 import { useEffect,useState } from "react"
 import {useNavigate} from "react-router-dom"
 
