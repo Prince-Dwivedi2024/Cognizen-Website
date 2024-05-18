@@ -32,13 +32,13 @@ const App = () => {
 
 
             {/* <Route element={<PrivateComponent />}> */}
-              <Route path="/admin" element={<AdminPage />} />
-              <Route path="/adminAchievement" element={<AdminAchievement />} />
-              <Route path="/adminAlumni" element={<AdminAlumni />} />
-              <Route path="/adminLeadership" element={<AdminLeadership />} />
-              <Route path="/adminNotice" element={<AdminNotice />} />
-              <Route path="/adminPage" element={<AdminPage />} />
-              <Route path="/adminTeam" element={<AdminTeam />} />
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/adminAchievement" element={<AdminAchievement />} />
+            <Route path="/adminAlumni" element={<AdminAlumni />} />
+            <Route path="/adminLeadership" element={<AdminLeadership />} />
+            <Route path="/adminNotice" element={<AdminNotice />} />
+            <Route path="/adminPage" element={<AdminPage />} />
+            <Route path="/adminTeam" element={<AdminTeam />} />
             {/* </Route> */}
 
             <Route path="/" element={<HomePage />} />

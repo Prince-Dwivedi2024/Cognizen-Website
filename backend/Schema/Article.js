@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const articleSchema = new mongoose.Schema({
-    id:{
+    id: {
         type: String,
         required: true
     },
@@ -13,9 +13,9 @@ const articleSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    publishDate:{
-        type:String,
-        required:true
+    publishDate: {
+        type: String,
+        required: true
     },
     content: {
         type: String,
@@ -23,28 +23,28 @@ const articleSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        required: true,        // philoneist || opinion || others 
+        required: true, // philoneist || opinion || others 
     },
     topic: {
         type: String,
-        required: true,       // education || environment || politics
+        required: true, // education || environment || politics
     },
     author: {
         type: [String],
         required: true,
     },
-    authorId:{                 //needed for author ID based article rendering
-        type:[String],
-        required:true
+    authorId: { // Updated field name
+        type: [String],
+        required: true
     },
     photo: {
         type: String,
         required: true,
     },
-    type:{
-        type:String,
-        default:"Article",
-        required:true
+    type: {
+        type: String,
+        default: "Article",
+        required: true
     }
 });
 

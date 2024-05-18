@@ -66,23 +66,23 @@ app.post('/register', async (req, res) => {
 // Admin login API
 app.post('/login', async (req, res) => {
     try {
-      const { userID, password } = req.body;
-      if (!userID || !password) {
-        return res.status(400).send({ error: "User ID and password are required" });
-      }
-  
-      const result = await Admin.findOne({ userID });
-      if (!result || result.password !== password) {
-        return res.status(401).send({ error: "Invalid user or password" });
-      }
-  
-      const token = Jwt.sign({ user: result }, jwtkey, { expiresIn: "2h" });
-      res.send({ result, auth: token });
+        const { userID, password } = req.body;
+        if (!userID || !password) {
+            return res.status(400).send({ error: "User ID and password are required" });
+        }
+
+        const result = await Admin.findOne({ userID });
+        if (!result || result.password !== password) {
+            return res.status(401).send({ error: "Invalid user or password" });
+        }
+
+        const token = Jwt.sign({ user: result }, jwtkey, { expiresIn: "2h" });
+        res.send({ result, auth: token });
     } catch (error) {
-      console.error(error);
-      res.status(500).send({ error: "Something went wrong" });
+        console.error(error);
+        res.status(500).send({ error: "Something went wrong" });
     }
-  });
+});
 
 
 
@@ -262,17 +262,21 @@ app.delete('/deletearticle/:id', async (req, res) => {
     try {
         const articleId = req.params.id;
         let Item;
-        if (req.body.type == "Article") {
-            Item = Article;
-        }
-        else {
-            Item = ArchieveArticle;
-        }
+        let article;
 
         // Find the article by its custom ID
-        const article = await Item.findOne({ id: articleId });
+        const article1 = await Article.findOne({ id: articleId });
+        const article2 = await ArchieveArticle.findOne({ id: articleId });
 
-        if (!article) {
+        if (article1) {
+            Item = Article;
+            article = article1
+        }
+        else if (article2) {
+            Item = ArchieveArticle;
+            article = article2
+        }
+        else {
             return res.status(404).json({ message: "Article not found" });
         }
 
