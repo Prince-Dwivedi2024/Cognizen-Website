@@ -15,14 +15,14 @@ export default function Nav() {
   };
 
   return (
-    <header >
-      <div className="bg-white ">
+    <header className='shadow-md' >
+      <div>
 
         <div className="flex justify-between bg-[#222f3d] px-6 ">
           <div className=' p-[1vh] flex items-center justify-center'>
 
             {/* title */}
-            <div className='border-2px-black flex flex-start items-center text-white text-4xl px-3 font-bold gap-3 font-inter font-sans'>
+            <div className='border-r-2 border-white flex flex-start items-center text-white text-4xl px-3 font-bold gap-3 font-inter font-sans'>
               <img src={CognizenLogo2} className='h-[70px]' />
               <div>
                 <p>Cognizen</p>
@@ -31,7 +31,7 @@ export default function Nav() {
             </div>
 
             {/* Home section */}
-            <div>
+            <div className='px-[2vw]'>
               <NavLink
                 to="/admin"
                 className={(isActive) =>

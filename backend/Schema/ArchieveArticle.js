@@ -43,7 +43,7 @@ const archieveSchema = new mongoose.Schema({
     },
     type:{
         type:String,
-        default:"ArchieveArticle",
+        default:"ArchiveArticle",
         required:true
     }
 });
