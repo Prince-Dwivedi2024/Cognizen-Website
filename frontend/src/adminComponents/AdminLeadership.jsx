@@ -1,5 +1,7 @@
 //page for admin control on leadership section
 import AdminNav from './AdminNav'
+import { useState } from "react"
+
 const AdminLeadership = () => {
   const [formData, setFormData] = useState({
     title: '',

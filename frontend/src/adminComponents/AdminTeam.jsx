@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import AdminNav from './AdminNav'
 
 const AdminTeam = () => {
   const [formData, setFormData] = useState({
@@ -46,6 +47,8 @@ const AdminTeam = () => {
   };
 
   return (
+    <div>
+      <AdminNav />
     <div className="container mx-auto p-4">
       <h2 className="text-2xl font-bold mb-4">Create Current Member Profile</h2>
       <form onSubmit={handleSubmit}>
@@ -158,6 +161,7 @@ const AdminTeam = () => {
           Create Profile
         </button>
       </form>
+    </div>
     </div>
   );
 };

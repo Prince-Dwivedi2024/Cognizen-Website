@@ -1,5 +1,7 @@
 //page for admin control on alumni section
 import AdminNav from './AdminNav'
+import { useState } from "react"
+
 const AdminAlumni = () => {
   const [formData, setFormData] = useState({
     title: '',
