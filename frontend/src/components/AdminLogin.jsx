@@ -41,7 +41,7 @@ const AdminLogin = () => {
     //   } else {
     //     console.warn('Error: Invalid credentials');
     //     setLoader(false);
-    //     toast.error('Unauthorised Access!', {
+    //     toast.error('Unauthorized Access!', {
     //       position: "bottom-center",
     //       autoClose: 4000,
     //       hideProgressBar: false,
@@ -104,8 +104,7 @@ const AdminLogin = () => {
           <div className="flex items-center justify-center">
             <button
               type="submit"
-              className={`bg-blue-500 w-64 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${loader ? 'opacity-50 cursor-not-allowed' : ''
-                }`}
+              className={`bg-blue-500 w-64 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${loader ? 'opacity-50 cursor-not-allowed' : ''}`}
               disabled={loader}
             >
               {loader ? 'Logging In...' : 'Login'}
