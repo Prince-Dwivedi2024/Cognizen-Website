@@ -55,14 +55,10 @@ export default function Nav() {
 
             <NavLink
               to="/reviews"
-<<<<<<< HEAD
+
               className={({ isActive }) =>
                 `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 ${isActive ? 'bg-[#222f3d]' : ''}`
-=======
-              className={(isActive) =>
-                `text-[#FFFFFF]  hover:text-orange-500 hover:underline cursor-pointer font-medium  text-sm px-4 py-2  ${isActive ? 'bg-[#222f3d]' : 'underline'
-                }`
->>>>>>> 517d974fb08d518b5648bb183b0d817dc3cf6455
+
               }
             >
               Reviews

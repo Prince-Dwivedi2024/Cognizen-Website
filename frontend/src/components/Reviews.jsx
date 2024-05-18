@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Phe from '../assets/Phe.jpeg';
-<<<<<<< HEAD
+
 
 const articles = [
     { type: 'Unemployment', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
@@ -14,20 +14,8 @@ const articles = [
     { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
     { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
     { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
-=======
-import Nav from './Nav';
-import Footer from './Footer'
 
-const articles = [
-  { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
-  { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
-  { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
-  { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
-  { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
-  { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
-  { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
-  { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
->>>>>>> 517d974fb08d518b5648bb183b0d817dc3cf6455
+
   { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Raj Naam To..', date: '2024-05-15' },
 ];
 
@@ -38,7 +26,7 @@ const Card = ({ type, highlight, imageUrl, author, date }) => {
         <div className="bg-[#FFFFFE] py-2" style={{ height: '36px' }}>
           <h1 className="text-left text-xl font-bold font-sans" style={{ color: '#212121' }}>{type}</h1>
         </div>
-<<<<<<< HEAD
+
         
         <div className="h-56 bg-cover bg-center rounded-lg" style={{ backgroundImage: `url(${imageUrl})`, height: '224.45px' }}>
           {/* Image section */}
@@ -48,17 +36,9 @@ const Card = ({ type, highlight, imageUrl, author, date }) => {
           <h2 className="text-mid font-semibold mb-1 font-sans" style={{ color: '#212121' }}>{highlight}</h2>
         </div>
         
-=======
 
-        <div className="h-56 bg-cover bg-center rounded-lg" style={{ backgroundImage: `url(${imageUrl})`, height: '224.45px' }}>
-          {/* Image section */}
-        </div>
 
-        <div className="py-2" style={{ height: '75px' }}>
-          <h2 className="text-mid font-semibold mb-1 font-sans" style={{ color: '#212121' }}>{highlight}</h2>
-        </div>
-
->>>>>>> 517d974fb08d518b5648bb183b0d817dc3cf6455
+  
         <div className="bg-[#FFFFFE] py-1 flex justify-between items-center" style={{ height: '20.6px' }}>
           <div className="text-sm" style={{ color: '#212121' }}>
             <span>{author}</span> | <span>{date}</span>
@@ -80,7 +60,7 @@ const Reviews = () => {
   };
 
   return (
-<<<<<<< HEAD
+
     <div className="min-h-screen bg-[#FFFFF5] p-10 pt-2 flex justify-center shadow-sm ">
       <div className="w-4/5">
         <div className="flex justify-center pb-7">
@@ -106,38 +86,6 @@ const Reviews = () => {
           ))}
         </div>
       </div>
-=======
-    <div>
-      <Nav />
-
-      <div className="min-h-screen bg-[#FFFFF5] p-10 pt-2 flex justify-center shadow-sm ">
-        <div className="w-4/5">
-          <div className="flex justify-center pb-7">
-            <div className="flex w-full h-8 bg-[#FFFFFE] shadow-md rounded-lg overflow-hidden hover:outline hover:outline-blue-200 transform  hover:bg-white hover:shadow-2xl hover:scale-[1.0001] transition-all">
-              <input
-                type="text"
-                className="w-11/12 p-4 text-lg bg-[#FFFFFE] placeholder-center flex items-center justify-center focus:outline-none font-sans"
-                placeholder="Search for articles..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <button
-                className="w-1/12 bg-blue-400 text-white text-lg hover:bg-blue-600 transition-all font-extrabold font-sans"
-                onClick={handleSearch}
-              >
-                Search
-              </button>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" style={{ rowGap: '80px' }}>
-            {articles.map((article, index) => (
-              <Card key={index} {...article} />
-            ))}
-          </div>
-        </div>
-      </div>
-      <Footer />
->>>>>>> 517d974fb08d518b5648bb183b0d817dc3cf6455
     </div>
   );
 };
