@@ -1,12 +1,12 @@
-//user landing page for articles related to Politics tab
+//user landing page for articles related to Reviews tab
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Phe from '../assets/Phe.jpeg';
 
 const articles = [
-    { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
-    { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
+    { type: 'Unemployment', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
+    { type: 'Movie', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
     { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
     { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
     { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'The Prince', date: '2024-05-15' },
@@ -43,7 +43,7 @@ const Card = ({ type, highlight, imageUrl, author, date }) => {
   );
 };
 
-const Politics = () => {
+const Reviews = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
@@ -82,4 +82,4 @@ const Politics = () => {
   );
 };
 
-export default Politics;
+export default Reviews;
