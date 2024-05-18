@@ -1,6 +1,8 @@
 //user landing page for articles and notices
 import { useEffect,useState } from "react"
 import {useNavigate} from "react-router-dom"
+import Nav from "./Nav";
+import Footer from "./Footer";
 
 const HomePage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -12,7 +14,10 @@ const HomePage = () => {
   };
 
   return (
-    <div>HomePagehnn</div>
+    <div>
+      <Nav/>
+      <Footer/>
+    </div>
   )
 }
 
