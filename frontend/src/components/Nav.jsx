@@ -122,7 +122,7 @@ export default function Nav() {
                 <i className="fas fa-caret-down ml-2"></i>
               </div>
 
-              <div className="absolute left-0 mt-2 w-30 bg-black text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute left-0 mt-2 w-30 bg-black text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50">
                 <NavLink
                   to="/leadership"
                   className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
