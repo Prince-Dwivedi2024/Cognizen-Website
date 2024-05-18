@@ -1,6 +1,6 @@
+// admin page for handling articles
 import AdminNav from './AdminNav'
 import { useState } from "react"
-import Footer from "../components/Footer"
 
 const AdminPage = () => {
 
@@ -223,7 +223,6 @@ const AdminPage = () => {
 
 
       </div>
-     
     </div >
   )
 }

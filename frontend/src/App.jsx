@@ -29,29 +29,25 @@ const App = () => {
         <BrowserRouter>
 
           <Routes>
-            <Route element={<PrivateComponent />}>
+
+
+            {/* <Route element={<PrivateComponent />}> */}
               <Route path="/admin" element={<AdminPage />} />
-            </Route>
+              <Route path="/adminAchievement" element={<AdminAchievement />} />
+              <Route path="/adminAlumni" element={<AdminAlumni />} />
+              <Route path="/adminLeadership" element={<AdminLeadership />} />
+              <Route path="/adminNotice" element={<AdminNotice />} />
+              <Route path="/adminPage" element={<AdminPage />} />
+              <Route path="/adminTeam" element={<AdminTeam />} />
+            {/* </Route> */}
 
-
-            <Route path="" element={<HomePage />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="philoneist" element={<Philoneist />} />
             <Route path="opinion" element={<Opinion />} />
             <Route path="politics" element={<Politics />} />
             <Route path="history" element={<History />} />
             <Route path="international" element={<International />} />
             <Route path="archives" element={< Archieves />} />
-            {/* <Route element={<PrivateComponent />}> */}
-            <Route path="/admin" element={<AdminPage />} />
-            <Route path="/adminAchievement" element={<AdminAchievement />} />
-            <Route path="/adminAlumni" element={<AdminAlumni />} />
-            <Route path="/adminLeadership" element={<AdminLeadership />} />
-            <Route path="/adminNotice" element={<AdminNotice />} />
-            <Route path="/adminPage" element={<AdminPage />} />
-            <Route path="/adminTeam" element={<AdminTeam />} />
-            {/* </Route> */}
-
-            <Route path="/" element={<HomePage />} />
             <Route path="/adminlogin" element={<AdminLogin />} />
             <Route path="/article" element={<Article />} />
             <Route path="/team" element={<CurrentMembersPage />} />
