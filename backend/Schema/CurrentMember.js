@@ -19,7 +19,6 @@ const currentMemberSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true,
         unique: true,
     },
     phone:{
@@ -30,15 +29,17 @@ const currentMemberSchema = new mongoose.Schema({
     mediumId: {
         type: String
     },
-    instagramID: {
+    instagramId: {
         type: String
+    },
+    XId:{
+        type:String
     },
     achievements: {
         type: [String]
     },
     passingBatch: {
         type: String,
-        required: true
     },
     position: {
         type: String,

@@ -5,6 +5,11 @@ const pastMemberSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    type:{
+        type: String,
+        default: "pastMember",
+        required: true
+    },
     name: {
         type: String,
         required: true
@@ -25,7 +30,7 @@ const pastMemberSchema = new mongoose.Schema({
     mediumId:{
         type: String
     },
-    instagramID:{
+    instagramId:{
         type:String
     },
     achievements: {
@@ -33,10 +38,9 @@ const pastMemberSchema = new mongoose.Schema({
     },
     passingBatch:{
         type: String,
-        required: true
     },
     position:{
-        default: "Ex-Member",
+        default: "Alumni",
         type: String,
         required: true
     },

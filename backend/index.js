@@ -165,7 +165,7 @@ app.put("/update/:id", async (req, res) => {
 app.delete("/delete/:id", async (req, res) => {
     try {
         const memberId = req.params.id;
-        const memberType = req.query.type;
+        const memberType = req.body.type;
 
         const Item = getItemModel(memberType);
 
@@ -193,11 +193,11 @@ app.delete("/delete/:id", async (req, res) => {
 
 function getItemModel(type) {
     switch (type) {
-        case "CurrentMember":
+        case "currentMember":
             return CurrentMember;
-        case "PastMember":
+        case "pastMember":
             return PastMember;
-        case "EBMember":
+        case "eBMember":
             return EBMember;
         default:
             throw new Error("Invalid member type");

@@ -3,20 +3,21 @@ import { useState } from "react";
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const AdminPage = () => {
+const AdminLeadership= () => {
   const [deleteID, setDeleteID] = useState('');
   const [publishLoader, setPublishLoader] = useState(false);
   const [deleteLoader, setDeleteLoader] = useState(false);
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    publishDate: '',
-    content: '',
-    category: '',
-    topic: '',
-    author: ['', '', ''],
-    authorId: ['', '', ''], // Updated field name
-    type: 'Article', // Default value
+    type: "eBMember",
+    name: '',
+    email: '',
+    phone: '',
+    mediumId: '',
+    instagramId: '',
+    XId: '',
+    achievements: ['', '', '', '', ''],
+    passingBatch: '',
+    position: '',
     photo: null
   });
 
@@ -24,7 +25,7 @@ const AdminPage = () => {
     const { name, value } = e.target;
     const nameParts = name.split('_');
 
-    if (nameParts[0] === 'author' || nameParts[0] === 'authorId') {
+    if (nameParts[0] === 'achievements') {
       const index = parseInt(nameParts[1], 10);
       setFormData((prevData) => ({
         ...prevData,
@@ -46,12 +47,13 @@ const AdminPage = () => {
   };
 
   const handlePublishSubmit = async (e) => {
+    console.log(formData)
     setPublishLoader(true);
     e.preventDefault();
-    if (!formData.photo || formData.title || formData.description || formData.publishDate || formData.content || formData.category || formData.topic || formData.author || formData.authorId || formData.type) {
+    if (!formData.photo || !formData.name || !formData.type || !formData.phone || !formData.position) {
       setPublishLoader(false);
       toast.error(
-        'Enter all fields!', {
+        'Enter * marked fields!', {
         position: "bottom-center",
         autoClose: 2000,
         hideProgressBar: false,
@@ -65,19 +67,20 @@ const AdminPage = () => {
       return;
     }
     const formDataToSend = new FormData();
-    formDataToSend.append('title', formData.title);
-    formDataToSend.append('description', formData.description);
-    formDataToSend.append('publishDate', formData.publishDate);
-    formDataToSend.append('content', formData.content);
-    formDataToSend.append('category', formData.category);
-    formDataToSend.append('topic', formData.topic);
-    formDataToSend.append('author', JSON.stringify(formData.author)); // Convert array to JSON string
-    formDataToSend.append('authorId', JSON.stringify(formData.authorId)); // Convert array to JSON string
+    formDataToSend.append('name', formData.name);
     formDataToSend.append('type', formData.type);
+    formDataToSend.append('email', formData.email);
+    formDataToSend.append('mediumId', formData.mediumId);
+    formDataToSend.append('XId', formData.XId);
+    formDataToSend.append('instagramId', formData.instagramId);
+    formDataToSend.append('phone', formData.phone);
+    formDataToSend.append('passingBatch', formData.passingBatch);
+    formDataToSend.append('position', formData.position);
+    formDataToSend.append('achievements', JSON.stringify(formData.achievements));
     formDataToSend.append('photo', formData.photo);
 
     try {
-      const response = await fetch('http://localhost:5000/article', {
+      const response = await fetch('http://localhost:5000/upload', {
         method: 'POST',
         body: formDataToSend
       });
@@ -85,7 +88,7 @@ const AdminPage = () => {
       if (response.ok) {
         const data = await response.json();
         toast.success(
-          'Article Published!', {
+          'EB Member added!', {
           position: "bottom-center",
           autoClose: 2000,
           hideProgressBar: false,
@@ -96,7 +99,7 @@ const AdminPage = () => {
           theme: "colored",
           transition: Bounce,
         });
-        console.log("Image uploaded and article created successfully:", data);
+        console.log("Image uploaded and EB member created successfully:", data);
         setPublishLoader(false);
       }
       else {
@@ -128,86 +131,94 @@ const AdminPage = () => {
         theme: "colored",
         transition: Bounce,
       });
-      console.error("Error uploading image and creating article:", error);
+      console.error("Error uploading image and creating EB member:", error);
     }
   };
 
   const handleDeleteSubmit = async (e) => {
     e.preventDefault();
     setDeleteLoader(true);
+    const memberType = "eBMember"; 
+  
     if (!deleteID) {
       setDeleteLoader(false);
       toast.error(
         'Enter all fields!', {
-        position: "bottom-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        transition: Bounce,
-      });
+          position: "bottom-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
+        }
+      );
       return;
     }
+  
     try {
-      const response = await fetch(`http://localhost:5000/deletearticle/${deleteID}`, {
+      const response = await fetch(`http://localhost:5000/delete/${deleteID}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
         },
+        body: JSON.stringify({ type: memberType })
       });
-
+  
       if (response.ok) {
         const data = await response.json();
         setDeleteLoader(false);
         toast.success(
-          'Article deleted!', {
-          position: "bottom-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          transition: Bounce,
-        });
-        console.log("Article and associated photo deleted successfully:", data);
-      }
-      else {
+          'EB Member deleted!', {
+            position: "bottom-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Bounce,
+          }
+        );
+        console.log("EB Member and associated photo deleted successfully:", data);
+      } else {
         setDeleteLoader(false);
         toast.error(
           'Error Encountered!', {
-          position: "bottom-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          transition: Bounce,
-        });
+            position: "bottom-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Bounce,
+          }
+        );
       }
     } catch (error) {
       setDeleteLoader(false);
       toast.error(
         'Error Encountered!', {
-        position: "bottom-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        transition: Bounce,
-      });
-      console.error("Error deleting article:", error);
+          position: "bottom-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
+        }
+      );
+      console.error("Error deleting EB Member:", error);
     }
   };
+  
 
 
   const handleDeleteChange = (e) => {
@@ -219,108 +230,111 @@ const AdminPage = () => {
       <AdminNav />
       <div className='py-[5vh] pb-[12vh] bg-[#e7e3e3]'>
         <section className='py-[5vh] p-4 px-[10vw] rounded'>
-          <div className='text-3xl font-bold mb-4'>Publish Article</div>
-          <form onSubmit={handlePublishSubmit} className='border bg-white rounded-lg shadow-xl p-8 font-inter font-sans'>
+          <div className='text-3xl font-bold mb-4'>Create EB Member</div>
+          <form onSubmit={handlePublishSubmit} className='border bg-white rounded-lg shadow-xl p-8 font-inter font-san flex flex-col gap-4'>
             <div className='mb-2'>
-              <label className='block font-semibold'>Title</label>
+              <label className='block font-semibold'>Name*</label>
               <input
                 type='text'
-                name='title'
-                value={formData.title}
+                name='name'
+                value={formData.name}
                 onChange={handleChange}
                 className='w-full border border-gray-300 p-1 rounded'
               />
             </div>
             <div className='mb-2'>
-              <label className='block font-semibold'>Description</label>
+              <label className='block font-semibold'>Email*</label>
               <input
                 type='text'
-                name='description'
-                value={formData.description}
+                name='email'
+                value={formData.email}
                 onChange={handleChange}
                 className='w-full border border-gray-300 p-1 rounded'
               />
             </div>
             <div className='mb-2'>
-              <label className='block font-semibold'>Publish Date</label>
-              <input
-                type='date'
-                name='publishDate'
-                value={formData.publishDate}
-                onChange={handleChange}
-                className='w-full border border-gray-300 p-1 rounded'
-              />
-            </div>
-            <div className='mb-2'>
-              <label className='block font-semibold'>Content</label>
-              <textarea
-                name='content'
-                value={formData.content}
-                onChange={handleChange}
-                className='w-full border border-gray-300 p-1 rounded'
-              />
-            </div>
-            <div className='mb-2'>
-              <label className='block font-semibold'>Category</label>
+              <label className='block font-semibold'>Medium ID</label>
               <input
                 type='text'
-                name='category'
-                value={formData.category}
+                name='mediumId'
+                value={formData.mediumId}
                 onChange={handleChange}
                 className='w-full border border-gray-300 p-1 rounded'
               />
             </div>
             <div className='mb-2'>
-              <label className='block font-semibold'>Topic</label>
+              <label className='block font-semibold'>Instagram ID</label>
               <input
                 type='text'
-                name='topic'
-                value={formData.topic}
+                name='instagramId'
+                value={formData.instagramId}
                 onChange={handleChange}
                 className='w-full border border-gray-300 p-1 rounded'
               />
             </div>
             <div className='mb-2'>
-              <label className='block font-semibold'>Author/s Name</label>
-              {formData.author.map((author, index) => (
+              <label className='block font-semibold'>X/Twitter ID</label>
+              <input
+                type='text'
+                name='XId'
+                value={formData.XId}
+                onChange={handleChange}
+                className='w-full border border-gray-300 p-1 rounded'
+              />
+            </div>
+            <div className='mb-2'>
+              <label className='block font-semibold'>Mobile*</label>
+              <input
+                type='text'
+                name='phone'
+                value={formData.phone}
+                onChange={handleChange}
+                className='w-full border border-gray-300 p-1 rounded'
+              />
+            </div>
+            <div className='mb-2'>
+              <label className='block font-semibold'>Passing Batch</label>
+              <input
+                type='text'
+                name='passingBatch'
+                value={formData.passingBatch}
+                onChange={handleChange}
+                className='w-full border border-gray-300 p-1 rounded'
+              />
+            </div>
+            <div className='mb-2'>
+              <label className='block font-semibold'>Position*</label>
+              <select
+                name='position'
+                value={formData.position}
+                onChange={handleChange}
+                className='w-full border border-gray-300 p-1 rounded'
+              >
+                <option value='President'>President</option>
+                <option value='Vice President'>Vice President</option>
+                <option value='Secretary'>Secretary</option>
+                <option value='Treasurer'>Treasurer</option>
+                <option value='Cheif Coordinator'>Cheif Coordinator</option>
+              </select>
+            </div>
+
+            <div className='mb-2'>
+              <label className='block font-semibold'>Achievements</label>
+              {formData.achievements.map((achievements, index) => (
                 <input
                   key={index}
                   type='text'
-                  name={`author_${index}`}
-                  value={author}
+                  name={`achievements_${index}`}
+                  value={achievements}
                   onChange={handleChange}
                   className='w-full border border-gray-300 p-1 my-1 rounded'
                 />
               ))}
             </div>
-            <div className='mb-2'>
-              <label className='block font-semibold'>Author ID</label>
-              {formData.authorId.map((authorId, index) => (
-                <input
-                  key={index}
-                  type='text'
-                  name={`authorId_${index}`} // Updated field name
-                  value={authorId}
-                  onChange={handleChange}
-                  className='w-full border border-gray-300 p-1 my-1 rounded'
-                />
-              ))}
-            </div>
+
             <div className='flex justify-evenly'>
               <div className='mb-4'>
-                <label className='block font-semibold'>Type</label>
-                <select
-                  name='type'
-                  value={formData.type}
-                  onChange={handleChange}
-                  className=' border border-gray-300 p-2 px-3 rounded'
-                >
-                  <option value='Article'>Article</option>
-                  <option value='ArchiveArticle'>Archive Article</option>
-                </select>
-              </div>
-              <div className='mb-4'>
-                <label className='block font-semibold'>Image Upload</label>
+                <label className='block font-semibold'>Image Upload*</label>
                 <input
                   type='file'
                   name='image'
@@ -330,19 +344,19 @@ const AdminPage = () => {
               </div>
             </div>
             {!publishLoader ?
-              <button type='submit' className='bg-green-600 shadow-xl text-white font-semibold px-3 py-2 rounded'>
-                PUBLISH
+              <button type='submit' className='bg-green-600 shadow-xl max-w-[10vw] text-white font-semibold px-3 py-2 rounded'>
+                CREATE
               </button> :
-              <button disabled className='bg-green-600 shadow-xl text-white font-semibold px-3 py-2 rounded'>PUBLISHING..</button>
+              <button disabled className='bg-green-600 shadow-xl max-w-[15vw] text-white font-semibold px-3 py-2 rounded'>CREATING..</button>
             }
           </form>
         </section>
 
         <section className='py-[5vh] p-4 px-[10vw] rounded'>
-          <div className='text-3xl font-bold mb-4'>Delete Article</div>
+          <div className='text-3xl font-bold mb-4'>Delete EB Member</div>
           <form onSubmit={handleDeleteSubmit} className='border w-[30vw] bg-white rounded-lg shadow-xl p-8 font-inter font-sans'>
             <div className='mb-2'>
-              <label className='block font-semibold'>Unique Article ID</label>
+              <label className='block font-semibold'>Unique Member ID</label>
               <input
                 type='text'
                 name='deleteID'
@@ -372,4 +386,4 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+export default AdminLeadership;
