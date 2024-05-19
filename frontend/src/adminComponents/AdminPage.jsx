@@ -48,7 +48,7 @@ const AdminPage = () => {
   const handlePublishSubmit = async (e) => {
     setPublishLoader(true);
     e.preventDefault();
-    if (!formData.photo || formData.title || formData.description || formData.publishDate || formData.content || formData.category || formData.topic || formData.author || formData.authorId || formData.type) {
+    if (!formData.photo || !formData.title || !formData.description || !formData.publishDate || !formData.content || !formData.category || !formData.topic || !formData.author || !formData.authorId || !formData.type) {
       setPublishLoader(false);
       toast.error(
         'Enter all fields!', {

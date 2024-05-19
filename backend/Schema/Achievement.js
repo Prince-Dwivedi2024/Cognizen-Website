@@ -20,7 +20,7 @@ const achievementSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    achievers: {
+    achiever: {
         type: [String],
         required: true,
     },

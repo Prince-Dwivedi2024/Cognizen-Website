@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const AdminPage = () => {
+const AdminAchievement = () => {
   const [deleteID, setDeleteID] = useState('');
   const [publishLoader, setPublishLoader] = useState(false);
   const [deleteLoader, setDeleteLoader] = useState(false);
@@ -12,11 +12,8 @@ const AdminPage = () => {
     description: '',
     publishDate: '',
     content: '',
-    category: '',
-    topic: '',
-    author: ['', '', ''],
-    authorId: ['', '', ''], // Updated field name
-    type: 'Article', // Default value
+    achiever: ['', '', ''],
+    achieverId: ['', '', ''],
     photo: null
   });
 
@@ -24,7 +21,7 @@ const AdminPage = () => {
     const { name, value } = e.target;
     const nameParts = name.split('_');
 
-    if (nameParts[0] === 'author' || nameParts[0] === 'authorId') {
+    if (nameParts[0] === 'achiever' || nameParts[0] === 'achieverId') {
       const index = parseInt(nameParts[1], 10);
       setFormData((prevData) => ({
         ...prevData,
@@ -48,7 +45,7 @@ const AdminPage = () => {
   const handlePublishSubmit = async (e) => {
     setPublishLoader(true);
     e.preventDefault();
-    if (!formData.photo || formData.title || formData.description || formData.publishDate || formData.content || formData.category || formData.topic || formData.author || formData.authorId || formData.type) {
+    if (!formData.photo || !formData.title || !formData.description || !formData.publishDate || !formData.content || !formData.achiever || !formData.achieverId) {
       setPublishLoader(false);
       toast.error(
         'Enter all fields!', {
@@ -69,15 +66,12 @@ const AdminPage = () => {
     formDataToSend.append('description', formData.description);
     formDataToSend.append('publishDate', formData.publishDate);
     formDataToSend.append('content', formData.content);
-    formDataToSend.append('category', formData.category);
-    formDataToSend.append('topic', formData.topic);
-    formDataToSend.append('author', JSON.stringify(formData.author)); // Convert array to JSON string
-    formDataToSend.append('authorId', JSON.stringify(formData.authorId)); // Convert array to JSON string
-    formDataToSend.append('type', formData.type);
+    formDataToSend.append('achiever', JSON.stringify(formData.achiever)); // Convert array to JSON string
+    formDataToSend.append('achieverId', JSON.stringify(formData.achieverId)); // Convert array to JSON string
     formDataToSend.append('photo', formData.photo);
 
     try {
-      const response = await fetch('http://localhost:5000/article', {
+      const response = await fetch('http://localhost:5000/achievement', {
         method: 'POST',
         body: formDataToSend
       });
@@ -85,7 +79,7 @@ const AdminPage = () => {
       if (response.ok) {
         const data = await response.json();
         toast.success(
-          'Article Published!', {
+          'Achievement Published!', {
           position: "bottom-center",
           autoClose: 2000,
           hideProgressBar: false,
@@ -96,7 +90,7 @@ const AdminPage = () => {
           theme: "colored",
           transition: Bounce,
         });
-        console.log("Image uploaded and article created successfully:", data);
+        console.log("Image uploaded and achievement created successfully:", data);
         setPublishLoader(false);
       }
       else {
@@ -128,7 +122,7 @@ const AdminPage = () => {
         theme: "colored",
         transition: Bounce,
       });
-      console.error("Error uploading image and creating article:", error);
+      console.error("Error uploading image and creating achivement:", error);
     }
   };
 
@@ -152,7 +146,7 @@ const AdminPage = () => {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:5000/deletearticle/${deleteID}`, {
+      const response = await fetch(`http://localhost:5000/deleteachievement/${deleteID}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -163,7 +157,7 @@ const AdminPage = () => {
         const data = await response.json();
         setDeleteLoader(false);
         toast.success(
-          'Article deleted!', {
+          'Achievement deleted!', {
           position: "bottom-center",
           autoClose: 2000,
           hideProgressBar: false,
@@ -174,7 +168,7 @@ const AdminPage = () => {
           theme: "colored",
           transition: Bounce,
         });
-        console.log("Article and associated photo deleted successfully:", data);
+        console.log("Achievement and associated photo deleted successfully:", data);
       }
       else {
         setDeleteLoader(false);
@@ -205,7 +199,7 @@ const AdminPage = () => {
         theme: "colored",
         transition: Bounce,
       });
-      console.error("Error deleting article:", error);
+      console.error("Error deleting Achievement:", error);
     }
   };
 
@@ -219,7 +213,7 @@ const AdminPage = () => {
       <AdminNav />
       <div className='py-[5vh] pb-[12vh] bg-[#e7e3e3]'>
         <section className='py-[5vh] p-4 px-[10vw] rounded'>
-          <div className='text-3xl font-bold mb-4'>Publish Article</div>
+          <div className='text-3xl font-bold mb-4'>Publish Achievement</div>
           <form onSubmit={handlePublishSubmit} className='border bg-white rounded-lg shadow-xl p-8 font-inter font-sans'>
             <div className='mb-2'>
               <label className='block font-semibold'>Title</label>
@@ -261,64 +255,32 @@ const AdminPage = () => {
               />
             </div>
             <div className='mb-2'>
-              <label className='block font-semibold'>Category</label>
-              <input
-                type='text'
-                name='category'
-                value={formData.category}
-                onChange={handleChange}
-                className='w-full border border-gray-300 p-1 rounded'
-              />
-            </div>
-            <div className='mb-2'>
-              <label className='block font-semibold'>Topic</label>
-              <input
-                type='text'
-                name='topic'
-                value={formData.topic}
-                onChange={handleChange}
-                className='w-full border border-gray-300 p-1 rounded'
-              />
-            </div>
-            <div className='mb-2'>
-              <label className='block font-semibold'>Author/s Name</label>
-              {formData.author.map((author, index) => (
+              <label className='block font-semibold'>Achiever/s Name</label>
+              {formData.achiever.map((achiever, index) => (
                 <input
                   key={index}
                   type='text'
-                  name={`author_${index}`}
-                  value={author}
+                  name={`achiever_${index}`}
+                  value={achiever}
                   onChange={handleChange}
                   className='w-full border border-gray-300 p-1 my-1 rounded'
                 />
               ))}
             </div>
             <div className='mb-2'>
-              <label className='block font-semibold'>Author ID</label>
-              {formData.authorId.map((authorId, index) => (
+              <label className='block font-semibold'>Achiever ID</label>
+              {formData.achieverId.map((achieverId, index) => (
                 <input
                   key={index}
                   type='text'
-                  name={`authorId_${index}`} // Updated field name
-                  value={authorId}
+                  name={`achieverId_${index}`} // Updated field name
+                  value={achieverId}
                   onChange={handleChange}
                   className='w-full border border-gray-300 p-1 my-1 rounded'
                 />
               ))}
             </div>
             <div className='flex justify-evenly'>
-              <div className='mb-4'>
-                <label className='block font-semibold'>Type</label>
-                <select
-                  name='type'
-                  value={formData.type}
-                  onChange={handleChange}
-                  className=' border border-gray-300 p-2 px-3 rounded'
-                >
-                  <option value='Article'>Article</option>
-                  <option value='ArchiveArticle'>Archive Article</option>
-                </select>
-              </div>
               <div className='mb-4'>
                 <label className='block font-semibold'>Image Upload</label>
                 <input
@@ -339,10 +301,10 @@ const AdminPage = () => {
         </section>
 
         <section className='py-[5vh] p-4 px-[10vw] rounded'>
-          <div className='text-3xl font-bold mb-4'>Delete Article</div>
+          <div className='text-3xl font-bold mb-4'>Delete Achievement</div>
           <form onSubmit={handleDeleteSubmit} className='border w-[30vw] bg-white rounded-lg shadow-xl p-8 font-inter font-sans'>
             <div className='mb-2'>
-              <label className='block font-semibold'>Unique Article ID</label>
+              <label className='block font-semibold'>Unique Achievement ID</label>
               <input
                 type='text'
                 name='deleteID'
@@ -372,4 +334,4 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+export default AdminAchievement;
