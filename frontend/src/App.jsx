@@ -29,12 +29,12 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/adminlogin" element={<AdminLogin />} />
-        
+
         <Route element={<Layout />}>  {/* Wrap routes with Layout */}
           <Route path="/" element={<HomePage />} />
           <Route path="philoneist" element={<Philoneist />} />
           <Route path="opinion" element={<Opinion />} />
-          <Route path="reviews" element={<Reviews/>} />
+          <Route path="reviews" element={<Reviews />} />
           <Route path="history" element={<History />} />
           <Route path="international" element={<International />} />
           <Route path="archives" element={<Archives />} />
@@ -45,14 +45,14 @@ const App = () => {
           <Route path="/notice" element={<NoticeBoard />} />
         </Route>
 
-        <Route element={<PrivateComponent />}>
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="/adminAchievement" element={<AdminAchievement />} />
-          <Route path="/adminAlumni" element={<AdminAlumni />} />
-          <Route path="/adminLeadership" element={<AdminLeadership />} />
-          <Route path="/adminNotice" element={<AdminNotice />} />
-          <Route path="/adminTeam" element={<AdminTeam />} />
-        </Route>
+        {/* <Route element={<PrivateComponent />}> */}
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/adminAchievement" element={<AdminAchievement />} />
+        <Route path="/adminAlumni" element={<AdminAlumni />} />
+        <Route path="/adminLeadership" element={<AdminLeadership />} />
+        <Route path="/adminNotice" element={<AdminNotice />} />
+        <Route path="/adminTeam" element={<AdminTeam />} />
+      {/* </Route> */}
       </Routes>
     </BrowserRouter>
   );
