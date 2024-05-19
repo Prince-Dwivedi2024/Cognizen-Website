@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Phe from '../assets/Phe.jpeg';
+import Nav from './Nav';
+import Footer from './Footer';
 
 const articles = [
   { type: 'History', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Prince Dwivedi', date: '2024-05-16' },
@@ -51,6 +53,9 @@ const History = () => {
   };
 
   return (
+    <>
+     <Nav/>
+
     <div className="min-h-screen bg-[#FFFFF5] p-10 pt-2 flex justify-center shadow-sm ">
       <div className="w-4/5">
         <div className="flex justify-center pb-7">
@@ -77,6 +82,9 @@ const History = () => {
         </div>
       </div>
     </div>
+
+    <Footer/>
+    </>
   );
 };
 

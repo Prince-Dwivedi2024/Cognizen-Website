@@ -1,6 +1,11 @@
+// Home page
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Phe from '../assets/Phe.jpeg';
+import Nav from './Nav';
+import Footer from './Footer';
+import NoticeBoard from './NoticeBoard';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const articles = [
   { type: 'Pheloneist', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Prince Dwivedi', date: '2024-05-16' },
@@ -43,6 +48,7 @@ const Card = ({ type, highlight, imageUrl, author, date }) => {
 
 const HomePage = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [showNoticeBoard, setShowNoticeBoard] = useState(false);
   const navigate = useNavigate();
 
   const handleSearch = () => {
@@ -50,35 +56,60 @@ const HomePage = () => {
     console.log(`Searching for: ${searchQuery}`);
   };
 
+  const toggleNoticeBoard = () => {
+    setShowNoticeBoard(!showNoticeBoard);
+  };
+
   return (
-    <div className="min-h-screen bg-[#FFFFF5] p-10 pt-2 flex justify-center shadow-sm ">
-      <div className="w-4/5">
-        <div className="flex justify-center pb-7">
-          <div className="flex w-full h-8 bg-[#FFFFFE] shadow-md rounded-lg overflow-hidden hover:outline hover:outline-blue-200 transform  hover:bg-white hover:shadow-2xl hover:scale-[1.0001] transition-all">
-            <input
-              type="text"
-              className="w-11/12 p-4 text-lg bg-[#FFFFFE] placeholder-center flex items-center justify-center focus:outline-none font-sans"
-              placeholder="Search for articles..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <button
-              className="w-1/12 bg-blue-400 text-white text-lg hover:bg-blue-600 transition-all font-extrabold font-sans"
-              onClick={handleSearch}
-            >
-              Search
-            </button>
+    <>
+      <Nav />
+      <div className="min-h-screen bg-[#FFFFF5] p-10 pt-2 flex justify-center shadow-sm">
+        <div className="w-4/5">
+          <div className="flex justify-center pb-7">
+            <div className="flex w-full h-8 bg-[#FFFFFE] shadow-md rounded-lg overflow-hidden hover:outline hover:outline-blue-200 transform hover:bg-white hover:shadow-2xl hover:scale-[1.0001] transition-all">
+              <input
+                type="text"
+                className="w-11/12 p-4 text-lg bg-[#FFFFFE] placeholder-center flex items-center justify-center focus:outline-none font-sans"
+                placeholder="Search for articles..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <button
+                className="w-1/12 bg-blue-400 text-white text-lg hover:bg-blue-600 transition-all font-extrabold font-sans"
+                onClick={handleSearch}
+              >
+                Search
+              </button>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" style={{ rowGap: '80px' }}>
+            {articles.map((article, index) => (
+              <Card key={index} {...article} />
+            ))}
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" style={{ rowGap: '80px' }}>
-          {articles.map((article, index) => (
-            <Card key={index} {...article} />
-          ))}
-        </div>
       </div>
-    </div>
+
+      {/* Loudspeaker Icon for NoticeBoard */}
+      <div className="fixed bottom-4 right-4 flex flex-col items-center">
+        <div
+          className="relative cursor-pointer text-blue-500 hover:text-blue-300"
+          onClick={toggleNoticeBoard}
+        >
+          <i className="fas fa-bullhorn text-4xl"></i>
+          <span className="absolute -top-6 left-1/2 transform -translate-x-1/2 text-sm transition-opacity opacity-0">Announcements</span>
+        </div>
+
+        {showNoticeBoard && (
+          <div className="absolute bottom-12 right-0 w-[40vw] h-[80vh] bg-[#FFFFF5] border border-gray-300 rounded shadow-lg z-50">
+            <NoticeBoard />
+          </div>
+        )}
+      </div>
+
+      <Footer />
+    </>
   );
 };
 
 export default HomePage;
-

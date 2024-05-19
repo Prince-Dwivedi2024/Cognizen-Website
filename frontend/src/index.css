@@ -2,6 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
+
 ::placeholder {
     text-align: center;
   }
+
+  
+
+.fixed-noticeboard {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fixed-noticeboard .notice-icon {
+  font-size: 2rem;
+  color: blue;
+  cursor: pointer;
+  position: relative;
+}
+
+.fixed-noticeboard .notice-icon:hover {
+  color: lightblue;
+}
+
+.fixed-noticeboard .notice-icon span {
+  position: absolute;
+  top: -1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: blue;
+  font-size: 0.75rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.fixed-noticeboard .notice-icon:hover span {
+  opacity: 1;
+}
+
+.notice-dropup {
+  position: absolute;
+  bottom: 2.5rem;
+  right: 0;
+  width: 15rem;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+  z-index: 50;
+}
+
+.notice-dropup .notice-item:hover {
+  background: #f1f1f1;
+}
