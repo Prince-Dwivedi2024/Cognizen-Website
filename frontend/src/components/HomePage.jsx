@@ -21,6 +21,7 @@ const articles = [
 
 const Card = ({ type, highlight, imageUrl, author, date }) => {
   return (
+
     <div className="bg-[#FFFFFE] rounded-lg overflow-hidden transform transition-transform hover:bg-white hover:shadow-2xl hover:scale-[1.0001]">
       <div className='px-2.5'>
         <div className="bg-[#FFFFFE] py-2" style={{ height: '36px' }}>
@@ -36,7 +37,7 @@ const Card = ({ type, highlight, imageUrl, author, date }) => {
         </div>
         
         <div className="bg-[#FFFFFE] py-1 flex justify-between items-center" style={{ height: '20.6px' }}>
-          <div className="text-sm" style={{ color: '#212121' }}>
+          <div className="text-sm" style={{ color: '#979797' }}>
             <span>{author}</span> | <span>{date}</span>
           </div>
           <button className="text-sm font-semibold text-blue-400 hover:text-[#c9c6c6]">Read more</button>
@@ -93,7 +94,7 @@ const HomePage = () => {
       {/* Loudspeaker Icon for NoticeBoard */}
       <div className="fixed bottom-4 right-4 flex flex-col items-center">
         <div
-          className="relative cursor-pointer text-blue-500 hover:text-blue-300"
+          className="relative cursor-pointer text-[#222f3d] hover:text-[#5e6b79] hover:text-lg hover:text-extrabold"
           onClick={toggleNoticeBoard}
         >
           <i className="fas fa-bullhorn text-4xl"></i>
