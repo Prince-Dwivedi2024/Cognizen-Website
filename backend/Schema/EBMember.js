@@ -30,7 +30,10 @@ const ebMemberSchema = new mongoose.Schema({
     mediumId:{
         type: String
     },
-    instagramID:{
+    instagramId:{
+        type:String
+    },
+    XId:{
         type:String
     },
     achievements: {
@@ -38,7 +41,6 @@ const ebMemberSchema = new mongoose.Schema({
     },
     passingBatch:{
         type: String,
-        required: true
     },
     position:{
         default: "Member",
