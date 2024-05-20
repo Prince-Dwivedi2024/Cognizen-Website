@@ -1,11 +1,22 @@
 //full page to display selected article
-import { useEffect,useState } from "react"
-import {useNavigate} from "react-router-dom"
+import { useEffect, useState } from "react";
 
 const Article = () => {
-  return (
-    <div>Article</div>
-  )
-}
+  const [articleType, setArticleType] = useState('');
 
-export default Article
+  useEffect(() => {
+    const storedType = localStorage.getItem('articleType');
+    if (storedType) {
+      setArticleType(storedType);
+    }
+  }, []);
+
+  return (
+    <div>
+      <h1>Article Type: {articleType}</h1>
+      {/* Add more article-related content here */}
+    </div>
+  );
+};
+
+export default Article;

@@ -1,5 +1,5 @@
-// Home page
-import React, { useState } from 'react';
+//Home page
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Phe from '../assets/Phe.jpeg';
 import Nav from './Nav';
@@ -21,7 +21,6 @@ const articles = [
 
 const Card = ({ type, highlight, imageUrl, author, date }) => {
   return (
-
     <div className="bg-[#FFFFFE] rounded-lg overflow-hidden transform transition-transform hover:bg-white hover:shadow-2xl hover:scale-[1.0001]">
       <div className='px-2.5'>
         <div className="bg-[#FFFFFE] py-2" style={{ height: '36px' }}>
@@ -50,6 +49,8 @@ const Card = ({ type, highlight, imageUrl, author, date }) => {
 const HomePage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showNoticeBoard, setShowNoticeBoard] = useState(false);
+  const noticeRef = useRef(null);
+  const iconRef = useRef(null);
   const navigate = useNavigate();
 
   const handleSearch = () => {
@@ -60,6 +61,24 @@ const HomePage = () => {
   const toggleNoticeBoard = () => {
     setShowNoticeBoard(!showNoticeBoard);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        noticeRef.current &&
+        !noticeRef.current.contains(event.target) &&
+        iconRef.current &&
+        !iconRef.current.contains(event.target)
+      ) {
+        setShowNoticeBoard(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
@@ -94,6 +113,7 @@ const HomePage = () => {
       {/* Loudspeaker Icon for NoticeBoard */}
       <div className="fixed bottom-4 right-4 flex flex-col items-center">
         <div
+          ref={iconRef}
           className="relative cursor-pointer text-[#222f3d] hover:text-[#5e6b79] hover:text-lg hover:text-extrabold"
           onClick={toggleNoticeBoard}
         >
@@ -102,7 +122,7 @@ const HomePage = () => {
         </div>
 
         {showNoticeBoard && (
-          <div className="absolute bottom-12 right-0 w-[40vw] h-[80vh] bg-[#FFFFF5] border border-gray-300 rounded shadow-lg z-50">
+          <div ref={noticeRef} className="absolute bottom-12 right-0 w-[40vw] h-[80vh] bg-[#FFFFF5] border border-gray-300 rounded shadow-lg z-50">
             <NoticeBoard />
           </div>
         )}
