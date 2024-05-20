@@ -21,7 +21,7 @@ import History from "./components/History"
 import International from "./components/International"
 import Archieves from "./components/Archives"
 import Reviews from "./components/Reviews"
-
+import Achievements from "./components/Achievements"
 const App = () => {
   return (
     <>
@@ -56,6 +56,7 @@ const App = () => {
             <Route path="/leadership" element={<ExecutiveMembersPage />} />
             <Route path="/alumni" element={<PastMembersPage />} />
             <Route path="/notice" element={<NoticeBoard />} />
+            <Route path="achievement" element={<Achievements />} />
             
           </Routes>
 

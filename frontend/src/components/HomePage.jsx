@@ -118,7 +118,9 @@ const HomePage = () => {
           onClick={toggleNoticeBoard}
         >
           <i className="fas fa-bullhorn text-4xl"></i>
-          <span className="absolute -top-6 left-1/2 transform -translate-x-1/2 text-sm transition-opacity opacity-0">Announcements</span>
+          <span className="announcement-popup absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 px-2 py-1 text-sm bg-black text-white rounded opacity-0 transition-opacity duration-300">
+            Announcements
+          </span>
         </div>
 
         {showNoticeBoard && (
