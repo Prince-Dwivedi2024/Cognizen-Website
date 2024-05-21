@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import CognizenLogo2 from '../assets/CognizenLogo2.png';
+import CampusNITR from '../assets/CampusNITR.jpg'; 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
@@ -9,7 +10,7 @@ export default function Nav() {
   return (
     <header>
       <div className="bg-white">
-        <div className="bg-black py-[3vh] flex items-center font-inter font-sans">
+      <div className="relative h-[400px] bg-cover bg-center" style={{ backgroundImage: `url(${CampusNITR})` }}>
           <Link to="/">
             <img
               src={CognizenLogo2}
@@ -19,7 +20,7 @@ export default function Nav() {
           </Link>
 
           <div className='ml-4 text-white flex flex-col items-center'>
-            <h1 className="text-2xl mb-2 font-extrabold">Cognizen Club NITR</h1>
+            <h1 className="text-3xl mb-2 font-extrabold">Cognizen Club NITR</h1>
             <p className='font-semibold'>The official politics and economics</p>
             <p className='font-semibold'>awareness club of NIT Rourkela.</p>
           </div>

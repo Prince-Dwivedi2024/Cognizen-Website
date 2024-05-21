@@ -19,7 +19,7 @@ const articles = [
   { type: 'Politics', highlight: "After Polls, Small Opposition Parties Will Merge With Congress, PM Claims", imageUrl: Phe, author: 'Big B', date: '2024-05-14' },
 ];
 
-const Card = ({ type, highlight, imageUrl, author, date }) => {
+const Card = ({ type, highlight, imageUrl, author, date, onReadMore }) => {
   return (
     <div className="bg-[#FFFFFE] rounded-lg overflow-hidden transform transition-transform hover:bg-white hover:shadow-2xl hover:scale-[1.0001]">
       <div className='px-2.5'>
@@ -39,7 +39,12 @@ const Card = ({ type, highlight, imageUrl, author, date }) => {
           <div className="text-sm" style={{ color: '#979797' }}>
             <span>{author}</span> | <span>{date}</span>
           </div>
-          <button className="text-sm font-semibold text-blue-400 hover:text-[#c9c6c6]">Read more</button>
+          <button 
+            className="text-sm font-semibold text-blue-400 hover:text-[#c9c6c6]" 
+            onClick={() => onReadMore(type)}
+          >
+            Read more
+          </button>
         </div>
       </div>
     </div>
@@ -80,6 +85,11 @@ const HomePage = () => {
     };
   }, []);
 
+  const handleReadMore = (type) => {
+    localStorage.setItem('articleType', type);
+    navigate('/article');
+  };
+
   return (
     <>
       <Nav />
@@ -104,7 +114,7 @@ const HomePage = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" style={{ rowGap: '80px' }}>
             {articles.map((article, index) => (
-              <Card key={index} {...article} />
+              <Card key={index} {...article} onReadMore={handleReadMore} />
             ))}
           </div>
         </div>
