@@ -31,32 +31,32 @@ const ExecutiveMembersPage = () => {
     <>
     <div className="min-h-screen bg-[#F0F4F8]">
       {/* Header Section */}
-      <div className="relative h-[400px] bg-cover bg-center" style={{ backgroundImage: `url(${NITimg3})` }}>
+      <div className="relative h-[250px] bg-cover bg-center" style={{ backgroundImage: `url(${NITimg3})` }}>
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="relative z-10 flex items-center justify-between h-full px-8 text-white">
-          <img src={CognizenLogo2} alt="Cognizen Club Logo" className="h-1/2" style={{ width: '17%' }} />
+          <img src={CognizenLogo2} alt="Cognizen Club Logo" className="h-1/" style={{ width: '12%' }} />
           <div className="absolute left-1/2 transform -translate-x-1/2 w-1/3 text-center font-raleway space-y-4">
-            <h1 className="text-4xl font-medium">Let's welcome</h1>
-            <h1 className="text-4xl font-medium">our</h1>
-            <h1 className="text-4xl font-medium">Executive Members</h1>
+            <h1 className="text-4xl font-bold">Let's meet</h1>
+            <h1 className="text-4xl font-bold">our</h1>
+            <h1 className="text-4xl font-bold">Executive Members</h1>
           </div>
           <div className="absolute top-4 right-4 flex space-x-4">
-            <Link to="/" className="text-lg font-medium px-4 py-2 hover:underline">Home</Link>
-            <Link to="/leadership" className="text-lg font-medium px-4 py-2 hover:underline">Leadership</Link>
-            <Link to="/team" className="text-lg font-medium px-4 py-2 hover:underline">Team</Link>
-            <Link to="/alumni" className="text-lg font-medium px-4 py-2 hover:underline">Alumni</Link>
-            <Link to="/more" className="text-lg font-medium px-4 py-2 hover:underline">More</Link>
+            <Link to="/" className="text-md font-medium px-4 py-2 hover:underline">Home</Link>
+            <Link to="/leadership" className="text-md font-medium px-4 py-2 hover:underline">Leadership</Link>
+            <Link to="/team" className="text-md font-medium px-4 py-2 hover:underline">Team</Link>
+            <Link to="/alumni" className="text-md font-medium px-4 py-2 hover:underline">Alumni</Link>
+            <Link to="/more" className="text-md font-medium px-4 py-2 hover:underline">More</Link>
           </div>
         </div>
       </div>
 
       {/* Main Section */}
-      <div className="flex justify-center">
+      <div className="flex justify-center py-[10vh]">
         <div className="p-8 w-4/5">
           <h2 className="text-3xl font-bold text-center mb-8 text-[#222f3d] font-raleway">"Innovate, Collaborate, Succeed"</h2>
           <div className="flex flex-col items-center space-y-8">
             <div className="w-full flex justify-center pt-8">
-              <div className="bg-[#F0F4F8] p-8 rounded-lg shadow-sm transform transition-transform hover:scale-105 hover:shadow-2xl">
+              <div className="bg-white p-8 rounded-lg shadow-sm transform transition-transform hover:scale-105 hover:shadow-2xl">
                 <div className="flex items-center mb-4">
                   <img src={members[0].imageUrl} alt={members[0].name} className="h-32 w-32 rounded-full border-2 border-gray-300" />
                   <div className="ml-4">
@@ -74,7 +74,7 @@ const ExecutiveMembersPage = () => {
             </div>
             <div className="w-full flex justify-center gap-8 pt-8">
               {members.slice(1, 3).map((member, index) => (
-                <div key={index} className="bg-[#F0F4F8] p-8 rounded-lg shadow-sm transform transition-transform hover:scale-105 hover:shadow-2xl">
+                <div key={index} className="bg-white p-8 rounded-lg shadow transform transition-transform hover:scale-105 hover:shadow-2xl">
                   <div className="flex items-center mb-4">
                     <img src={member.imageUrl} alt={member.name} className="h-32 w-32 rounded-full border-2 border-gray-300" />
                     <div className="ml-4">
@@ -93,7 +93,7 @@ const ExecutiveMembersPage = () => {
             </div>
             <div className="w-full flex justify-between gap-8 pt-8">
               {members.slice(3, 6).map((member, index) => (
-                <div key={index} className="bg-[#F0F4F8] p-8 rounded-lg shadow-sm transform transition-transform hover:scale-105 hover:shadow-2xl">
+                <div key={index} className="bg-white p-8 rounded-lg shadow transform transition-transform hover:scale-105 hover:shadow-2xl">
                   <div className="flex items-center mb-4">
                     <img src={member.imageUrl} alt={member.name} className="h-32 w-32 rounded-full border-2 border-gray-300" />
                     <div className="ml-4">
@@ -113,7 +113,7 @@ const ExecutiveMembersPage = () => {
              
             <div className="w-full flex justify-between gap-8 pt-8">
               {members.slice(6,9).map((member, index) => (
-                <div key={index} className="bg-[#F0F4F8] p-8 rounded-lg shadow-sm transform transition-transform hover:scale-105 hover:shadow-2xl">
+                <div key={index} className="bg-white p-8 rounded-lg shadow transform transition-transform hover:scale-105 hover:shadow-2xl">
                   <div className="flex items-center mb-4">
                     <img src={member.imageUrl} alt={member.name} className="h-32 w-32 rounded-full border-2 border-gray-300" />
                     <div className="ml-4">

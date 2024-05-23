@@ -121,7 +121,7 @@ const MilestoneCard = ({ icon, number, label, inView }) => {
   }, [inView, number]);
 
   return (
-    <div className="flex flex-col items-center bg-transparent p-4">
+    <div className="flex flex-col items-center font-raleway bg-transparent p-4">
       <div className="text-6xl">{icon}</div>
       <div className="text-4xl font-bold mt-2">{count}</div>
       <div className="text-lg mt-1">{label}</div>
@@ -136,9 +136,9 @@ const OurMilestones = () => {
   });
 
   const milestones = [
-    { icon: <i className="fas fa-users"></i>, number: 1256, label: "Total Members" },
+    { icon: <i className="fas fa-users"></i>, number: 1256, label: "Our Alumni" },
     { icon: <i className="fas fa-users"></i>, number: 900, label: "Current Members" },
-    { icon: <i className="fas fa-trophy"></i>, number: 50, label: "Total Awards" },
+    { icon: <i className="fas fa-trophy"></i>, number: 50, label: "Total Recognition" },
     { icon: <i className="fas fa-book"></i>, number: 200, label: "Total Articles" }
   ];
 
@@ -189,25 +189,9 @@ const Achievements = () => {
   return (
     <>
       <Nav />
-      <div className="min-h-screen bg-[#FFFFF5] p-10 pt-2 flex justify-center shadow-sm">
+      <div className="min-h-screen bg-[#F0F4F8] p-10 py-[15vh] flex justify-center shadow-sm">
         <div className="w-4/5">
-          <div className="flex justify-center pb-7">
-            <div className="flex w-full h-8 bg-[#FFFFFE] shadow-md rounded-lg overflow-hidden hover:outline hover:outline-blue-200 transform hover:bg-white hover:shadow-2xl hover:scale-105 transition-all">
-              <input
-                type="text"
-                className="w-11/12 p-4 text-lg bg-[#FFFFFE] placeholder-center flex items-center justify-center focus:outline-none"
-                placeholder="Search for articles..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <button
-                className="w-1/12 bg-blue-400 text-white text-lg hover:bg-blue-600 transition-all font-extrabold"
-                onClick={handleSearch}
-              >
-                Search
-              </button>
-            </div>
-          </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-14">
             {achievements.map((achievement, index) => (
               <AchievementCard key={index} {...achievement} />

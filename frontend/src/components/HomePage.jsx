@@ -14,16 +14,16 @@ import Card6 from '../assets/Card6.webp';
 import Card7 from '../assets/Card7.webp';
 import Card8 from '../assets/Card8.webp';
 import Card9 from '../assets/Card9.jpg';
-import TrendCard1 from  '../assets/TrendCard1.jpg';
-import TrendCard2 from  '../assets/TrendCard2.jpg';
-import TrendCard3 from  '../assets/TrendCard3.jpg';
-import TrendCard4 from  '../assets/TrendCard4.jpg';
+import TrendCard1 from '../assets/TrendCard1.jpg';
+import TrendCard2 from '../assets/TrendCard2.jpg';
+import TrendCard3 from '../assets/TrendCard3.jpg';
+import TrendCard4 from '../assets/TrendCard4.jpg';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const articles = [
-  { type: 'Pheloneist', highlight: "AI is a black box maybe not for long", detail:"No One Truly Knows How AI Systems Work. A New Discovery Could Change That", imageUrl: Card1, author: 'Author1', date: '2024-05-16' },
-  { type: 'World', highlight: "Why Some Iranians Refuse to Mourn Ebrahim Raisi", details:"" , imageUrl: Card2, author: 'Author2', date: '2024-05-15' },
+  { type: 'Pheloneist', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", imageUrl: Card1, author: 'Author1', date: '2024-05-16' },
+  { type: 'World', highlight: "Why Some Iranians Refuse to Mourn Ebrahim Raisi", details: "", imageUrl: Card2, author: 'Author2', date: '2024-05-15' },
   { type: 'Politics', highlight: "As Indians Vote, Modi's Party Misleads Online", imageUrl: Card3, author: 'Author3', date: '2024-05-14' },
   { type: 'Pheloneist', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card4, author: 'Author4', date: '2024-05-16' },
   { type: 'Reviews', highlight: "The 20 Best Period Dramas to Watch ", imageUrl: Card5, author: 'Author5', date: '2024-05-15' },
@@ -34,19 +34,19 @@ const articles = [
 
 //Cards for Trending Articles-
 const extraArticles = [
-  { type: 'History', highlight: "Here are top secrets behind the Pyramids of Giza ",detail: "Curiously, the Great Pyramid of Khufu contains a large granite sarcophagus." , imageUrl: TrendCard1, author: 'Author7', date: '2024-05-13' },
-  { type: 'History', highlight: "History behind our two wheels of daily life ", detail:"The Draisine is regarded as the first bicycle and Karl von Drais is seen as the father of the bicycle.", imageUrl: TrendCard2, author: 'The Prince', date: '2024-05-12' },
-  { type: 'History', highlight: "Shahjahan and his Tajmahal", detail:"The so-called “22 rooms” in the basement of the Taj Mahal are not really rooms, rather a long arched corridor.... ", imageUrl: TrendCard3, author: 'Raj' , date: '2024-05-11' },
-  { type: 'History', highlight: "A king, his fear and how he made the Great Wall", detail:"In c. 220 B.C., under Qin Shi Huang, sections of earlier fortifications were joined together to form a united defence system against invasions from the north.",  imageUrl: TrendCard4, author: 'Zeeshan', date: '2024-05-10' },
-   
+  { type: 'History', highlight: "Here are top secrets behind the Pyramids of Giza ", detail: "Curiously, the Great Pyramid of Khufu contains a large granite sarcophagus.", imageUrl: TrendCard1, author: 'Author7', date: '2024-05-13' },
+  { type: 'History', highlight: "History behind our two wheels of daily life ", detail: "The Draisine is regarded as the first bicycle and Karl von Drais is seen as the father of the bicycle.", imageUrl: TrendCard2, author: 'The Prince', date: '2024-05-12' },
+  { type: 'History', highlight: "Shahjahan and his Tajmahal", detail: "The so-called “22 rooms” in the basement of the Taj Mahal are not really rooms, rather a long arched corridor.... ", imageUrl: TrendCard3, author: 'Raj', date: '2024-05-11' },
+  { type: 'History', highlight: "A king, his fear and how he made the Great Wall", detail: "In c. 220 B.C., under Qin Shi Huang, sections of earlier fortifications were joined together to form a united defence system against invasions from the north.", imageUrl: TrendCard4, author: 'Zeeshan', date: '2024-05-10' },
+
 ];
 
 //Cards for You Must Know section-
 const youMustKnowArticles = [
-  { type: 'History', highlight: "Here are top secrets behind the Pyramids of Giza ",detail: "Curiously, the Great Pyramid of Khufu contains a large granite sarcophagus." , imageUrl: TrendCard1, author: 'Author7', date: '2024-05-13' },
-  { type: 'History', highlight: "History behind our two wheels of daily life ", detail:"The Draisine is regarded as the first bicycle and Karl von Drais is seen as the father of the bicycle.", imageUrl: TrendCard2, author: 'The Prince', date: '2024-05-12' },
-  { type: 'History', highlight: "Shahjahan and his Tajmahal", detail:"The so-called “22 rooms” in the basement of the Taj Mahal are not really rooms, rather a long arched corridor.... ", imageUrl: TrendCard3, author: 'Raj' , date: '2024-05-11' },
-  { type: 'History', highlight: "A king, his fear and how he made the Great Wall", detail:"In c. 220 B.C., under Qin Shi Huang, sections of earlier fortifications were joined together to form a united defence system against invasions from the north.",  imageUrl: TrendCard4, author: 'Zeeshan', date: '2024-05-10' },
+  { type: 'History', highlight: "Here are top secrets behind the Pyramids of Giza ", detail: "Curiously, the Great Pyramid of Khufu contains a large granite sarcophagus.", imageUrl: TrendCard1, author: 'Author7', date: '2024-05-13' },
+  { type: 'History', highlight: "History behind our two wheels of daily life ", detail: "The Draisine is regarded as the first bicycle and Karl von Drais is seen as the father of the bicycle.", imageUrl: TrendCard2, author: 'The Prince', date: '2024-05-12' },
+  { type: 'History', highlight: "Shahjahan and his Tajmahal", detail: "The so-called “22 rooms” in the basement of the Taj Mahal are not really rooms, rather a long arched corridor.... ", imageUrl: TrendCard3, author: 'Raj', date: '2024-05-11' },
+  { type: 'History', highlight: "A king, his fear and how he made the Great Wall", detail: "In c. 220 B.C., under Qin Shi Huang, sections of earlier fortifications were joined together to form a united defence system against invasions from the north.", imageUrl: TrendCard4, author: 'Zeeshan', date: '2024-05-10' },
   { type: 'World', highlight: "The Wonders of Space Exploration", detail: "Discover the latest in space technology and exploration.", imageUrl: Card9, author: 'Dr. X', date: '2024-05-20' }
 ];
 
@@ -105,10 +105,12 @@ const Carousel = ({ articles, onReadMore }) => {
 };
 
 const Card = ({ type, highlight, imageUrl, author, date, onReadMore }) => (
-  <div className="bg-transparent overflow-hidden transform transition-transform hover:scale-105">
-    <div className='px-'>
-      <div className="relative bg-cover bg-center h-60" style={{ backgroundImage: `url(${imageUrl})` }}>
-      </div>
+  <div className="bg-transparent bg-white rounded shadow-md overflow-hidden transform transition-transform hover:scale-105">
+
+    <div className="relative bg-cover bg-center h-60" style={{ backgroundImage: `url(${imageUrl})` }}>
+    </div>
+
+    <div className='p-5'>
       <div className="py-2" style={{ height: '75px' }}>
         <h2 className="text-mid font-semibold mb-1 font-sans" style={{ color: '#212121' }}>{highlight}</h2>
       </div>
@@ -124,6 +126,7 @@ const Card = ({ type, highlight, imageUrl, author, date, onReadMore }) => (
         </button>
       </div>
     </div>
+
   </div>
 );
 
@@ -190,12 +193,14 @@ const HomePage = () => {
   const mostReadArticles = extraArticles.slice(0, 3); // Just an example
 
   return (
-    <>
+    <div className=''>
       <Nav />
-      <div className="min-h-screen bg-[#F0F4F8] p-10 pt-2 flex justify-center shadow-sm">
+      <div className="min-h-screen bg-[#F0F4F8] p-10 flex justify-center py-[10vh] shadow-sm">
         <div className="w-4/5">
+
+          {/* search bar */}
           <div className="flex justify-center pb-7">
-            <div className="flex w-full h-8 bg-[#FFFFFE] shadow-md rounded-lg overflow-hidden hover:outline hover:outline-blue-200 transform hover:bg-white hover:shadow-2xl hover:scale-[1.0001] transition-all">
+            <div className="flex w-full h-10 bg-[#FFFFFE] shadow-md rounded overflow-hidden hover:outline hover:outline-blue-200 transform hover:bg-white hover:shadow-2xl hover:scale-[1.0001] transition-all">
               <input
                 type="text"
                 className="w-11/12 p-4 text-lg bg-[#FFFFFE] placeholder-center flex items-center justify-center focus:outline-none font-sans"
@@ -211,6 +216,7 @@ const HomePage = () => {
               </button>
             </div>
           </div>
+
           <div className="pb-12">
             <h2 className="text-3xl font-medium mb-4 font-raleway pt-10 pb-4 text-[#222f3d]">Trending Articles-</h2>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
@@ -222,14 +228,7 @@ const HomePage = () => {
               ))}
             </div>
           </div>
-          <div className="pb-12 border-t border-black pt-10">
-            <h2 className="text-3xl font-medium  pb-4 font-raleway text-[#222f3d]">Editor's Picks-</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-14">
-              {articles.slice(4).map((article, index) => (
-                <Card key={index} {...article} onReadMore={handleReadMore} />
-              ))}
-            </div>
-          </div>
+
           <div className="pb-12 border-t border-black pt-10">
             <h2 className="text-3xl font-medium pb-4 font-raleway text-[#222f3d]">You Must Know-</h2>
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
@@ -276,7 +275,7 @@ const HomePage = () => {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 
