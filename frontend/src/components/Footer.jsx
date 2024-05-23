@@ -1,4 +1,5 @@
 //footer section
+//footer section
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import CognizenLogo2 from '../assets/CognizenLogo2.png'

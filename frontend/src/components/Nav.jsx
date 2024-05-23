@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import CognizenLogo2 from '../assets/CognizenLogo2.png';
+import CampusNITR from '../assets/CampusNITR.jpg'; 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
@@ -9,7 +10,7 @@ export default function Nav() {
   return (
     <header>
       <div className="bg-white">
-        <div className="bg-black py-[3vh] flex items-center font-inter font-sans">
+      <div className="relative h-[400px] bg-cover bg-center" style={{ backgroundImage: `url(${CampusNITR})` }}>
           <Link to="/">
             <img
               src={CognizenLogo2}
@@ -19,7 +20,7 @@ export default function Nav() {
           </Link>
 
           <div className='ml-4 text-white flex flex-col items-center'>
-            <h1 className="text-2xl mb-2 font-extrabold">Cognizen Club NITR</h1>
+            <h1 className="text-3xl mb-2 font-extrabold">Cognizen Club NITR</h1>
             <p className='font-semibold'>The official politics and economics</p>
             <p className='font-semibold'>awareness club of NIT Rourkela.</p>
           </div>
@@ -92,7 +93,7 @@ export default function Nav() {
             </NavLink>
 
             <NavLink
-              to="/achievements"
+              to="/achievement"
               className={({ isActive }) =>
                 `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 ${isActive ? 'bg-[#222f3d]' : ''}`
               }
@@ -104,9 +105,9 @@ export default function Nav() {
               <div className="text-[#FFFFFF] hover:text-orange-500 cursor-pointer font-medium text-sm px-4 py-2 flex items-center">
                 About us
                 <i className="fas fa-caret-down ml-2"></i>
-              </div>
+              </div> 
 
-              <div className="absolute left-0 mt-2 w-30 bg-black text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50">
+              <div className="absolute left-0 mt-2 w-30 bg-black text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-40">
                 <NavLink
                   to="/leadership"
                   className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"

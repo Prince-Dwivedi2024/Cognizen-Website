@@ -9,6 +9,7 @@ export default {
       fontFamily: {
         'source-sans-3': ['"Source Sans 3"', 'sans-serif'],
         jacquard: ['"Jacques Francois Shadow"', 'serif'],
+        raleway: ['Raleway', 'sans-serif'],
       },
     },
     plugins: [],
