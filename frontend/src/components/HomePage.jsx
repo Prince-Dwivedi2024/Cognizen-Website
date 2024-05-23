@@ -262,7 +262,7 @@ const HomePage = () => {
             className="relative cursor-pointer text-[#222f3d] hover:text-[#5e6b79] hover:text-lg hover:text-extrabold"
             onClick={toggleNoticeBoard}
           >
-            <i className="fas fa-bullhorn text-4xl text-black"></i>
+            <i className="fas fa-bullhorn text-4xl text-[#463f3f]"></i>
             <span className="announcement-popup absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 px-2 py-1 text-sm bg-black text-white rounded opacity-0 transition-opacity duration-300">
               Announcements
             </span>

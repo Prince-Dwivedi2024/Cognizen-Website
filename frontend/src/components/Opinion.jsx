@@ -5,8 +5,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Nav from './Nav';
 import Footer from './Footer';
-import NoticeBoard from './NoticeBoard';
-
 import Card1 from '../assets/Card1.webp';
 import Card2 from '../assets/Card2.webp';
 import Card3 from '../assets/Card3.webp';
@@ -14,7 +12,6 @@ import Card4 from '../assets/Card4.webp';
 import Card5 from '../assets/Card5.webp';
 import Card6 from '../assets/Card6.webp';
 
-import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const articles = [
   { type: 'Opinion', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", passage: "This is a passage for the first article to give more detail.", imageUrl: Card1, author: 'Author1', date: '2024-05-16' },
@@ -127,25 +124,7 @@ const Opinion = () => {
       <div className="min-h-screen bg-[#F0F4F8] p-10 py-[10vh] flex justify-center shadow-sm">
         <div className="w-4/5">
 
-          {/* search bar */}
-          <div className="flex justify-center pb-7">
-            <div className="flex w-full h-10 bg-[#FFFFFE] shadow-md rounded overflow-hidden hover:outline hover:outline-blue-200 transform hover:bg-white hover:shadow-2xl hover:scale-[1.0001] transition-all">
-              <input
-                type="text"
-                className="w-11/12 p-4 text-lg bg-[#FFFFFE] placeholder-center flex items-center justify-center focus:outline-none font-sans"
-                placeholder="Search for articles..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <button
-                className="w-1/12 bg-blue-400 text-white text-lg hover:bg-blue-600 transition-all font-extrabold font-sans"
-                onClick={handleSearch}
-              >
-                Search
-              </button>
-            </div>
-          </div>
-
+         
           <div className="pb-12">
             <h2 className="text-3xl font-medium mb-4 font-raleway pt-10 pb-4 text-[#222f3d]">Opinion Articles-</h2>
 
@@ -173,23 +152,7 @@ const Opinion = () => {
           </div>
         </div>
 
-        <div className="fixed bottom-4 right-4 flex flex-col items-center">
-          <div
-            ref={iconRef}
-            className="relative cursor-pointer text-[#222f3d] hover:text-[#5e6b79] hover:text-lg hover:text-extrabold"
-            onClick={toggleNoticeBoard}
-          >
-            <i className="fas fa-bullhorn text-4xl"></i>
-            <span className="announcement-popup absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 px-2 py-1 text-sm bg-black text-white rounded opacity-0 transition-opacity duration-300">
-              Announcements
-            </span>
-          </div>
-          {showNoticeBoard && (
-            <div ref={noticeRef} className="fixed bottom-12 right-4 w-96 p-4 bg-white rounded-lg shadow-lg z-50">
-              <NoticeBoard />
-            </div>
-          )}
-        </div>
+        
       </div>
       <Footer />
     </>
