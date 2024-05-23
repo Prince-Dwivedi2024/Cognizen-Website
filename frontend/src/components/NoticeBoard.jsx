@@ -27,7 +27,7 @@ const NoticeBoard = () => {
             <span>{notice.text}</span>
             <span className="text-sm mt-10" style={{ color: '#979797' }}>{notice.date}</span>
           </div>
-          <button className="text-sm font-semibold text-blue-400 hover:text-[#c9c6c6] transition-all">more&gt;&gt;</button>
+          {/* <button className="text-sm font-semibold text-blue-400 hover:text-[#c9c6c6] transition-all">more&gt;&gt;</button> */}
         </div>
       ))}
     </div>
