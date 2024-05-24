@@ -299,6 +299,32 @@ app.delete('/deletearticle/:id', async (req, res) => {
     }
 });
 
+// Update article for special categorisation
+app.put('/categorisation/:id', async (req, res) => {
+    try {
+        const articleId = req.params.id;
+        const { specialCategorisation } = req.body;
+
+        if (!Array.isArray(specialCategorisation)) {
+            return res.status(400).send({ message: "specialCategorisation must be an array" });
+        }
+
+        const article = await Article.findOne({ id: articleId });
+
+        if (!article) {
+            return res.status(404).send({ message: "Article not found" });
+        }
+
+        article.specialCategorisation = specialCategorisation;
+        await article.save();
+
+        res.status(200).send({ message: "Article categorisation updated successfully", article });
+    } catch (error) {
+        console.error("Error updating article categorisation:", error);
+        res.status(500).send({ message: "Something went wrong" });
+    }
+});
+
 
 
 

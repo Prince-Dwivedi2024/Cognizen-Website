@@ -41,6 +41,9 @@ const articleSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    specialCategorisation: {          //categorisation as "author's pick","trending","must read","featured"...
+        type: [String]
+    },
     type: {
         type: String,
         default: "Article",

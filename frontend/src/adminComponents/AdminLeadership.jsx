@@ -80,7 +80,7 @@ const AdminLeadership= () => {
     formDataToSend.append('photo', formData.photo);
 
     try {
-      const response = await fetch('http://localhost:5000/upload', {
+      const response = await fetch('https://cognizen-backend.vercel.app/upload', {
         method: 'POST',
         body: formDataToSend
       });
@@ -159,7 +159,7 @@ const AdminLeadership= () => {
     }
   
     try {
-      const response = await fetch(`http://localhost:5000/delete/${deleteID}`, {
+      const response = await fetch(`https://cognizen-backend.vercel.app/delete/${deleteID}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -218,8 +218,6 @@ const AdminLeadership= () => {
       console.error("Error deleting EB Member:", error);
     }
   };
-  
-
 
   const handleDeleteChange = (e) => {
     setDeleteID(e.target.value);
