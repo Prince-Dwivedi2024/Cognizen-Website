@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const pastMemberSchema = new mongoose.Schema({
     id:{
@@ -46,4 +46,6 @@ const pastMemberSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model("PastMember", pastMemberSchema);
+const PastMember = mongoose.model("PastMember", pastMemberSchema);
+
+export default PastMember;
