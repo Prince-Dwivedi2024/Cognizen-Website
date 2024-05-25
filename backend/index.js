@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('./db/config');
-const port = proccess.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 const Admin = require('./Schema/Admin');
 const Article = require('./Schema/Article');
 const ArchieveArticle = require('./Schema/ArchieveArticle');
