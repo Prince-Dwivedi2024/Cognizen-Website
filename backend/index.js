@@ -13,7 +13,7 @@ const Achievement = require('./Schema/Achievement')
 const Notice = require('./Schema/Notice')
 const app = express();
 const fileUpload = require('express-fileupload');
-const cloudinary = require('cloudinary').v2; // Use 'cloudinary' package correctly
+const cloudinary = require('cloudinary').v2;
 require('dotenv').config();
 
 // Configure Cloudinary
@@ -31,7 +31,8 @@ app.use(express.json());
 const corsOptions = {
     origin: '*',
     optionsSuccessStatus: 200,
-    methods: ["GET", "POST", "PUT", "DELETE"]
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
 };
 
 app.use(cors(corsOptions));
@@ -40,7 +41,9 @@ app.use(fileUpload({
     useTempFiles: true
 }));
 
-
+app.get('/',async(req,resp)=>{
+    resp.send({result:"properly integrated"})
+})
 
 
 
@@ -296,6 +299,32 @@ app.delete('/deletearticle/:id', async (req, res) => {
     } catch (error) {
         console.error("Error deleting article:", error);
         res.status(500).json({ message: "Something went wrong" });
+    }
+});
+
+// Update article for special categorisation
+app.put('/categorisation/:id', async (req, res) => {
+    try {
+        const articleId = req.params.id;
+        const { specialCategorisation } = req.body;
+
+        if (!Array.isArray(specialCategorisation)) {
+            return res.status(400).send({ message: "specialCategorisation must be an array" });
+        }
+
+        const article = await Article.findOne({ id: articleId });
+
+        if (!article) {
+            return res.status(404).send({ message: "Article not found" });
+        }
+
+        article.specialCategorisation = specialCategorisation;
+        await article.save();
+
+        res.status(200).send({ message: "Article categorisation updated successfully", article });
+    } catch (error) {
+        console.error("Error updating article categorisation:", error);
+        res.status(500).send({ message: "Something went wrong" });
     }
 });
 

@@ -12,19 +12,23 @@ export default function Nav() {
       <div className="bg-white ">
 
         {/* top */}
-        <div className="relative h-[250px] bg-cover bg-center flex items-center" style={{ backgroundImage: `url(${CampusNITR})` }}>
-          <Link to="/">
-            <img
-              src={CognizenLogo2}
-              className="h-36 pl-[8vw]"
-              alt="The Cognizen Logo"
-            />
-          </Link>
+        <div className='flex justify-center items-center'>
+          <div className="relative h-[300px] w-[100vw] bg-cover bg-center flex flex-col gap-5 justify-center items-center" style={{ backgroundImage: `url(${CampusNITR})` }}>
+            {/* <Link to="/"> */}
 
-          <div className='ml-4 text-white flex flex-col items-center'>
-            <h1 className="text-3xl mb-2 font-extrabold font-raleway">Cognizen Club NITR</h1>
-            <p className='font-semibold'>The official politics and economics</p>
-            <p className='font-semibold'>awareness club of NIT Rourkela.</p>
+              <img
+                src={CognizenLogo2}
+                className="h-36"
+                alt="The Cognizen Logo"
+              />
+            {/* </Link> */}
+
+            <div className='ml-4 text-white flex flex-col items-center'>
+              <h1 className="text-3xl mb-2 font-extrabold font-raleway">Cognizen Club NITR</h1>
+              <p className='font-semibold'>The official politics and economics</p>
+              <p className='font-semibold'>awareness club of NIT Rourkela.</p>
+            </div>
+
           </div>
         </div>
 
