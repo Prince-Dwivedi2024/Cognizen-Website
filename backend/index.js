@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import './db/config.js';
 const port = process.env.PORT || 5000;
-import { Admin } from './Schema/Admin.js';
+import  Admin  from './Schema/Admin.js';
 import Article from './Schema/Article.js';
 import ArchieveArticle from './Schema/ArchieveArticle.js';
 import CurrentMember from './Schema/CurrentMember.js';
