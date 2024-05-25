@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const archieveSchema = new mongoose.Schema({
     id:{
@@ -48,4 +48,6 @@ const archieveSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("ArchieveArticle", archieveSchema);
+const ArchieveArticle = mongoose.model("ArchieveArticle", archieveSchema);
+
+export default ArchieveArticle;
