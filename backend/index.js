@@ -13,7 +13,7 @@ const Achievement = require('./Schema/Achievement')
 const Notice = require('./Schema/Notice')
 const app = express();
 const fileUpload = require('express-fileupload');
-const cloudinary = require('cloudinary').v2; // Use 'cloudinary' package correctly
+const cloudinary = require('cloudinary').v2;
 require('dotenv').config();
 
 // Configure Cloudinary
@@ -41,7 +41,9 @@ app.use(fileUpload({
     useTempFiles: true
 }));
 
-
+app.get('/',async(req,resp)=>{
+    resp.send({result:"properly integrated"})
+})
 
 
 
