@@ -202,7 +202,7 @@ import { config as dotenvConfig } from 'dotenv';
                 return CurrentMember;
             case "pastMember":
                 return PastMember;
-            case "eBMember":
+            case "EBMember":
                 return EBMember;
             default:
                 throw new Error("Invalid member type");
