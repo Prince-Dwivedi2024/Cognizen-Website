@@ -218,7 +218,7 @@ const HomePage = () => {
           </div>
 
           <div className="pb-12">
-            <h2 className="text-3xl font-medium mb-4 font-raleway pt-10 pb-4 text-[#222f3d]">Trending Articles-</h2>
+            <h2 className="text-3xl font-medium mb-4 font-raleway pt-10 pb-4 text-[#222f3d] underline underline-offset-8">Trending Articles-</h2>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
               <div className="lg:col-span-3">
                 <Carousel articles={[articles[0], ...extraArticles]} onReadMore={handleReadMore} />
@@ -230,7 +230,7 @@ const HomePage = () => {
           </div>
 
           <div className="pb-12 border-t border-black pt-10">
-            <h2 className="text-3xl font-medium pb-4 font-raleway text-[#222f3d]">You Must Know-</h2>
+            <h2 className="text-3xl font-medium pb-4 font-raleway text-[#222f3d] underline underline-offset-8">You Must Know:</h2>
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
               {youMustKnowArticles.slice(0, 5).map((article, index) => (
                 <YouMustKnowCard key={index} {...article} onReadMore={handleReadMore} />
@@ -238,7 +238,7 @@ const HomePage = () => {
             </div>
           </div>
           <div className="pb-12 border-t border-black pt-10">
-            <h2 className="text-3xl font-medium pb-4 font-raleway text-[#222f3d]">Recents-</h2>
+            <h2 className="text-3xl font-medium pb-4 font-raleway text-[#222f3d] underline underline-offset-8">Recents-</h2>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
               {recentArticles.map((article, index) => (
                 <Card key={index} {...article} onReadMore={handleReadMore} />
@@ -246,7 +246,7 @@ const HomePage = () => {
             </div>
           </div>
           <div className="pb-12 border-t border-black pt-10">
-            <h2 className="text-3xl font-medium pb-4 font-raleway text-[#222f3d]">Most Read-</h2>
+            <h2 className="text-3xl font-medium pb-4 font-raleway text-[#222f3d] underline underline-offset-8">Most Read-</h2>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
               {mostReadArticles.map((article, index) => (
                 <Card key={index} {...article} onReadMore={handleReadMore} />
