@@ -125,7 +125,7 @@ const Philoneist = () => {
 
          
           <div className="pb-12">
-            <h2 className="text-3xl font-medium mb-4 font-raleway pt-10 pb-4 text-[#222f3d]">Philoneist Articles-</h2>
+            <h2 className="text-3xl font-medium mb-4 font-raleway pt-10 pb-4 text-black">Philoneist Articles-</h2>
 
             {/* That single big card */}
             <div className="p-10 flex justify-center ">
@@ -142,7 +142,7 @@ const Philoneist = () => {
           </div>
 
           <div className="pb-12 border-t border-black pt-10">
-            <h2 className="text-3xl font-medium  pb-4 font-raleway text-[#222f3d]">More in Philoneist-</h2>
+            <h2 className="text-3xl font-medium  pb-4 font-raleway text-black ">More in Philoneist-</h2>
             <div className="grid grid-cols-1 gap-4">
               {moreInPhiloneist.map((article, index) => (
                 <MoreInPhiloneistCard key={index} {...article} onReadMore={handleReadMore} />
