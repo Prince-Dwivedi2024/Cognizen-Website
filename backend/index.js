@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('./db/config');
-const PORT = 5000;
+const port = proccess.env.PORT || 5000;
 const Admin = require('./Schema/Admin');
 const Article = require('./Schema/Article');
 const ArchieveArticle = require('./Schema/ArchieveArticle');
@@ -477,6 +477,6 @@ function generateRandomCode(length = 10) {
     return code;
 }
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });
