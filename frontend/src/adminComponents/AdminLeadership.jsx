@@ -80,7 +80,7 @@ const AdminLeadership= () => {
     formDataToSend.append('photo', formData.photo);
 
     try {
-      const response = await fetch('https://cognizen-backend.vercel.app/upload', {
+      const response = await fetch('https://cognizen-backend/upload', {
         method: 'POST',
         body: formDataToSend
       });
