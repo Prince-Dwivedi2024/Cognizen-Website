@@ -7,7 +7,7 @@ const EBMemberSchema = new mongoose.Schema({
     },
     type:{
         type: String,
-        default: "eBMember",
+        default: "EBMember",
         required: true
     },
     name: {
