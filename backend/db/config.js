@@ -1,5 +1,7 @@
-const mongoose = require('mongoose');
-require('dotenv').config();
+import mongoose from 'mongoose';
+
+import { config as dotenvConfig } from 'dotenv';
+dotenvConfig();
 
 const URI = "mongodb+srv://cognizennitr:cognizen@cluster0.xiualzs.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
