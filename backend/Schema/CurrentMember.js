@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const currentMemberSchema = new mongoose.Schema({
     id:{
@@ -48,4 +48,6 @@ const currentMemberSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("CurrentMember", currentMemberSchema);
+const CurrentMember = mongoose.model("CurrentMember", currentMemberSchema);
+
+export default CurrentMember;
