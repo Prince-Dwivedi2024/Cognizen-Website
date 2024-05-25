@@ -1,4 +1,10 @@
 {
+  "name": "cognizen-backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+},
   "dependencies": {
     "cloudinary": "^2.2.0",
     "cors": "^2.8.5",
@@ -8,5 +14,11 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.6.1",
     "mongoose": "^8.3.4"
-  }
+  },
+  "version": "1.0.0",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
