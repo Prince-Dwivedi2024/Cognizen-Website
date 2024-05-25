@@ -29,9 +29,10 @@ const jwtkey = 'cognizen';
 app.use(express.json());
 
 const corsOptions = {
-    origin: '*',
+    origin: 'https://cognizen.vercel.app',
     optionsSuccessStatus: 200,
-    methods: ["GET", "POST", "PUT", "DELETE"]
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
 };
 
 app.use(cors(corsOptions));
