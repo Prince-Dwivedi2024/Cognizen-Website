@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const adminSchema = new mongoose.Schema({
     userID: {
@@ -10,6 +10,8 @@ const adminSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-})
+});
 
-module.exports = mongoose.model("Admin",adminSchema);
+const Admin = mongoose.model("Admin", adminSchema);
+
+export { Admin };
