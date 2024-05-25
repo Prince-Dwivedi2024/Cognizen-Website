@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const ebMemberSchema = new mongoose.Schema({
+const EBMemberSchema = new mongoose.Schema({
     id:{
         type: String,
         required: true
@@ -49,6 +49,6 @@ const ebMemberSchema = new mongoose.Schema({
     },
 });
 
-const EBMember = mongoose.model("EBMember", ebMemberSchema);
+const EBMember = mongoose.model("EBMember", EBMemberSchema);
 
 export default EBMember;
