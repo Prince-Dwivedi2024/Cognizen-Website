@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const ebMemberSchema = new mongoose.Schema({
     id:{
@@ -49,4 +49,6 @@ const ebMemberSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model("EBMember", ebMemberSchema);
+const EBMember = mongoose.model("EBMember", ebMemberSchema);
+
+export default EBMember;
