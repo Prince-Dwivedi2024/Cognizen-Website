@@ -1,26 +1,30 @@
-//user landing page for articles related to Pheloneist topic
+//user landing page for articles related to History topic
 
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Nav from './Nav';
 import Footer from './Footer';
+import NoticeBoard from './NoticeBoard';
+
 import Card1 from '../assets/Card1.webp';
 import Card2 from '../assets/Card2.webp';
 import Card3 from '../assets/Card3.webp';
 import Card4 from '../assets/Card4.webp';
 import Card5 from '../assets/Card5.webp';
 import Card6 from '../assets/Card6.webp';
+import Card7 from '../assets/Card7.webp';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const articles = [
-  { type: 'History', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", passage: "This is a passage for the first article to give more detail.", imageUrl: Card1, author: 'Author1', date: '2024-05-16' },
-  { type: 'History', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card4, author: 'Author4', date: '2024-05-16' },
-  { type: 'History', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", passage: "This is a passage for the first article to give more detail.", imageUrl: Card1, author: 'Author1', date: '2024-05-16' },
-  { type: 'History', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card4, author: 'Author4', date: '2024-05-16' },
-  { type: 'History', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", passage: "This is a passage for the first article to give more detail.", imageUrl: Card1, author: 'Author1', date: '2024-05-16' },
-  { type: 'History', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card4, author: 'Author4', date: '2024-05-16' },
-  { type: 'History', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", passage: "This is a passage for the first article to give more detail.", imageUrl: Card1, author: 'Author1', date: '2024-05-16' },
-  { type: 'History', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card4, author: 'Author4', date: '2024-05-16' },
+  { type: 'History', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", imageUrl: Card1, author: 'Author1', date: '2024-05-16' },
+  { type: 'History', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card7, author: 'Author4', date: '2024-05-16' },
+  { type: 'History', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", passage: "This is a passage for the first article to give more detail.", imageUrl: Card5, author: 'Author1', date: '2024-05-16' },
+  { type: 'History', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card6, author: 'Author4', date: '2024-05-16' },
+  { type: 'History', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", passage: "This is a passage for the first article to give more detail.", imageUrl: Card7, author: 'Author1', date: '2024-05-16' },
+  { type: 'History', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card7, author: 'Author4', date: '2024-05-16' },
+  { type: 'History', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", passage: "This is a passage for the first article to give more detail.", imageUrl: Card5, author: 'Author1', date: '2024-05-16' },
+  { type: 'History', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card6, author: 'Author4', date: '2024-05-16' },
 ];
 
 const moreInHistory = [
@@ -31,21 +35,21 @@ const moreInHistory = [
 ];
 
 const Card = ({ type, highlight, imageUrl, author, date, detail, passage, onReadMore, large = false }) => (
-  <div
-    className={`bg-white rounded shadow-md overflow-hidden transform transition-transform hover:scale-105 ${large ? 'large-card' : ''}`}
+  <div 
+    className={`bg-transparent bg-[#F0F4F8]  shadow-sm overflow-hidden transform transition-transform hover:scale-[1.008] hover:shadow-2xl ${large ? 'large-card' : ''}`}
     style={large ? { width: '800px', height: '500px', margin: '0 auto' } : {}}
   >
     <div>
-      <div
-        className="relative bg-cover bg-center"
+      <div 
+        className="relative bg-cover bg-center" 
         style={{ height: large ? '350px' : '240px' }}
       >
         <img src={imageUrl} alt={highlight} className="w-full h-full object-cover" />
       </div>
-      <div className="p-4">
+      <div className="p-4 flex flex-col justify-between" style={{ minHeight: '150px' }}>
         <h2 className="text-lg font-semibold mb-2 font-sans" style={{ color: '#212121' }}>{highlight}</h2>
-        {large && <p className="text-gray-700 mb-4">{passage}</p>}
-        <div className="bg-transparent py-1 flex justify-between items-center">
+        {large && <p className="text-gray-700 mb-4">{detail}</p>}
+        <div className="bg-transparent py-1 flex justify-between items-center mt-auto">
           <div className="text-sm" style={{ color: '#979797' }}>
             <span>{author}</span> | <span>{date}</span>
           </div>
@@ -62,18 +66,22 @@ const Card = ({ type, highlight, imageUrl, author, date, detail, passage, onRead
 );
 
 const MoreInHistoryCard = ({ type, highlight, detail, imageUrl, author, date, onReadMore }) => (
-  <div className="cursor-pointer flex bg-white border-b border-gray-300 rounded font-raleway" onClick={() => onReadMore(type)}>
+  <div className="flex border-b border-gray-300 py-4">
     <div className="flex-shrink-0 mr-4">
-      <img src={imageUrl} alt={highlight} className="w-24 h-28 object-cover" />
+      <img src={imageUrl} alt={highlight} className="w-24 h-24 object-cover" />
     </div>
-    <div className="flex-grow p-3">
-      <h3 className="text-lg font-semibold mb-2">{highlight}</h3>
+    <div className="flex-grow">
+      <h3
+        className="text-xl font-semibold mb-2 cursor-pointer hover:text-orange-400"
+        onClick={() => onReadMore(type)}
+      >
+        {highlight}
+      </h3>
       <p className="text-gray-700 mb-2">{detail}</p>
       <div className="flex justify-between items-center text-sm">
-        <div className='text-[#2b5455]'>
+        <div>
           <span>{author}</span> | <span>{date}</span>
         </div>
-
       </div>
     </div>
   </div>
@@ -87,7 +95,7 @@ const History = () => {
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    console.log(`Searching for: ${searchQuery}`);
+    // console.log(Searching for: ${searchQuery});
   };
 
   const toggleNoticeBoard = () => {
@@ -120,30 +128,28 @@ const History = () => {
   return (
     <>
       <Nav />
-      <div className="min-h-screen bg-[#F0F4F8] p-10 py-[10vh] flex justify-center shadow-sm">
+      <div className="min-h-screen bg-[#F0F4F8] p-10 pt-2 flex justify-center shadow-sm">
         <div className="w-4/5">
-
-        
-
+          
           <div className="pb-12">
-            <h2 className="text-3xl font-medium mb-4 font-raleway pt-10 pb-4 text-[#222f3d]">History Articles-</h2>
-
-            {/* That single big card */}
-            <div className="p-10 flex justify-center ">
+            <h2 className="text-3xl font-medium  font-serif pt-16 pb-2 text-[#222f3d] underline underline-offset-8">HISTORY ARTICLES -</h2>
+              
+              {/* That single big card */}
+            <div className="p-10 flex justify-center">
               {articles.slice(0, 1).map((article, index) => (
                 <Card key={index} {...article} onReadMore={handleReadMore} large />
               ))}
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
-              {articles.slice(1, 7).map((article, index) => (
+              {articles.slice(1,7).map((article, index) => (
                 <Card key={index} {...article} onReadMore={handleReadMore} />
               ))}
             </div>
           </div>
 
           <div className="pb-12 border-t border-black pt-10">
-            <h2 className="text-3xl font-medium  pb-4 font-raleway text-[#222f3d]">More in History-</h2>
+            <h2 className="text-3xl font-medium  pb-8 font-serif text-[#222f3d] underline underline-offset-8">MORE IN HISTORY ARTICLES -</h2>
             <div className="grid grid-cols-1 gap-4">
               {moreInHistory.map((article, index) => (
                 <MoreInHistoryCard key={index} {...article} onReadMore={handleReadMore} />
@@ -151,6 +157,24 @@ const History = () => {
             </div>
           </div>
         </div>
+
+        {/* <div className="fixed bottom-4 right-4 flex flex-col items-center">
+          <div
+            ref={iconRef}
+            className="relative cursor-pointer text-[#222f3d] hover:text-[#5e6b79] hover:text-lg hover:text-extrabold"
+            onClick={toggleNoticeBoard}
+          >
+            <i className="fas fa-bullhorn text-4xl"></i>
+            <span className="announcement-popup absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 px-2 py-1 text-sm bg-black text-white rounded opacity-0 transition-opacity duration-300">
+              Announcements
+            </span>
+          </div>
+          {showNoticeBoard && (
+            <div ref={noticeRef} className="fixed bottom-12 right-4 w-96 p-4 bg-white rounded-lg shadow-lg z-50">
+              <NoticeBoard />
+            </div>
+          )}
+        </div> */}
       </div>
       <Footer />
     </>
