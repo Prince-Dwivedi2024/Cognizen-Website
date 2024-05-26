@@ -30,12 +30,13 @@ import { config as dotenvConfig } from 'dotenv';
     app.use(express.json());
 
     const corsOptions = {
-        origin: '*',
+        origin: 'https://cognizen.vercel.app',
         optionsSuccessStatus: 200,
-        credential:true,
+        credentials: true,
         methods: ["GET", "POST", "PUT", "DELETE"],
         allowedHeaders: ["Content-Type", "Authorization"]
     };
+    
 
     app.use(cors(corsOptions));
 

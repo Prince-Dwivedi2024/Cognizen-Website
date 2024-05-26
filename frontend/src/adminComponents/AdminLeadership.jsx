@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const AdminLeadership= () => {
+const AdminLeadership = () => {
   const [deleteID, setDeleteID] = useState('');
   const [publishLoader, setPublishLoader] = useState(false);
   const [deleteLoader, setDeleteLoader] = useState(false);
@@ -138,26 +138,26 @@ const AdminLeadership= () => {
   const handleDeleteSubmit = async (e) => {
     e.preventDefault();
     setDeleteLoader(true);
-    const memberType = "eBMember"; 
-  
+    const memberType = "eBMember";
+
     if (!deleteID) {
       setDeleteLoader(false);
       toast.error(
         'Enter all fields!', {
-          position: "bottom-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          transition: Bounce,
-        }
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      }
       );
       return;
     }
-  
+
     try {
       const response = await fetch(`https://cognizen-nit-rourkela.vercel.app/delete/${deleteID}`, {
         method: 'DELETE',
@@ -166,44 +166,12 @@ const AdminLeadership= () => {
         },
         body: JSON.stringify({ type: memberType })
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         setDeleteLoader(false);
         toast.success(
           'EB Member deleted!', {
-            position: "bottom-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            transition: Bounce,
-          }
-        );
-        console.log("EB Member and associated photo deleted successfully:", data);
-      } else {
-        setDeleteLoader(false);
-        toast.error(
-          'Error Encountered!', {
-            position: "bottom-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            transition: Bounce,
-          }
-        );
-      }
-    } catch (error) {
-      setDeleteLoader(false);
-      toast.error(
-        'Error Encountered!', {
           position: "bottom-center",
           autoClose: 2000,
           hideProgressBar: false,
@@ -214,6 +182,38 @@ const AdminLeadership= () => {
           theme: "colored",
           transition: Bounce,
         }
+        );
+        console.log("EB Member and associated photo deleted successfully:", data);
+      } else {
+        setDeleteLoader(false);
+        toast.error(
+          'Error Encountered!', {
+          position: "bottom-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
+        }
+        );
+      }
+    } catch (error) {
+      setDeleteLoader(false);
+      toast.error(
+        'Error Encountered!', {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      }
       );
       console.error("Error deleting EB Member:", error);
     }
@@ -308,6 +308,7 @@ const AdminLeadership= () => {
                 onChange={handleChange}
                 className='w-full border border-gray-300 p-1 rounded'
               >
+                <option>Select any one</option>
                 <option value='President'>President</option>
                 <option value='Vice President'>Vice President</option>
                 <option value='Secretary'>Secretary</option>
