@@ -168,11 +168,11 @@ app.delete("/delete/:id", async (req, res) => {
         }
 
         // Delete the photo from Cloudinary if it exists
-        if (member.photo) {
-            // Extract public ID from the photo URL
-            const publicId = member.photo.split('/').pop().split('.')[0]; // Assuming the URL structure allows this extraction
-            await cloudinary.uploader.destroy(publicId);
-        }
+        // if (member.photo) {
+        //     // Extract public ID from the photo URL
+        //     const publicId = member.photo.split('/').pop().split('.')[0]; // Assuming the URL structure allows this extraction
+        //     await cloudinary.uploader.destroy(publicId);
+        // }
 
         // Delete the member from the database
         await Item.deleteOne({ id: memberId });
