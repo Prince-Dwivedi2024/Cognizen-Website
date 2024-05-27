@@ -29,7 +29,15 @@ import Jwt from 'jsonwebtoken';
 
 const jwtkey = 'cognizen';
 app.use(express.json());
-app.use(cors());
+// Configure CORS
+const corsOptions = {
+    origin: ['https://cognizen.vercel.app', 'https://cognizen-nit-rourkela.vercel.app'], // Specify allowed origins
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true // Allow credentials
+};
+app.use(cors(corsOptions));
+
 
 
 app.use(fileUpload({
@@ -168,11 +176,11 @@ app.delete("/delete/:id", async (req, res) => {
         }
 
         // Delete the photo from Cloudinary if it exists
-        // if (member.photo) {
-        //     // Extract public ID from the photo URL
-        //     const publicId = member.photo.split('/').pop().split('.')[0]; // Assuming the URL structure allows this extraction
-        //     await cloudinary.uploader.destroy(publicId);
-        // }
+        if (member.photo) {
+            // Extract public ID from the photo URL
+            const publicId = member.photo.split('/').pop().split('.')[0]; // Assuming the URL structure allows this extraction
+            await cloudinary.uploader.destroy(publicId);
+        }
 
         // Delete the member from the database
         await Item.deleteOne({ id: memberId });
