@@ -1,11 +1,32 @@
 //navigation section
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import CognizenLogo2 from '../assets/CognizenLogo2.png';
 import CampusNITR from '../assets/CampusNITR.jpg';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 export default function Nav() {
+  const [showSearchBar, setShowSearchBar] = useState(false);
+  const searchBarRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
+      setShowSearchBar(false);
+    }
+  };
+
+  useEffect(() => {
+    if (showSearchBar) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showSearchBar]);
+
   return (
     <header>
       <div className="bg-white">
@@ -31,121 +52,144 @@ export default function Nav() {
         </div>
 
         {/* nav */}
-        <div>
-          <div className="bg-[#222f3d] h-12 flex items-center justify-center">
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 ${isActive ? 'bg-[#222f3d]' : ''}`
-              }
-            >
-              <i className="fas fa-home mr-2"></i> Home
-            </NavLink>
+        <div className="relative">
+          <div className="bg-[#222f3d] h-12 flex items-center justify-center relative">
+            <div className="flex items-center justify-center w-full">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
+                }
+              >
+                <i className="fas fa-home mr-2"></i>
+              </NavLink>
 
-            <NavLink
-              to="/philoneist"
-              className={({ isActive }) =>
-                `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 ${isActive ? 'bg-[#222f3d]' : ''}`
-              }
-            >
-              Philoneist
-            </NavLink>
+              <NavLink
+                to="/philoneist"
+                className={({ isActive }) =>
+                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
+                }
+              >
+                Philoneist
+              </NavLink>
 
-            <NavLink
-              to="/opinion"
-              className={({ isActive }) =>
-                `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 ${isActive ? 'bg-[#222f3d]' : ''}`
-              }
-            >
-              Opinion
-            </NavLink>
+              <NavLink
+                to="/opinion"
+                className={({ isActive }) =>
+                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
+                }
+              >
+                Opinion
+              </NavLink>
 
-            <NavLink
-              to="/reviews"
-              className={({ isActive }) =>
-                `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 ${isActive ? 'bg-[#222f3d]' : ''}`
-              }
-            >
-              Reviews
-            </NavLink>
+              <NavLink
+                to="/reviews"
+                className={({ isActive }) =>
+                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
+                }
+              >
+                Reviews
+              </NavLink>
 
-            <NavLink
-              to="/history"
-              className={({ isActive }) =>
-                `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 ${isActive ? 'bg-[#222f3d]' : ''}`
-              }
-            >
-              History
-            </NavLink>
+              <NavLink
+                to="/history"
+                className={({ isActive }) =>
+                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
+                }
+              >
+                History
+              </NavLink>
 
-            <NavLink
-              to="/international"
-              className={({ isActive }) =>
-                `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 ${isActive ? 'bg-[#222f3d]' : ''}`
-              }
-            >
-              World
-            </NavLink>
-            <NavLink
-              to="/archives"
-              className={({ isActive }) =>
-                `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 ${isActive ? 'bg-[#222f3d]' : ''}`
-              }
-            >
-              Archive
-            </NavLink>
+              <NavLink
+                to="/international"
+                className={({ isActive }) =>
+                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
+                }
+              >
+                World
+              </NavLink>
+              <NavLink
+                to="/archives"
+                className={({ isActive }) =>
+                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
+                }
+              >
+                Archive
+              </NavLink>
 
-            <NavLink
-              to="/achievement"
-              className={({ isActive }) =>
-                `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 ${isActive ? 'bg-[#222f3d]' : ''}`
-              }
-            >
-              Achievements
-            </NavLink>
+              <NavLink
+                to="/achievement"
+                className={({ isActive }) =>
+                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
+                }
+              >
+                Achievements
+              </NavLink>
 
-            <div className="relative group">
-              <div className="text-[#FFFFFF] hover:text-orange-500 cursor-pointer font-medium text-sm px-4 py-2 flex items-center">
-                About us
-                <i className="fas fa-caret-down ml-2"></i>
+              <div className="relative group">
+                <div className="text-[#FFFFFF] hover:text-orange-500 cursor-pointer font-medium text-sm px-4 py-2 flex items-center">
+                  About us
+                  <i className="fas fa-caret-down ml-2"></i>
+                </div>
+
+                <div className="absolute left-0 mt-2 w-30 bg-black text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-40">
+                  <NavLink
+                    to="/leadership"
+                    className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
+                  >
+                    Leadership
+                  </NavLink>
+                  <NavLink
+                    to="/team"
+                    className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
+                  >
+                    Team
+                  </NavLink>
+                  <NavLink
+                    to="/alumni"
+                    className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
+                  >
+                    Alumni
+                  </NavLink>
+                  <NavLink
+                    to="/more"
+                    className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
+                  >
+                    More
+                  </NavLink>
+                </div>
               </div>
 
-              <div className="absolute left-0 mt-2 w-30 bg-black text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-40">
-                <NavLink
-                  to="/leadership"
-                  className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
+              <NavLink
+                to="/adminlogin"
+                className={({ isActive }) =>
+                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
+                }
+              >
+                Admin
+              </NavLink>
+
+              <div className="relative ml-8" ref={searchBarRef}>
+                <div
+                  className="text-[#FFFFFF] flex items-center hover:text-orange-500 cursor-pointer font-medium text-sm px-4 py-2"
+                  onClick={() => setShowSearchBar(!showSearchBar)}
                 >
-                  Leadership
-                </NavLink>
-                <NavLink
-                  to="/team"
-                  className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
-                >
-                  Team
-                </NavLink>
-                <NavLink
-                  to="/alumni"
-                  className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
-                >
-                  Alumni
-                </NavLink>
-                <NavLink
-                  to="/more"
-                  className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
-                >
-                  More
-                </NavLink>
+                  <i className="fas fa-search"></i>
+                </div>
+                {showSearchBar && (
+                  <div className="absolute right-0 mt-2 w-64 p-2 flex items-center bg-transparent z-50">
+                    <input
+                      type="text"
+                      className="bg-white text-black p-2 flex-grow focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      placeholder="Search..."
+                    />
+                    <button className="bg-orange-500 text-white p-2 ml-2">
+                      Search
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
-
-            <NavLink
-              to="/adminlogin"
-              className={({ isActive }) =>
-                `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 ${isActive ? 'bg-[#222f3d]' : ''}`
-              }
-            >
-              Admin
-            </NavLink>
           </div>
         </div>
       </div>

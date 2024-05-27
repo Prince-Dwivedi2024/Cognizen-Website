@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
 
-const ebMemberSchema = new mongoose.Schema({
+const EBMemberSchema = new mongoose.Schema({
     id:{
         type: String,
         required: true
     },
     type:{
         type: String,
-        default: "eBMember",
+        default: "EBMember",
         required: true
     },
     name: {
@@ -49,6 +49,6 @@ const ebMemberSchema = new mongoose.Schema({
     },
 });
 
-const EBMember = mongoose.model("EBMember", ebMemberSchema);
+const EBMember = mongoose.model("EBMember", EBMemberSchema);
 
 export default EBMember;

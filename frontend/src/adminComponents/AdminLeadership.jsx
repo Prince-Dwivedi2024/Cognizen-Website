@@ -8,7 +8,7 @@ const AdminLeadership = () => {
   const [publishLoader, setPublishLoader] = useState(false);
   const [deleteLoader, setDeleteLoader] = useState(false);
   const [formData, setFormData] = useState({
-    type: "eBMember",
+    type: "EBMember",
     name: '',
     email: '',
     phone: '',
@@ -138,8 +138,13 @@ const AdminLeadership = () => {
   const handleDeleteSubmit = async (e) => {
     e.preventDefault();
     setDeleteLoader(true);
+<<<<<<< HEAD
     const memberType = "eBMember";
 
+=======
+    const memberType = "EBMember"; 
+  
+>>>>>>> 6f16c45db21b38f00dbb48b773efaeb73f8c561d
     if (!deleteID) {
       setDeleteLoader(false);
       toast.error(

@@ -105,7 +105,7 @@ const Carousel = ({ articles, onReadMore }) => {
 };
 
 const Card = ({ type, highlight, imageUrl, author, date, onReadMore }) => (
-  <div className="bg-transparent bg-white rounded shadow-md overflow-hidden transform transition-transform hover:scale-105">
+  <div className="bg-transparent bg-[#F0F4F8]  shadow-sm overflow-hidden transform transition-transform hover:scale-[1.008] hover:shadow-2xl">
 
     <div className="relative bg-cover bg-center h-60" style={{ backgroundImage: `url(${imageUrl})` }}>
     </div>
@@ -194,13 +194,13 @@ const HomePage = () => {
 
   return (
     <div className=''>
-      <Nav />
+      <Nav/>
       <div className="min-h-screen bg-[#F0F4F8] p-10 flex justify-center py-[10vh] shadow-sm">
         <div className="w-4/5">
 
           {/* search bar */}
-          <div className="flex justify-center pb-7">
-            <div className="flex w-full h-10 bg-[#FFFFFE] shadow-md rounded overflow-hidden hover:outline hover:outline-blue-200 transform hover:bg-white hover:shadow-2xl hover:scale-[1.0001] transition-all">
+          {/* <div className="flex justify-center pt-7  ">
+            <div className=" flex w-full h-10 bg-[#FFFFFE] shadow-md rounded overflow-hidden hover:outline hover:outline-blue-200 transform hover:bg-white hover:shadow-2xl hover:scale-[1.0001] transition-all">
               <input
                 type="text"
                 className="w-11/12 p-4 text-lg bg-[#FFFFFE] placeholder-center flex items-center justify-center focus:outline-none font-sans"
@@ -215,10 +215,10 @@ const HomePage = () => {
                 Search
               </button>
             </div>
-          </div>
+          </div> */}
 
           <div className="pb-12">
-            <h2 className="text-3xl font-medium mb-4 font-raleway pt-10 pb-4 text-[#222f3d] underline underline-offset-8">Trending Articles-</h2>
+            <h2 className="text-3xl font-medium mb-4 font-serif pt-2 pb-8 text-[#222f3d] underline underline-offset-8">TRENDING ARTICLES -</h2>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
               <div className="lg:col-span-3">
                 <Carousel articles={[articles[0], ...extraArticles]} onReadMore={handleReadMore} />
@@ -230,7 +230,7 @@ const HomePage = () => {
           </div>
 
           <div className="pb-12 border-t border-black pt-10">
-            <h2 className="text-3xl font-medium pb-4 font-raleway text-[#222f3d] underline underline-offset-8">You Must Know:</h2>
+            <h2 className="text-3xl font-medium pb-4 font-serif text-[#222f3d] underline underline-offset-8">YOU MUST KNOW -</h2>
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
               {youMustKnowArticles.slice(0, 5).map((article, index) => (
                 <YouMustKnowCard key={index} {...article} onReadMore={handleReadMore} />
@@ -238,7 +238,7 @@ const HomePage = () => {
             </div>
           </div>
           <div className="pb-12 border-t border-black pt-10">
-            <h2 className="text-3xl font-medium pb-4 font-raleway text-[#222f3d] underline underline-offset-8">Recents-</h2>
+            <h2 className="text-3xl font-medium pb-8 font-serif text-[#222f3d] underline underline-offset-8">RECENTS -</h2>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
               {recentArticles.map((article, index) => (
                 <Card key={index} {...article} onReadMore={handleReadMore} />
@@ -246,7 +246,7 @@ const HomePage = () => {
             </div>
           </div>
           <div className="pb-12 border-t border-black pt-10">
-            <h2 className="text-3xl font-medium pb-4 font-raleway text-[#222f3d] underline underline-offset-8">Most Read-</h2>
+            <h2 className="text-3xl font-medium pb-8 font-serif text-[#222f3d] underline underline-offset-8">MOST READ -</h2>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
               {mostReadArticles.map((article, index) => (
                 <Card key={index} {...article} onReadMore={handleReadMore} />
