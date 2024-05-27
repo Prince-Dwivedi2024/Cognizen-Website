@@ -29,16 +29,8 @@ import Jwt from 'jsonwebtoken';
 
 const jwtkey = 'cognizen';
 app.use(express.json());
+app.use(cors());
 
-const corsOptions = {
-    origin: 'https://cognizen.vercel.app',
-    optionsSuccessStatus: 200,
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"]
-};
-
-app.use(cors(corsOptions));
 
 app.use(fileUpload({
     useTempFiles: true
