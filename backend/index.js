@@ -16,6 +16,7 @@ import { v2 as cloudinary } from 'cloudinary';
 import { config as dotenvConfig } from 'dotenv';
 import cors from 'cors'
 dotenvConfig();
+import Jwt from 'jsonwebtoken';
 
 // Configure Cloudinary
 cloudinary.config({
@@ -25,7 +26,6 @@ cloudinary.config({
     secure: true // Ensures secure URLs are used
 });
 
-import Jwt from 'jsonwebtoken';
 
 const jwtkey = 'cognizen';
 app.use(express.json());
