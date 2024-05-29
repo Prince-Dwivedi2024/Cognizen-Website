@@ -80,9 +80,12 @@ const AdminLeadership = () => {
     formDataToSend.append('photo', formData.photo);
 
     try {
-      const response = await fetch('https://cognizen-nit-rourkela.vercel.app/upload', {
+      const response = await fetch('https://cognizen-backend.vercel.app/upload', {
         method: 'POST',
-        body: formDataToSend
+        body: formDataToSend,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
       });
 
       if (response.ok) {
@@ -138,13 +141,8 @@ const AdminLeadership = () => {
   const handleDeleteSubmit = async (e) => {
     e.preventDefault();
     setDeleteLoader(true);
-<<<<<<< HEAD
     const memberType = "eBMember";
 
-=======
-    const memberType = "EBMember"; 
-  
->>>>>>> 6f16c45db21b38f00dbb48b773efaeb73f8c561d
     if (!deleteID) {
       setDeleteLoader(false);
       toast.error(
@@ -164,10 +162,13 @@ const AdminLeadership = () => {
     }
 
     try {
-      const response = await fetch(`https://cognizen-nit-rourkela.vercel.app/delete/${deleteID}`, {
+      const response = await fetch(`https://cognizen-backend.vercel.app/delete/${deleteID}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
+        },
+        headers: {
+          'Access-Control-Allow-Origin': '*',
         },
         body: JSON.stringify({ type: memberType })
       });
