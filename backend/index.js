@@ -29,14 +29,7 @@ cloudinary.config({
 
 const jwtkey = 'cognizen';
 app.use(express.json());
-// Configure CORS
-const corsOptions = {
-    origin: ['https://cognizen.vercel.app', 'https://cognizen-nit-rourkela.vercel.app'], // Specify allowed origins
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true // Allow credentials
-};
-app.use(cors(corsOptions));
+app.use(cors());
 
 
 
