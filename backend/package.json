@@ -113,7 +113,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
+    "dev": "node index.js",
     "test": "mocha"
   },
   "author": "zeeshan",
