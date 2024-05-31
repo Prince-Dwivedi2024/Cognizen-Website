@@ -26,10 +26,15 @@ cloudinary.config({
     secure: true // Ensures secure URLs are used
 });
 
-
+const corsOptions = {
+    origin: '*', // You can restrict this to specific domains if needed
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
+    credentials: true
+};
 const jwtkey = 'cognizen';
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 
 
@@ -449,3 +454,5 @@ function generateRandomCode(length = 10) {
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
+
