@@ -19,8 +19,10 @@ import { config as dotenvConfig } from 'dotenv';
 const corsOptions = {
     origin: 'https://cognizen.vercel.app',
     optionsSuccessStatus: 200,
-    methods: ["GET", "POST", "PUT", "DELETE"]
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin']
 };
+
 
 app.use(cors(corsOptions));
 
