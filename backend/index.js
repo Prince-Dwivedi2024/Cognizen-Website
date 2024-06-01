@@ -34,7 +34,6 @@ import { config as dotenvConfig } from 'dotenv';
         optionsSuccessStatus: 200,
         credentials: true, // Corrected the typo here
         methods: ["GET", "POST", "PUT", "DELETE"],
-        allowedHeaders: ["Content-Type", "Authorization"]
     };
     
     app.use(cors(corsOptions));
