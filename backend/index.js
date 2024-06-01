@@ -31,14 +31,15 @@ import { config as dotenvConfig } from 'dotenv';
 
 
 
+
+
 const corsOptions = {
-    origin: '*',
+    origin: 'https://cognizen.vercel.app',
     optionsSuccessStatus: 200,
     methods: ["GET", "POST", "PUT", "DELETE"]
 };
 
 app.use(cors(corsOptions));
-
     
     app.use(fileUpload({
         useTempFiles: true
