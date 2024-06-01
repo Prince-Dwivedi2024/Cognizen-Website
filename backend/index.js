@@ -15,7 +15,7 @@ const app = express();
 import fileUpload from 'express-fileupload';
 import { v2 as cloudinary } from 'cloudinary'; 
 import { config as dotenvConfig } from 'dotenv';
-app.use(fileUpload());
+
 const corsOptions = {
     origin: '*',
     optionsSuccessStatus: 200,
@@ -23,6 +23,7 @@ const corsOptions = {
     allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin']
 };
 app.use(cors(corsOptions));
+
 
 
 
@@ -42,7 +43,7 @@ app.use(cors(corsOptions));
 
 
 
-
+app.use(fileUpload());
 
 
 
