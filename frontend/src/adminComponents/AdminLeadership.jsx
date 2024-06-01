@@ -40,103 +40,42 @@ const AdminLeadership = () => {
   };
 
   const handleImageChange = (e) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      photo: e.target.files[0]
-    }));
-  };
+  const file = e.target.files[0];
+  setFormData((prevData) => ({
+    ...prevData,
+    photo: file
+  }));
+};
 
-  const handlePublishSubmit = async (e) => {
-    console.log(formData)
-    setPublishLoader(true);
-    e.preventDefault();
-    if (!formData.photo || !formData.name || !formData.type || !formData.phone || !formData.position) {
-      setPublishLoader(false);
-      toast.error(
-        'Enter * marked fields!', {
-        position: "bottom-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        transition: Bounce,
-      });
-      return;
+const handlePublishSubmit = async (e) => {
+  e.preventDefault();
+  const formDataToSend = new FormData();
+  for (const key in formData) {
+    if (formData.hasOwnProperty(key)) {
+      formDataToSend.append(key, formData[key]);
     }
-    const formDataToSend = new FormData();
-    formDataToSend.append('name', formData.name);
-    formDataToSend.append('type', formData.type);
-    formDataToSend.append('email', formData.email);
-    formDataToSend.append('mediumId', formData.mediumId);
-    formDataToSend.append('XId', formData.XId);
-    formDataToSend.append('instagramId', formData.instagramId);
-    formDataToSend.append('phone', formData.phone);
-    formDataToSend.append('passingBatch', formData.passingBatch);
-    formDataToSend.append('position', formData.position);
-    formDataToSend.append('achievements', JSON.stringify(formData.achievements));
-    formDataToSend.append('photo', formData.photo);
+  }
 
-    try {
-      const response = await fetch('https://cognizen-backend.vercel.app/upload', {
-        method: 'POST',
-        body: formDataToSend,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-        },
-      });
+  try {
+    const response = await fetch('https://cognizen-backend.vercel.app/upload', {
+      method: 'POST',
+      body: formDataToSend,
+      // Remove the 'Access-Control-Allow-Origin' header from here
+    });
 
-      if (response.ok) {
-        const data = await response.json();
-        toast.success(
-          'EB Member added!', {
-          position: "bottom-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          transition: Bounce,
-        });
-        console.log("Image uploaded and EB member created successfully:", data);
-        setPublishLoader(false);
-      }
-      else {
-        setPublishLoader(false);
-        toast.error(
-          'Error Encountered!', {
-          position: "bottom-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          transition: Bounce,
-        });
-      }
-    } catch (error) {
-      setPublishLoader(false);
-      toast.error(
-        'Error encountered!', {
-        position: "bottom-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        transition: Bounce,
-      });
-      console.error("Error uploading image and creating EB member:", error);
+    if (response.ok) {
+      const data = await response.json();
+      console.log("Image uploaded and EB member created successfully:", data);
+      // Reset form data if needed
+    } else {
+      // Handle error response
     }
-  };
+  } catch (error) {
+    // Handle network error
+    console.error("Error uploading image and creating EB member:", error);
+  }
+};
+
 
   const handleDeleteSubmit = async (e) => {
     e.preventDefault();
