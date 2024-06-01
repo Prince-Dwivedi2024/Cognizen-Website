@@ -15,7 +15,6 @@ const app = express();
 import fileUpload from 'express-fileupload';
 import { v2 as cloudinary } from 'cloudinary'; 
 import { config as dotenvConfig } from 'dotenv';
-const cors = require('cors');
 
 const corsOptions = {
     origin: 'https://cognizen.vercel.app',
