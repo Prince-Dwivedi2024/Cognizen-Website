@@ -29,14 +29,16 @@ import { config as dotenvConfig } from 'dotenv';
     const jwtkey = 'cognizen';
     app.use(express.json());
 
-    const corsOptions = {
-        origin: '*',
-        optionsSuccessStatus: 200,
-        credentials: true, // Corrected the typo here
-        methods: ["GET", "POST", "PUT", "DELETE"],
-    };
-    
-    app.use(cors(corsOptions));
+
+
+const corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200,
+    methods: ["GET", "POST", "PUT", "DELETE"]
+};
+
+app.use(cors(corsOptions));
+
     
     app.use(fileUpload({
         useTempFiles: true
