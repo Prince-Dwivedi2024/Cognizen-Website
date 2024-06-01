@@ -15,7 +15,15 @@ const app = express();
 import fileUpload from 'express-fileupload';
 import { v2 as cloudinary } from 'cloudinary'; 
 import { config as dotenvConfig } from 'dotenv';
-app.use(cors());
+const cors = require('cors');
+
+const corsOptions = {
+    origin: 'https://cognizen.vercel.app',
+    optionsSuccessStatus: 200,
+    methods: ["GET", "POST", "PUT", "DELETE"]
+};
+
+app.use(cors(corsOptions));
 
     dotenvConfig();
     // Configure Cloudinary
