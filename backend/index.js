@@ -17,14 +17,13 @@ import { v2 as cloudinary } from 'cloudinary';
 import { config as dotenvConfig } from 'dotenv';
 
 const corsOptions = {
-    origin: '*',
-    optionsSuccessStatus: 200,
+    origin: 'https://cognizen.vercel.app',
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin']
+    allowedHeaders: ['Content-Type', 'Authorization']
 };
 
-
 app.use(cors(corsOptions));
+
 
     dotenvConfig();
     // Configure Cloudinary
