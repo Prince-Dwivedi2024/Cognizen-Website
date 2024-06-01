@@ -2,7 +2,6 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import './db/config.js';
-import fs from 'fs'; // Import the 'fs' module to work with file system
 const port = process.env.PORT || 5000;
 import Admin from './Schema/Admin.js';
 import Article from './Schema/Article.js';
@@ -24,24 +23,17 @@ const corsOptions = {
     allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin']
 };
 
+
 app.use(cors(corsOptions));
 
-// Ensure the existence of the temporary directory
-const tempDir = './tmp';
-if (!fs.existsSync(tempDir)) {
-    fs.mkdirSync(tempDir);
-}
-
-dotenvConfig();
-// Configure Cloudinary
-cloudinary.config({
-    cloud_name: process.env.CLOUD,
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET,
-    secure: true // Ensures secure URLs are used
-});
-
-
+    dotenvConfig();
+    // Configure Cloudinary
+    cloudinary.config({
+        cloud_name: process.env.CLOUD,
+        api_key: process.env.API_KEY,
+        api_secret: process.env.API_SECRET,
+        secure: true // Ensures secure URLs are used
+    });
 
     import Jwt from 'jsonwebtoken';
 
