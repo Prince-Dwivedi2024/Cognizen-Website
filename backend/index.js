@@ -43,10 +43,7 @@ app.use(cors(corsOptions));
 
 
 
-    
-    app.use(fileUpload({
-        useTempFiles: true
-    }));
+
 
     app.get('/',async(req,resp)=>{
         resp.send({result:"properly integrated"})
