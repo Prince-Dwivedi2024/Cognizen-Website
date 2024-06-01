@@ -142,7 +142,7 @@ const handleImageChange = (e) => {
   const handleDeleteSubmit = async (e) => {
     e.preventDefault();
     setDeleteLoader(true);
-    const memberType = "eBMember";
+    const memberType = "EBMember";
 
     if (!deleteID) {
       setDeleteLoader(false);
