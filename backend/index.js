@@ -43,8 +43,6 @@ app.use(cors(corsOptions));
 
 
 
-app.use(fileUpload());
-
 
 
     app.get('/',async(req,resp)=>{
