@@ -15,6 +15,8 @@ const app = express();
 import fileUpload from 'express-fileupload';
 import { v2 as cloudinary } from 'cloudinary'; 
 import { config as dotenvConfig } from 'dotenv';
+app.use(cors());
+
     dotenvConfig();
     // Configure Cloudinary
     cloudinary.config({
@@ -33,13 +35,6 @@ import { config as dotenvConfig } from 'dotenv';
 
 
 
-const corsOptions = {
-    origin: 'https://cognizen.vercel.app',
-    optionsSuccessStatus: 200,
-    methods: ["GET", "POST", "PUT", "DELETE"]
-};
-
-app.use(cors(corsOptions));
     
     app.use(fileUpload({
         useTempFiles: true
