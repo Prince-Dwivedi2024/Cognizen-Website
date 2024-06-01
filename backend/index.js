@@ -15,13 +15,12 @@ const app = express();
 import fileUpload from 'express-fileupload';
 import { v2 as cloudinary } from 'cloudinary'; 
 import { config as dotenvConfig } from 'dotenv';
-
 const corsOptions = {
-    origin: 'https://cognizen.vercel.app',
+    origin: '*',
+    optionsSuccessStatus: 200,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin']
 };
-
 app.use(cors(corsOptions));
 
 
