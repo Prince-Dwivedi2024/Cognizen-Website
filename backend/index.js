@@ -1,4 +1,4 @@
-import express from 'express';
+// import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import './db/config.js';
@@ -11,18 +11,20 @@ import EBMember from './Schema/EBMember.js';
 import PastMember from './Schema/PastMember.js';
 import Achievement from './Schema/Achievement.js';
 import Notice from './Schema/Notice.js';
-const app = express();
+// const app = express();
 import fileUpload from 'express-fileupload';
 import { v2 as cloudinary } from 'cloudinary'; 
 import { config as dotenvConfig } from 'dotenv';
 
-const corsOptions = {
-    origin: '*',
-    optionsSuccessStatus: 200,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin']
-};
-app.use(cors(corsOptions));
+const express = require('express');
+       const app = express();
+
+       app.use((req, res, next) => {
+         res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
+         res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+         res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+         next();
+       });
 
 
 
