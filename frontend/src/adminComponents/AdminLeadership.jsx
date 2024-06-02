@@ -8,7 +8,7 @@ const AdminLeadership = () => {
   const [publishLoader, setPublishLoader] = useState(false);
   const [deleteLoader, setDeleteLoader] = useState(false);
   const [formData, setFormData] = useState({
-    type: "EBMember",
+    type: "eBMember",
     name: '',
     email: '',
     phone: '',
@@ -142,7 +142,7 @@ const handleImageChange = (e) => {
   const handleDeleteSubmit = async (e) => {
     e.preventDefault();
     setDeleteLoader(true);
-    const memberType = "EBMember";
+    const memberType = "eBMember";
 
     if (!deleteID) {
       setDeleteLoader(false);
