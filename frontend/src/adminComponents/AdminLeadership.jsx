@@ -80,7 +80,7 @@ const handleImageChange = (e) => {
     formDataToSend.append('photo', formData.photo);
 
     try {
-      const response = await fetch('https://cognizen-backend-pearl.vercel.app/upload', {
+      const response = await fetch('https://cognizen-website.onrender.com/upload', {
         method: 'POST',
         body: formDataToSend,
         headers: {
@@ -163,7 +163,7 @@ const handleImageChange = (e) => {
     }
 
     try {
-      const response = await fetch(`https://cognizen-backend-pearl.vercel.app/delete/${deleteID}`, {
+      const response = await fetch(`https://cognizen-website.onrender.com/delete/${deleteID}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
