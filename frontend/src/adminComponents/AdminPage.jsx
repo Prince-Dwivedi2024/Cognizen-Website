@@ -81,7 +81,7 @@ const AdminPage = () => {
     formDataToSend.append('photo', formData.photo);
 
     try {
-      const response = await fetch('https://cognizen-nit-rourkela.vercel.app/article', {
+      const response = await fetch('https://cognizen-website.onrender.com/article', {
         method: 'POST',
         body: formDataToSend
       });
@@ -156,7 +156,7 @@ const AdminPage = () => {
       return;
     }
     try {
-      const response = await fetch(`https://cognizen-nit-rourkela.vercel.app/${deleteID}`, {
+      const response = await fetch(`https://cognizen-website.onrender.com/${deleteID}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -248,7 +248,7 @@ const AdminPage = () => {
         return;
       }
 
-      const response = await fetch(`https://cognizen-nit-rourkela.vercel.app/categorisation/${updateID}`, {
+      const response = await fetch(`https://cognizen-website.onrender.com/categorisation/${updateID}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
