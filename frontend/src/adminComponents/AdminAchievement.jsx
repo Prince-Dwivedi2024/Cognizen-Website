@@ -71,7 +71,7 @@ const AdminAchievement = () => {
     formDataToSend.append('photo', formData.photo);
 
     try {
-      const response = await fetch('http://localhost:5000/achievement', {
+      const response = await fetch('https://cognizen-website.onrender.com/achievement', {
         method: 'POST',
         body: formDataToSend
       });
@@ -146,7 +146,7 @@ const AdminAchievement = () => {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:5000/deleteachievement/${deleteID}`, {
+      const response = await fetch(`https://cognizen-website.onrender.com/deleteachievement/${deleteID}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'

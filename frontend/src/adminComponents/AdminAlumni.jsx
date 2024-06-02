@@ -81,7 +81,7 @@ const AdminAlumni = () => {
     formDataToSend.append('photo', formData.photo);
 
     try {
-      const response = await fetch('http://localhost:5000/upload', {
+      const response = await fetch('https://cognizen-website.onrender.com/upload', {
         method: 'POST',
         body: formDataToSend
       });
@@ -160,7 +160,7 @@ const AdminAlumni = () => {
     }
   
     try {
-      const response = await fetch(`http://localhost:5000/delete/${deleteID}`, {
+      const response = await fetch(`https://cognizen-website.onrender.com/delete/${deleteID}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'

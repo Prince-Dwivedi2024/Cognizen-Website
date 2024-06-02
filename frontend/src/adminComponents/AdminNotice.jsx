@@ -58,7 +58,7 @@ const AdminNotice = () => {
     formDataToSend.append('photo', formData.photo);
 
     try {
-      const response = await fetch('http://localhost:5000/notice', {
+      const response = await fetch('https://cognizen-website.onrender.com/notice', {
         method: 'POST',
         body: formDataToSend
       });
@@ -133,7 +133,7 @@ const AdminNotice = () => {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:5000/deletenotice/${deleteID}`, {
+      const response = await fetch(`https://cognizen-website.onrender.com/deletenotice/${deleteID}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
