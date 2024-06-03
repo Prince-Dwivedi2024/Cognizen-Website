@@ -4,7 +4,7 @@ import HomePage from './components/HomePage';
 import AdminLogin from './components/AdminLogin';
 import Article from './components/Article';
 import CurrentMembersPage from './components/CurrentMembersPage';
-import ExecutiveMembersPage from './components/ExecutiveMembersPage';
+import Leadership from './components/Leadership';
 import PastMembersPage from './components/PastMembersPage';
 import NoticeBoard from './components/NoticeBoard';
 import AdminAchievement from './adminComponents/AdminAchievement';
@@ -44,7 +44,7 @@ const App = () => {
           <Route path="/adminlogin" element={<AdminLogin />} />
           <Route path="/article" element={<Article />} />
           <Route path="/team" element={<CurrentMembersPage />} />
-          <Route path="/leadership" element={<ExecutiveMembersPage />} />
+          <Route path="/leadership" element={<Leadership />} />
           <Route path="/alumni" element={<PastMembersPage />} />
           <Route path="/notice" element={<NoticeBoard />} />
           <Route path="achievement" element={<Achievements />} />
