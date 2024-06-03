@@ -7,6 +7,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 export default function Nav() {
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [aboutUsOpen, setAboutUsOpen] = useState(false); // State for About Us dropdown
   const searchBarRef = useRef(null);
 
   const handleClickOutside = (event) => {
@@ -67,7 +68,7 @@ export default function Nav() {
                   `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
                 }
               >
-                <i className="fas fa-home mr-2"></i>
+                <i className="fas fa-home mr-2"></i> Home
               </NavLink>
 
               <NavLink
@@ -134,7 +135,7 @@ export default function Nav() {
 
               <div className="relative group">
                 <div className="text-[#FFFFFF] hover:text-orange-500 cursor-pointer font-medium text-sm px-4 py-2 flex items-center">
-                  About us
+                  About Us
                   <i className="fas fa-caret-down ml-2"></i>
                 </div>
 
@@ -262,6 +263,47 @@ export default function Nav() {
                 >
                   Achievements
                 </NavLink>
+                <div className="relative">
+                  <div
+                    className="text-white text-2xl py-2 cursor-pointer flex items-center"
+                    onClick={() => setAboutUsOpen(!aboutUsOpen)}
+                  >
+                    About Us
+                    <i className="fas fa-caret-down ml-2"></i>
+                  </div>
+                  {aboutUsOpen && (
+                    <div className="absolute left-0 mt-2 w-30 bg-black text-white text-sm z-40">
+                      <NavLink
+                        to="/leadership"
+                        className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        Leadership
+                      </NavLink>
+                      <NavLink
+                        to="/team"
+                        className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        Team
+                      </NavLink>
+                      <NavLink
+                        to="/alumni"
+                        className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        Alumni
+                      </NavLink>
+                      <NavLink
+                        to="/more"
+                        className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        More
+                      </NavLink>
+                    </div>
+                  )}
+                </div>
                 <NavLink
                   to="/adminlogin"
                   className="text-white text-2xl py-2"
@@ -269,13 +311,26 @@ export default function Nav() {
                 >
                   Admin
                 </NavLink>
-                <NavLink
-                  to="/about-us"
-                  className="text-white text-2xl py-2"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  About Us
-                </NavLink>
+                <div className="relative ml-8" ref={searchBarRef}>
+                  <div
+                    className="text-white text-2xl py-2 cursor-pointer"
+                    onClick={() => setShowSearchBar(!showSearchBar)}
+                  >
+                    <i className="fas fa-search"></i>
+                  </div>
+                  {showSearchBar && (
+                    <div className="absolute right-0 mt-2 w-64 p-2 flex items-center bg-transparent z-50">
+                      <input
+                        type="text"
+                        className="bg-white text-black p-2 flex-grow focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        placeholder="Search..."
+                      />
+                      <button className="bg-orange-500 text-white p-2 ml-2">
+                        Search
+                      </button>
+                    </div>
+                  )}
+                </div>
               </nav>
             </div>
           )}
