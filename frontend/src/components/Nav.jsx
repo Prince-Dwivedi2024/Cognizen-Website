@@ -1,4 +1,3 @@
-//navigation section
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import CognizenLogo2 from '../assets/CognizenLogo2.png';
@@ -7,6 +6,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 export default function Nav() {
   const [showSearchBar, setShowSearchBar] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const searchBarRef = useRef(null);
 
   const handleClickOutside = (event) => {
@@ -53,8 +53,14 @@ export default function Nav() {
 
         {/* nav */}
         <div className="relative">
-          <div className="bg-[#222f3d] h-12 flex items-center justify-center relative">
-            <div className="flex items-center justify-center w-full">
+          <div className="bg-[#222f3d] h-12 flex items-center justify-between px-4 lg:px-0">
+            <button
+              className="text-[#FFFFFF] text-2xl lg:hidden"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <i className="fas fa-bars"></i>
+            </button>
+            <div className={`lg:flex items-center justify-center w-full ${menuOpen ? 'block' : 'hidden'}`}>
               <NavLink
                 to="/"
                 className={({ isActive }) =>
@@ -191,6 +197,88 @@ export default function Nav() {
               </div>
             </div>
           </div>
+          {menuOpen && (
+            <div className="lg:hidden fixed inset-0 bg-[#708364] flex flex-col items-center justify-center z-50">
+              <button
+                className="text-white text-3xl absolute top-4 right-4"
+                onClick={() => setMenuOpen(false)}
+              >
+                &times;
+              </button>
+              <nav className="flex flex-col items-center">
+                <NavLink
+                  to="/"
+                  className="text-white text-2xl py-2"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Home
+                </NavLink>
+                <NavLink
+                  to="/philoneist"
+                  className="text-white text-2xl py-2"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Philoneist
+                </NavLink>
+                <NavLink
+                  to="/opinion"
+                  className="text-white text-2xl py-2"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Opinion
+                </NavLink>
+                <NavLink
+                  to="/reviews"
+                  className="text-white text-2xl py-2"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Reviews
+                </NavLink>
+                <NavLink
+                  to="/history"
+                  className="text-white text-2xl py-2"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  History
+                </NavLink>
+                <NavLink
+                  to="/international"
+                  className="text-white text-2xl py-2"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  World
+                </NavLink>
+                <NavLink
+                  to="/archives"
+                  className="text-white text-2xl py-2"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Archive
+                </NavLink>
+                <NavLink
+                  to="/achievement"
+                  className="text-white text-2xl py-2"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Achievements
+                </NavLink>
+                <NavLink
+                  to="/adminlogin"
+                  className="text-white text-2xl py-2"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Admin
+                </NavLink>
+                <NavLink
+                  to="/about-us"
+                  className="text-white text-2xl py-2"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  About Us
+                </NavLink>
+              </nav>
+            </div>
+          )}
         </div>
       </div>
     </header>
