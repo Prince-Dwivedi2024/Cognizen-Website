@@ -1,6 +1,5 @@
 //full page to display selected article
 import { useEffect, useState } from "react";
-import Member1 from '../assets/Member1.png'
 import Card6 from '../assets/Card6.webp'
 const Article = () => {
   const [articleType, setArticleType] = useState('');
