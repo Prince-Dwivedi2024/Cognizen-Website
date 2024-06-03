@@ -4,7 +4,7 @@ import Footer from './Footer';
 import CognizenLogo2 from '../assets/CognizenLogo2.png';
 import CampusNITR from '../assets/CampusNITR.jpg';
 
-const Leadership = () => {
+const Team = () => {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -15,7 +15,7 @@ const Leadership = () => {
   const fetchMembers = async () => {
     try {
       const url = new URL('https://cognizen-website.onrender.com/members');
-      url.searchParams.append('type', 'eBMember');
+      url.searchParams.append('type', 'currentMember');
 
       const response = await fetch(url, { method: 'GET' });
 
@@ -32,21 +32,11 @@ const Leadership = () => {
     }
   };
 
-  const getMemberByPosition = (position) => members.find(member => member.position === position);
-
-  const president = getMemberByPosition('President');
-  const vicePresident = getMemberByPosition('Vice President');
-  const secretary = getMemberByPosition('Secretary');
-  const chiefCoordinator = getMemberByPosition('Chief Coordinator');
-  const treasurer = getMemberByPosition('Treasurer');
-
   const MemberCard = ({ member }) => {
-    if (!member) return null;
-
     const { photo, name, passingBatch, id, position, mediumId, instagramId, XId, email } = member;
 
     return (
-      <div className="bg-[#F0F4F8] p-12 rounded-lg shadow-sm transform transition-transform hover:scale-105 hover:shadow-2xl">
+      <div className="bg-[#F0F4F8] p-8 rounded-lg shadow-sm transform transition-transform hover:scale-105 hover:shadow-2xl">
         <div className="flex items-center mb-4">
           <div className="relative h-32 w-32 rounded-full border-4 border-gray-300 overflow-hidden shadow-lg">
             <img src={photo} alt={name} className="h-full w-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-110" />
@@ -79,11 +69,11 @@ const Leadership = () => {
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1/3 text-center font-raleway space-y-4">
               <h1 className="text-4xl font-medium">Let's meet</h1>
               <h1 className="text-4xl font-medium">our</h1>
-              <h1 className="text-4xl font-medium">EB Members</h1>
+              <h1 className="text-4xl font-medium">Team Members</h1>
             </div>
             <div className="absolute top-4 right-4 flex space-x-4">
               <Link to="/" className="text-md font-medium px-4 py-2 hover:underline">home</Link>
-              <Link to="/team" className="text-md font-medium px-4 py-2 hover:underline">team</Link>
+              <Link to="/leadership" className="text-md font-medium px-4 py-2 hover:underline">leadership</Link>
               <Link to="/alumni" className="text-md font-medium px-4 py-2 hover:underline">alumni</Link>
               <Link to="/more" className="text-md font-medium px-4 py-2 hover:underline">more</Link>
             </div>
@@ -91,27 +81,24 @@ const Leadership = () => {
         </div>
 
         <div className="flex justify-center py-[8vh] bg-[#e9e7e7]">
-          <div className="p-8 w-4/5">
+          <div className="py-8 ">
             <h2 className="text-3xl font-bold text-center mb-8 text-[#222f3d] font-raleway">"Innovate, Collaborate, Succeed"</h2>
             <div className="flex flex-col items-center space-y-8">
               {loading ? (
                 <div className="flex justify-center items-center h-[70vh]">
-                <div className="w-48 h-48 border-4 border-blue-500 border-t-transparent border-t-4 border-r-transparent border-r-4 rounded-full animate-spin"></div>
-              </div>
-              
+                  <div className="w-48 h-48 border-4 border-blue-500 border-t-transparent border-t-4 border-r-transparent border-r-4 rounded-full animate-spin"></div>
+                </div>
               ) : (
                 <>
-                  <div className="w-full flex justify-center pt-8">
-                    <MemberCard member={president} />
-                  </div>
-                  <div className="w-full flex justify-center gap-8 pt-8">
-                    <MemberCard member={vicePresident} />
-                    <MemberCard member={secretary} />
-                  </div>
-                  <div className="w-full flex justify-center gap-8 pt-8">
-                    <MemberCard member={treasurer} />
-                    <MemberCard member={chiefCoordinator} />
-                  </div>
+                  {members.length > 0 ?
+                    <div className=" flex flex-wrap justify-center gap-8 pt-8">
+                      {members.map((member, index) => (
+                        <MemberCard key={index} member={member} />
+                      ))}
+                    </div>
+                    :
+                    <div></div>
+                  }
                 </>
               )}
             </div>
@@ -123,4 +110,4 @@ const Leadership = () => {
   );
 };
 
-export default Leadership;
+export default Team;

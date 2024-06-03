@@ -3,9 +3,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomePage from './components/HomePage';
 import AdminLogin from './components/AdminLogin';
 import Article from './components/Article';
-import CurrentMembersPage from './components/CurrentMembersPage';
+import Team from './components/Team';
 import Leadership from './components/Leadership';
-import PastMembersPage from './components/PastMembersPage';
+import Alumni from './components/Alumni'
 import NoticeBoard from './components/NoticeBoard';
 import AdminAchievement from './adminComponents/AdminAchievement';
 import AdminAlumni from './adminComponents/AdminAlumni';
@@ -43,9 +43,9 @@ const App = () => {
           <Route path="archives" element={<Archives />} />
           <Route path="/adminlogin" element={<AdminLogin />} />
           <Route path="/article" element={<Article />} />
-          <Route path="/team" element={<CurrentMembersPage />} />
+          <Route path="/team" element={<Team />} />
           <Route path="/leadership" element={<Leadership />} />
-          <Route path="/alumni" element={<PastMembersPage />} />
+          <Route path="/alumni" element={<Alumni />} />
           <Route path="/notice" element={<NoticeBoard />} />
           <Route path="achievement" element={<Achievements />} />
           <Route path="more" element={<More />} />
