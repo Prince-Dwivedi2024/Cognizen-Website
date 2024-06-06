@@ -1,8 +1,11 @@
 //full page to display selected article
 import { useEffect, useState } from "react";
 import Card6 from '../assets/Card6.webp'
+import { useNavigate } from "react-router-dom";
+
 const Article = () => {
   const [articleType, setArticleType] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedType = localStorage.getItem('articleType');
@@ -13,7 +16,7 @@ const Article = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-4 mt-4 relative">
-      <button className="bg-orange-500 text-white px-4 py-2 rounded absolute top-0 left-0">Home</button>
+      <button onClick={navigate('/')} className="bg-orange-500 text-white px-4 py-2 rounded absolute top-0 left-0">Home</button>
       <div className="text-sm text-orange-500 mb-2 mt-12">Politics: General Elections</div>
       <h1 className="text-4xl font-bold mb-4">
         Education, aspiration & 3 de-hyphenations: A changing Kashmir votes and vents
@@ -22,7 +25,7 @@ const Article = () => {
         In Kashmir Valley, 3 de-hyphenations stand out. Youth have de-hyphenated from radicalism; de-hyphenation with Pakistan; and security agencies’ success in de-hyphenating weapons and people.
       </p>
       <div className="flex items-center mb-6">
-        <img src={Member1} alt="Author" className="w-10 h-10 rounded-full mr-4" />
+        <img src={Card6} alt="Author" className="w-10 h-10 rounded-full mr-4" />
         <div>
           <p className="text-gray-700 font-bold">SHEKHAR GUPTA</p>
           <p className="text-gray-500">25 May, 2024 12:11 pm IST</p>

@@ -6,93 +6,7 @@ import Nav from './Nav';
 import Footer from './Footer';
 import NoticeBoard from './NoticeBoard';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import Trophie from '../assets/Trophie.png';
 
-const achievements = [
-  {
-    eventName: 'National Political Debate Competition, JNU',
-    points: [
-      'Our cognizen club team won the first prize',
-      'Awarded by the President of India',
-      'Team Members- Zeeshan, Jian, Baba',
-      'Cash Prize of 50k'
-    ],
-    imageUrl: Phe
-  },
-  {
-    eventName: 'Event Two',
-    points: [
-      'Point 1',
-      'Point 2',
-      'Point 3',
-      'Point 4'
-    ],
-    imageUrl: Phe
-  },
-  {
-    eventName: 'Event Three',
-    points: [
-      'Point 1',
-      'Point 2',
-      'Point 3',
-      'Point 4'
-    ],
-    imageUrl: Phe
-  },
-  {
-    eventName: 'Event Four',
-    points: [
-      'Point 1',
-      'Point 2',
-      'Point 3',
-      'Point 4'
-    ],
-    imageUrl: Phe
-  },
-  {
-    eventName: 'Event Five',
-    points: [
-      'Point 1',
-      'Point 2',
-      'Point 3',
-      'Point 4'
-    ],
-    imageUrl: Phe
-  },
-  {
-    eventName: 'Event Six',
-    points: [
-      'Point 1',
-      'Point 2',
-      'Point 3',
-      'Point 4'
-    ],
-    imageUrl: Phe
-  },
-];
-
-const AchievementCard = ({ eventName, points, imageUrl }) => {
-  return (
-    <div className="bg-[#FFFFFE] rounded-lg overflow-hidden shadow-lg p-4 transition-transform hover:shadow-2xl hover:scale-[1.008]" style={{ height: '30vh' }}>
-      <div className="flex h-full">
-        <div className="w-1/3 bg-cover bg-center rounded-lg" style={{ backgroundImage: `url(${imageUrl})` }}>
-          {/* Image section */}
-        </div>
-        <div className="w-2/3 p-4 pl-10 flex flex-col justify-between">
-          <h1 className="text-xl font-bold" style={{ color: '#212121' }}>{eventName}</h1>
-          <ul className="list-disc list-inside">
-            {points.map((point, index) => (
-              <li key={index} className="text-sm" style={{ color: '#212121' }}>{point}</li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <img src={Trophie} alt="" className='h-10' />
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const MilestoneCard = ({ icon, number, label, inView }) => {
   const [count, setCount] = useState(0);
@@ -156,6 +70,8 @@ const OurMilestones = () => {
 const Achievements = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showNoticeBoard, setShowNoticeBoard] = useState(false);
+  const [achievements, setAchievements] = useState([]);
+  const [loader, setLoader] = useState(true);
   const noticeRef = useRef(null);
   const iconRef = useRef(null);
   const navigate = useNavigate();
@@ -186,15 +102,57 @@ const Achievements = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const getAchievements = async () => {
+      try {
+        const response = await fetch('https://cognizen-backend-pearl.vercel.app/getachievement', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+
+        const noticesData = await response.json();
+        setAchievements(noticesData);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching notices:", error);
+        setError("Something went wrong while fetching notices.");
+        setLoading(false);
+      }
+    };
+
+    getAchievements();
+  }, []);
+
+  const reversedAchievements = [...achievements].reverse();
+
   return (
     <>
       <Nav />
       <div className="min-h-screen bg-[#F0F4F8] p-10 py-[15vh] flex justify-center shadow-sm">
         <div className="w-4/5">
-          
+
           <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-14">
-            {achievements.map((achievement, index) => (
-              <AchievementCard key={index} {...achievement} />
+            {reversedAchievements.map((achievement, index) => (
+              <div className="bg-[#FFFFFE] rounded-lg overflow-hidden shadow-lg p-4 transition-transform hover:shadow-2xl hover:scale-[1.008]" style={{ height: '30vh' }}>
+                <div className="flex h-full">
+                  <div className="w-1/3 bg-cover bg-center rounded-lg" style={{ backgroundImage: `url(${achievement.photo})` }}>
+                    {/* Image section */}
+                  </div>
+                  <div className="w-2/3 p-4 pl-10 flex flex-col justify-between">
+                    <h1 className="text-xl font-bold" style={{ color: '#212121' }}>{achievement.title}</h1>
+
+                    <div key={index} className="text-sm" style={{ color: '#212121' }}>{achievement.content}</div>
+
+                  </div>
+             
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -202,7 +160,7 @@ const Achievements = () => {
 
       <OurMilestones />
 
-      <div className="fixed bottom-4 right-4 flex flex-col items-center">
+      {/* <div className="fixed bottom-4 right-4 flex flex-col items-center">
         <div
           ref={iconRef}
           className="relative cursor-pointer text-[#222f3d] hover:text-[#5e6b79] hover:text-lg hover:text-extrabold"
@@ -219,7 +177,7 @@ const Achievements = () => {
             <NoticeBoard />
           </div>
         )}
-      </div>
+      </div> */}
 
       <Footer />
     </>

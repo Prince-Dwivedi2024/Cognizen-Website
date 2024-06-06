@@ -194,7 +194,7 @@ const HomePage = () => {
 
   return (
     <div className=''>
-      <Nav/>
+      <Nav />
       <div className="min-h-screen bg-[#F0F4F8] p-10 flex justify-center py-[10vh] shadow-sm">
         <div className="w-4/5">
 

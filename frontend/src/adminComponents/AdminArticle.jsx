@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const AdminPage = () => {
+const AdminArticle = () => {
   const [deleteID, setDeleteID] = useState('');
   const [updateID, setUpdateID] = useState('');
   const [publishLoader, setPublishLoader] = useState(false);
@@ -376,7 +376,7 @@ const AdminPage = () => {
                 <input
                   key={index}
                   type='text'
-                  name={`authorId_${index}`} // Updated field name
+                  name={`authorId_${index}`} 
                   value={authorId}
                   onChange={handleChange}
                   className='w-full border border-gray-300 p-1 my-1 rounded'
@@ -521,4 +521,4 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+export default AdminArticle;

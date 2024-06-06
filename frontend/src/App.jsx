@@ -11,7 +11,7 @@ import AdminAchievement from './adminComponents/AdminAchievement';
 import AdminAlumni from './adminComponents/AdminAlumni';
 import AdminLeadership from './adminComponents/AdminLeadership';
 import AdminNotice from './adminComponents/AdminNotice';
-import AdminPage from './adminComponents/AdminPage';
+import AdminArticle from './adminComponents/AdminArticle';
 import AdminTeam from './adminComponents/AdminTeam';
 import Philoneist from './components/Philoneist';
 import Opinion from './components/Opinion';
@@ -27,12 +27,11 @@ const App = () => {
     <div className='App'>
       <BrowserRouter>
         <Routes>
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin" element={<AdminArticle />} />
           <Route path="/adminAchievement" element={<AdminAchievement />} />
           <Route path="/adminAlumni" element={<AdminAlumni />} />
           <Route path="/adminLeadership" element={<AdminLeadership />} />
           <Route path="/adminNotice" element={<AdminNotice />} />
-          <Route path="/adminPage" element={<AdminPage />} />
           <Route path="/adminTeam" element={<AdminTeam />} />
           <Route path="/" element={<HomePage />} />
           <Route path="philoneist" element={<Philoneist />} />
