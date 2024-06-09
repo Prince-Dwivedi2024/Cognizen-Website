@@ -28,6 +28,37 @@ const moreInPhiloneist = [
   { type: 'Philoneist', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card4, author: 'Author4', date: '2024-05-16' },
 ];
 
+const Card = ({ type, highlight, imageUrl, author, date, detail, passage, onReadMore, large = false }) => (
+  <div 
+    className={`bg-transparent bg-[#F0F4F8]  shadow-sm overflow-hidden transform transition-transform hover:scale-[1.008] hover:shadow-2xl ${large ? 'large-card' : ''}`}
+    style={large ? { width: '800px', height: '500px', margin: '0 auto' } : {}}
+  >
+    <div>
+      <div 
+        className="relative bg-cover bg-center" 
+        style={{ height: large ? '350px' : '240px' }}
+      >
+        <img src={imageUrl} alt={highlight} className="w-full h-full object-cover" />
+      </div>
+      <div className="p-4 flex flex-col justify-between" style={{ minHeight: '150px' }}>
+        <h2 className="text-lg font-semibold mb-2 font-sans" style={{ color: '#212121' }}>{highlight}</h2>
+        {large && <p className="text-gray-700 mb-4">{detail}</p>}
+        <div className="bg-transparent py-1 flex justify-between items-center mt-auto">
+          <div className="text-sm" style={{ color: '#979797' }}>
+            <span>{author}</span> | <span>{date}</span>
+          </div>
+          <button
+            className="text-sm font-semibold text-blue-400 hover:text-[#c9c6c6]"
+            onClick={() => onReadMore(type)}
+          >
+            Read more
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 const MoreInPhiloneistCard = ({ type, highlight, detail, imageUrl, author, date, onReadMore }) => (
   <div className="flex border-b border-gray-300 py-4">
     <div className="flex-shrink-0 mr-4">

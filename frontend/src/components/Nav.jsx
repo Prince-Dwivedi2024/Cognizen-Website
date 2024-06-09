@@ -1,3 +1,5 @@
+//Nav bar section.
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import CognizenLogo2 from '../assets/CognizenLogo2.png';
@@ -70,6 +72,16 @@ export default function Nav() {
               >
                 <i className="fas fa-home mr-2"></i> 
               </NavLink>
+
+              <NavLink
+                to="/politics"
+                className={({ isActive }) =>
+                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
+                }
+              >
+                Politics
+              </NavLink>
+
 
               <NavLink
                 to="/philoneist"
