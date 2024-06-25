@@ -34,18 +34,21 @@ const Team = () => {
 
   const MemberCard = ({ member }) => {
     const { photo, name, passingBatch, id, position, mediumId, instagramId, XId, email } = member;
-
+  
     return (
       <div className="bg-[#F0F4F8] p-8 rounded-lg shadow-sm transform transition-transform hover:scale-105 hover:shadow-2xl w-80 h-[290px]">
         <div className="flex items-center mb-4">
           <div className="relative h-32 w-32 rounded-full border-4 border-gray-300 overflow-hidden shadow-lg">
-            <img src={photo} alt={name} className="h-full w-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-110" />
+            <img
+              src={photo}
+              alt={name}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
           </div>
-
           <div className="ml-4">
             <h3 className="text-base font-semibold">{name}</h3>
             <p className="text-gray-600 text-sm">batch - {passingBatch}</p>
-            <p className="text-gray-800 font-semibold text-sm mb-2">id - {id}</p>
+            {/* <p className="text-gray-800 font-semibold text-sm mb-2">id - {id}</p> */}
           </div>
         </div>
         <p className="text-gray-800 font-bold mb-2">{position}</p>
@@ -58,6 +61,8 @@ const Team = () => {
       </div>
     );
   };
+  
+
 
   return (
     <>
