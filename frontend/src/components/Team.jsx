@@ -36,16 +36,16 @@ const Team = () => {
     const { photo, name, passingBatch, id, position, mediumId, instagramId, XId, email } = member;
 
     return (
-      <div className="bg-[#F0F4F8] p-8 rounded-lg shadow-sm transform transition-transform hover:scale-105 hover:shadow-2xl">
+      <div className="bg-[#F0F4F8] p-8 rounded-lg shadow-sm transform transition-transform hover:scale-105 hover:shadow-2xl w-80 h-[290px]">
         <div className="flex items-center mb-4">
           <div className="relative h-32 w-32 rounded-full border-4 border-gray-300 overflow-hidden shadow-lg">
             <img src={photo} alt={name} className="h-full w-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-110" />
           </div>
 
           <div className="ml-4">
-            <h3 className="text-xl font-semibold">{name}</h3>
-            <p className="text-gray-600">batch - {passingBatch}</p>
-            <p className="text-gray-800 font-semibold mb-2">id - {id}</p>
+            <h3 className="text-base font-semibold">{name}</h3>
+            <p className="text-gray-600 text-sm">batch - {passingBatch}</p>
+            <p className="text-gray-800 font-semibold text-sm mb-2">id - {id}</p>
           </div>
         </div>
         <p className="text-gray-800 font-bold mb-2">{position}</p>
@@ -81,7 +81,7 @@ const Team = () => {
         </div>
 
         <div className="flex justify-center py-[8vh] bg-[#e9e7e7]">
-          <div className="py-8 ">
+          <div className="py-8 w-4/5">
             <h2 className="text-3xl font-bold text-center mb-8 text-[#222f3d] font-raleway">"Innovate, Collaborate, Succeed"</h2>
             <div className="flex flex-col items-center space-y-8">
               {loading ? (
@@ -91,7 +91,7 @@ const Team = () => {
               ) : (
                 <>
                   {members.length > 0 ?
-                    <div className=" flex flex-wrap justify-center gap-8 pt-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-8 justify-items-center">
                       {members.map((member, index) => (
                         <MemberCard key={index} member={member} />
                       ))}
