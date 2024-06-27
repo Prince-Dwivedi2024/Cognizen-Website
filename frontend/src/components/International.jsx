@@ -116,7 +116,7 @@ const International = () => {
         setArticles(filteredArticles);
       } catch (error) {
         console.error("Error fetching International articles:", error);
-        setError("Something went wrong while fetching articles.");
+        // setError("Something went wrong while fetching articles.");
       }
     };
 

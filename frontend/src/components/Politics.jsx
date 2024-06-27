@@ -116,7 +116,7 @@ const Politics = () => {
         setArticles(filteredArticles);
       } catch (error) {
         console.error("Error fetching Politics articles:", error);
-        setError("Something went wrong while fetching articles.");
+        // setError("Something went wrong while fetching articles.");
       }
     };
 

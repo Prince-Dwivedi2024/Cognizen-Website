@@ -116,7 +116,7 @@ const History = () => {
         setArticles(filteredArticles);
       } catch (error) {
         console.error("Error fetching History articles:", error);
-        setError("Something went wrong while fetching articles.");
+        // setError("Something went wrong while fetching articles.");
       }
     };
 

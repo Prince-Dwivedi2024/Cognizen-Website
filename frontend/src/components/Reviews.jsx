@@ -116,7 +116,7 @@ const Reviews = () => {
         setArticles(filteredArticles);
       } catch (error) {
         console.error("Error fetching Reviews articles:", error);
-        setError("Something went wrong while fetching articles.");
+        // setError("Something went wrong while fetching articles.");
       }
     };
 
