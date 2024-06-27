@@ -1,47 +1,18 @@
-//user landing page for articles related to Politics topic
-
-
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Nav from './Nav';
 import Footer from './Footer';
-import NoticeBoard from './NoticeBoard';
-
-import Card1 from '../assets/Card1.webp';
-import Card2 from '../assets/Card2.webp';
-import Card3 from '../assets/Card3.webp';
-import Card4 from '../assets/Card4.webp';
-import Card5 from '../assets/Card5.webp';
-import Card6 from '../assets/Card6.webp';
-import Card7 from '../assets/Card7.webp';
+// import NoticeBoard from './NoticeBoard';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
-const articles = [
-  { type: 'Politics', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", imageUrl: Card1, author: 'Author1', date: '2024-05-16' },
-  { type: 'Politics', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card7, author: 'Author4', date: '2024-05-16' },
-  { type: 'Politics', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", passage: "This is a passage for the first article to give more detail.", imageUrl: Card5, author: 'Author1', date: '2024-05-16' },
-  { type: 'Politics', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card6, author: 'Author4', date: '2024-05-16' },
-  { type: 'Politics', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", passage: "This is a passage for the first article to give more detail.", imageUrl: Card7, author: 'Author1', date: '2024-05-16' },
-  { type: 'Politics', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card7, author: 'Author4', date: '2024-05-16' },
-  { type: 'Politics', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", passage: "This is a passage for the first article to give more detail.", imageUrl: Card5, author: 'Author1', date: '2024-05-16' },
-  { type: 'Politics', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card6, author: 'Author4', date: '2024-05-16' },
-];
-
-const moreInPolitics = [
-  { type: 'Politics', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", imageUrl: Card1, author: 'Author1', date: '2024-05-16' },
-  { type: 'Politics', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card4, author: 'Author4', date: '2024-05-16' },
-  { type: 'Politics', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", imageUrl: Card1, author: 'Author1', date: '2024-05-16' },
-  { type: 'Politics', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card4, author: 'Author4', date: '2024-05-16' },
-];
-
 const Card = ({ type, highlight, imageUrl, author, date, detail, passage, onReadMore, large = false }) => (
-  <div 
-    className={`bg-transparent bg-[#F0F4F8]  shadow-sm overflow-hidden transform transition-transform hover:scale-[1.008] hover:shadow-2xl ${large ? 'large-card' : ''}`}
+  <div
+    className={`bg-transparent bg-[#F0F4F8]  shadow-xl overflow-hidden transform transition-transform hover:scale-[1.008] hover:shadow-2xl ${large ? 'large-card' : ''}`}
     style={large ? { width: '800px', height: '500px', margin: '0 auto' } : {}}
   >
     <div>
-      <div 
-        className="relative bg-cover bg-center" 
+      <div
+        className="relative bg-cover bg-center"
         style={{ height: large ? '350px' : '240px' }}
       >
         <img src={imageUrl} alt={highlight} className="w-full h-full object-cover" />
@@ -66,7 +37,7 @@ const Card = ({ type, highlight, imageUrl, author, date, detail, passage, onRead
 );
 
 const MoreInPoliticsCard = ({ type, highlight, detail, imageUrl, author, date, onReadMore }) => (
-  <div className="flex border-b border-gray-300 py-4">
+  <div className="flex border-b border-gray-300 py-4" onClick={() => handleReadMore}>
     <div className="flex-shrink-0 mr-4">
       <img src={imageUrl} alt={highlight} className="w-24 h-24 object-cover" />
     </div>
@@ -88,6 +59,7 @@ const MoreInPoliticsCard = ({ type, highlight, detail, imageUrl, author, date, o
 );
 
 const Politics = () => {
+  const [articles, setArticles] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [showNoticeBoard, setShowNoticeBoard] = useState(false);
   const noticeRef = useRef(null);
@@ -95,12 +67,12 @@ const Politics = () => {
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    // console.log(Searching for: ${searchQuery});
+    // console.log(`Searching for: ${searchQuery}`);
   };
 
-  const toggleNoticeBoard = () => {
-    setShowNoticeBoard(!showNoticeBoard);
-  };
+  // const toggleNoticeBoard = () => {
+  //   setShowNoticeBoard(!showNoticeBoard);
+  // };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -125,39 +97,71 @@ const Politics = () => {
     navigate('/article');
   };
 
+  useEffect(() => {
+    const fetchPoliticsArticles = async () => {
+      try {
+        const response = await fetch('https://cognizen-backend-pearl.vercel.app/getarticle?type=Article', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+
+        const articlesData = await response.json();
+        const filteredArticles = articlesData.filter(article => article.category.toLowerCase() === 'Politics');
+        setArticles(filteredArticles);
+      } catch (error) {
+        console.error("Error fetching Politics articles:", error);
+        setError("Something went wrong while fetching articles.");
+      }
+    };
+
+    fetchPoliticsArticles();
+  }, []);
+
+  const reversedArticles = [...articles].reverse();
+
   return (
     <>
       <Nav />
       <div className="min-h-screen bg-[#F0F4F8] p-10 pt-2 flex justify-center shadow-sm">
         <div className="w-4/5">
-          
+
           <div className="pb-12">
-            <h2 className="text-3xl font-medium  font-serif pt-16 pb-2 text-[#222f3d] underline underline-offset-8">POLITICAL ARTICLES -</h2>
-              
-              {/* That single big card */}
+            <h2 className="text-3xl font-medium  font-serif pt-16 pb-2 text-[#222f3d] underline underline-offset-8">Politics ARTICLES -</h2>
+
+            {/* That single big card */}
             <div className="p-10 flex justify-center">
-              {articles.slice(0, 1).map((article, index) => (
+              {reversedArticles.slice(0, 1).map((article, index) => (
                 <Card key={index} {...article} onReadMore={handleReadMore} large />
               ))}
             </div>
 
+            {/* quadrilateral cards */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
-              {articles.slice(1,7).map((article, index) => (
+              {reversedArticles.slice(1, 7).map((article, index) => (
                 <Card key={index} {...article} onReadMore={handleReadMore} />
               ))}
             </div>
           </div>
 
+          {/* more articles */}
           <div className="pb-12 border-t border-black pt-10">
-            <h2 className="text-3xl font-medium  pb-8 font-serif text-[#222f3d] underline underline-offset-8">MORE IN POLITICS ARTICLES -</h2>
+            <h2 className="text-3xl font-medium  pb-8 font-serif text-[#222f3d] underline underline-offset-8">MORE IN Politics -</h2>
             <div className="grid grid-cols-1 gap-4">
-              {moreInPolitics.map((article, index) => (
+              {reversedArticles.slice(4).map((article, index) => (
                 <MoreInPoliticsCard key={index} {...article} onReadMore={handleReadMore} />
               ))}
             </div>
           </div>
+
         </div>
 
+        {/* notice section */}
         {/* <div className="fixed bottom-4 right-4 flex flex-col items-center">
           <div
             ref={iconRef}
