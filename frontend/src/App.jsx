@@ -21,6 +21,7 @@ import Archives from './components/Archives';
 import Reviews from './components/Reviews';
 import Achievements from './components/Achievements';
 import More from './components/More';
+import Politics from './components/Politics.jsx';
 
 const App = () => {
   return (
@@ -34,7 +35,8 @@ const App = () => {
           <Route path="/adminNotice" element={<AdminNotice />} />
           <Route path="/adminTeam" element={<AdminTeam />} />
           <Route path="/" element={<HomePage />} />
-          <Route path="philoneist" element={<Philoneist />} />
+          <Route path="politics" element={<Politics />} />
+          <Route path="/philoneist" element={<Philoneist />} />
           <Route path="opinion" element={<Opinion />} />
           <Route path="reviews" element={<Reviews />} />
           <Route path="history" element={<History />} />
