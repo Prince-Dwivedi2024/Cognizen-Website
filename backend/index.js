@@ -252,12 +252,13 @@ app.post('/article', async (req, res) => {
 app.get('/getarticle', async (req, res) => {
     try {
         let Item;
-        if (req.query.type == "Article") {
+
+        if (req.query.type === "Article") {
             Item = Article;
-        }
-        else {
+        } else {
             Item = ArchieveArticle;
         }
+
         const articles = await Item.find();
 
         if (!articles.length) {
@@ -271,18 +272,19 @@ app.get('/getarticle', async (req, res) => {
     }
 });
 
+
 // render only philoneist articles
 app.get('/getphiloneist', async (req, res) => {
     try {
         let Item;
-        if (req.query.type == "Article") {
+
+        if (req.query.type === "Article") {
             Item = Article;
         } else {
             Item = ArchieveArticle;
         }
 
-        // Fetch articles filtered by the 'philoneist' category
-        const articles = await Item.find({ category: 'philoneist' });
+        const articles = await Item.find({category:"Philoneist"});
 
         if (!articles.length) {
             return res.status(404).json({ message: "No articles found" });
