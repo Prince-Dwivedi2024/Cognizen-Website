@@ -252,7 +252,7 @@ app.post('/article', async (req, res) => {
 app.get('/getarticle', async (req, res) => {
     try {
         let Item;
-        if (req.body.type == "Article") {
+        if (req.query.type == "Article") {
             Item = Article;
         }
         else {

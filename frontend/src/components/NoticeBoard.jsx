@@ -8,7 +8,7 @@ const NoticeBoard = () => {
   useEffect(() => {
     const getNotices = async () => {
       try {
-        const response = await fetch('https://cognizen-backend-pearl.vercel.app/getnotice', {
+        const response = await fetch('https://cognizen-website.onrender.com/getnotice', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
