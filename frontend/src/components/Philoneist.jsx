@@ -9,14 +9,14 @@ const Card = ({ type, title, photo, author, publishDate, description, onReadMore
   const limitedDescription = (description) => {
     const words = description.split(' ');
     if (words.length > 25) {
-      return words.slice(0, 25).join(' ') + '...';
+      return words.slice(0, 30).join(' ') + '...';
     }
     return description;
   };
 
   // Function to filter non-empty authors
   const formatAuthors = (authors) => {
-    return authors.filter(author => author.trim() !== '').join(', ');
+    return authors.filter(author => author.trim() !== '').join(' & ');
   };
 
   return (
@@ -36,7 +36,7 @@ const Card = ({ type, title, photo, author, publishDate, description, onReadMore
           {large && <p className="text-gray-700 mb-4">{limitedDescription(description)}</p>}
           <div className="bg-transparent py-1 flex justify-between items-center mt-auto">
             <div className="text-sm" style={{ color: '#979797' }}>
-            <span>{author.map((ath)=>(ath!='' && {ath}))}</span> | <span>{publishDate}</span>
+              <span>{formatAuthors(author)}</span> | <span>{publishDate}</span>
             </div>
             <button
               className="text-sm font-semibold text-blue-400 hover:text-[#c9c6c6]"
@@ -52,27 +52,37 @@ const Card = ({ type, title, photo, author, publishDate, description, onReadMore
 };
 
 
-const MoreInPhiloneistCard = ({ type, highlight, detail, imageUrl, author, date, onReadMore }) => (
+
+const MoreInPhiloneistCard = ({ type, description, title, photo, author, publishDate, onReadMore }) => {
+  const limitedDescription = (description) => {
+    const words = description.split(' ');
+    if (words.length > 25) {
+      return words.slice(0, 45).join(' ') + '...';
+    }
+    return description;
+  };
+  return(
   <div className="flex border-b border-gray-300 py-4" onClick={() => handleReadMore}>
     <div className="flex-shrink-0 mr-4">
-      <img src={imageUrl} alt={highlight} className="w-24 h-24 object-cover" />
+      <img src={photo} alt={title} className="w-24 h-24 object-cover" />
     </div>
     <div className="flex-grow">
       <h3
         className="text-xl font-semibold mb-2 cursor-pointer hover:text-orange-400"
         onClick={() => onReadMore(type)}
       >
-        {highlight}
+        {title}
       </h3>
-      <p className="text-gray-700 mb-2">{detail}</p>
+      <p className="text-gray-700 mb-2">{limitedDescription(description)}</p>
       <div className="flex justify-between items-center text-sm">
         <div>
-          <span>{author}</span> | <span>{date}</span>
+          <span>{author}</span> | <span>{publishDate}</span>
         </div>
       </div>
     </div>
   </div>
-);
+  );
+}
 
 const Philoneist = () => {
   const [articles, setArticles] = useState([]);

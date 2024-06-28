@@ -81,10 +81,10 @@ const AdminArticle = () => {
     formDataToSend.append('photo', formData.photo);
 
     try {
-      // const response = await fetch('https://cognizen-website.onrender.com/article', {
-      //   method: 'POST',
-      //   body: formDataToSend
-      // });
+      const response = await fetch('https://cognizen-website.onrender.com/article', {
+        method: 'POST',
+        body: formDataToSend
+      });
 
       if (response.ok) {
         const data = await response.json();
