@@ -271,6 +271,31 @@ app.get('/getarticle', async (req, res) => {
     }
 });
 
+// render only philoneist articles
+app.get('/getphiloneist', async (req, res) => {
+    try {
+        let Item;
+        if (req.query.type == "Article") {
+            Item = Article;
+        } else {
+            Item = ArchieveArticle;
+        }
+
+        // Fetch articles filtered by the 'philoneist' category
+        const articles = await Item.find({ category: 'philoneist' });
+
+        if (!articles.length) {
+            return res.status(404).json({ message: "No articles found" });
+        }
+
+        res.status(200).json(articles);
+    } catch (error) {
+        console.error("Error fetching articles:", error);
+        res.status(500).json({ message: "Something went wrong" });
+    }
+});
+
+
 // Delete article by ID
 app.delete('/deletearticle/:id', async (req, res) => {
     try {

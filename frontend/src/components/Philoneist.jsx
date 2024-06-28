@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Nav from './Nav';
 import Footer from './Footer';
-// import NoticeBoard from './NoticeBoard';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const Card = ({ type, highlight, imageUrl, author, date, detail, passage, onReadMore, large = false }) => (
@@ -75,6 +74,8 @@ const Philoneist = () => {
   // };
 
   useEffect(() => {
+    console.log("useEffect is running...");
+
     const handleClickOutside = (event) => {
       if (
         noticeRef.current &&
@@ -98,9 +99,13 @@ const Philoneist = () => {
   };
 
   useEffect(() => {
+    console.log("fetchPhiloneistArticles useEffect is running...");
+
     const fetchPhiloneistArticles = async () => {
       try {
-        const response = await fetch('https://cognizen-backend.onrender.com/getarticle?type=Article', {
+        console.log("Starting fetch request...");
+
+        const response = await fetch('https://cognizen-backend.onrender.com/getphiloneist?type=Article', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -108,15 +113,18 @@ const Philoneist = () => {
         });
 
         if (!response.ok) {
+          console.error(`Response not OK: ${response.status} ${response.statusText}`);
           throw new Error(`Error: ${response.statusText}`);
         }
 
+        console.log("Response received:", response);
+
         const articlesData = await response.json();
-        const filteredArticles = articlesData.filter(article => article.category.toLowerCase() === 'Philoneist');
-        setArticles(filteredArticles);
+        console.log("Articles data:", articlesData);
+
+        setArticles(articlesData);
       } catch (error) {
         console.error("Error fetching Philoneist articles:", error);
-        // setError("Something went wrong while fetching articles.");
       }
     };
 
