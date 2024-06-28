@@ -226,16 +226,22 @@ app.post('/article', async (req, res) => {
     const file = req.files.photo;
     try {
         const result = await cloudinary.uploader.upload(file.tempFilePath);
+
+        // Parse author and authorId from JSON strings
+        const authors = JSON.parse(req.body.author);
+        const authorIds = JSON.parse(req.body.authorId);
+
         let Item;
-        if (req.body.type == "Article") {
+        if (req.body.type === "Article") {
             Item = Article;
-        }
-        else {
+        } else {
             Item = ArchieveArticle;
         }
 
         const newArticle = new Item({
             ...req.body,
+            author: authors,
+            authorId: authorIds,
             photo: result.secure_url, // Ensure secure URL is used
             id: generateRandomCode() // Assign random ID
         });

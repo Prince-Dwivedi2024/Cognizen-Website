@@ -18,8 +18,8 @@ const AdminArticle = () => {
     content: '',
     category: '',
     topic: '',
-    author: ['', '', ''],
-    authorId: ['', '', ''], // Updated field name
+    author: ['','',''],
+    authorId: ['','',''], 
     type: 'Article', // Default value
     photo: null
   });
@@ -75,16 +75,16 @@ const AdminArticle = () => {
     formDataToSend.append('content', formData.content);
     formDataToSend.append('category', formData.category);
     formDataToSend.append('topic', formData.topic);
-    formDataToSend.append('author', JSON.stringify(formData.author)); // Convert array to JSON string
-    formDataToSend.append('authorId', JSON.stringify(formData.authorId)); // Convert array to JSON string
+    formDataToSend.append('author', JSON.stringify(formData.author));
+    formDataToSend.append('authorId', JSON.stringify(formData.authorId));
     formDataToSend.append('type', formData.type);
     formDataToSend.append('photo', formData.photo);
 
     try {
-      const response = await fetch('https://cognizen-website.onrender.com/article', {
-        method: 'POST',
-        body: formDataToSend
-      });
+      // const response = await fetch('https://cognizen-website.onrender.com/article', {
+      //   method: 'POST',
+      //   body: formDataToSend
+      // });
 
       if (response.ok) {
         const data = await response.json();

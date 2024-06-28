@@ -4,36 +4,53 @@ import Nav from './Nav';
 import Footer from './Footer';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
-const Card = ({ type, highlight, imageUrl, author, date, detail, onReadMore, large = false }) => (
-  <div
-    className={`bg-transparent bg-[#F0F4F8] shadow-xl overflow-hidden transform transition-transform hover:scale-[1.008] hover:shadow-2xl ${large ? 'large-card' : ''}`}
-    style={large ? { width: '800px', height: '500px', margin: '0 auto' } : {}}
-  >
-    <div>
-      <div
-        className="relative bg-cover bg-center"
-        style={{ height: large ? '350px' : '240px' }}
-      >
-        <img src={imageUrl} alt={highlight} className="w-full h-full object-cover" />
-      </div>
-      <div className="p-4 flex flex-col justify-between" style={{ minHeight: '150px' }}>
-        <h2 className="text-lg font-semibold mb-2 font-sans" style={{ color: '#212121' }}>{highlight}</h2>
-        {large && <p className="text-gray-700 mb-4">{detail}</p>}
-        <div className="bg-transparent py-1 flex justify-between items-center mt-auto">
-          <div className="text-sm" style={{ color: '#979797' }}>
-            <span>{author}</span> | <span>{date}</span>
+const Card = ({ type, title, photo, author, publishDate, description, onReadMore, large }) => {
+  // Function to limit description to 25 words
+  const limitedDescription = (description) => {
+    const words = description.split(' ');
+    if (words.length > 25) {
+      return words.slice(0, 25).join(' ') + '...';
+    }
+    return description;
+  };
+
+  // Function to filter non-empty authors
+  const formatAuthors = (authors) => {
+    return authors.filter(author => author.trim() !== '').join(', ');
+  };
+
+  return (
+    <div
+      className={`bg-transparent bg-[#F0F4F8] shadow-xl overflow-hidden transform transition-transform hover:scale-[1.008] hover:shadow-2xl ${large ? 'large-card' : ''}`}
+      style={large ? { width: '800px', height: '500px', margin: '0 auto' } : {}}
+    >
+      <div>
+        <div
+          className="relative bg-cover bg-center"
+          style={{ height: large ? '350px' : '240px' }}
+        >
+          <img src={photo} alt={title} className="w-full h-full object-cover" />
+        </div>
+        <div className="p-4 flex flex-col justify-between" style={{ minHeight: '150px' }}>
+          <h2 className="text-lg font-semibold mb-2 font-sans" style={{ color: '#212121' }}>{title}</h2>
+          {large && <p className="text-gray-700 mb-4">{limitedDescription(description)}</p>}
+          <div className="bg-transparent py-1 flex justify-between items-center mt-auto">
+            <div className="text-sm" style={{ color: '#979797' }}>
+            <span>{author.map((ath)=>(ath!='' && {ath}))}</span> | <span>{publishDate}</span>
+            </div>
+            <button
+              className="text-sm font-semibold text-blue-400 hover:text-[#c9c6c6]"
+              onClick={() => onReadMore(type)}
+            >
+              Read more
+            </button>
           </div>
-          <button
-            className="text-sm font-semibold text-blue-400 hover:text-[#c9c6c6]"
-            onClick={() => onReadMore(type)}
-          >
-            Read more
-          </button>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
+
 
 const MoreInPhiloneistCard = ({ type, highlight, detail, imageUrl, author, date, onReadMore }) => (
   <div className="flex border-b border-gray-300 py-4" onClick={() => handleReadMore}>
@@ -64,13 +81,14 @@ const Philoneist = () => {
   useEffect(() => {
       const fetchPhiloneistArticles = async () => {
           try {
-              const response = await fetch('https://cognizen-backend.onrender.com/getphiloneist?type=Article');
+              const response = await fetch('http://localhost:5000/getphiloneist?type=Article');
 
               if (!response.ok) {
                   throw new Error(`HTTP error! Status: ${response.status}`);
               }
 
               const articlesData = await response.json();
+              console.log(articlesData);
               setArticles(articlesData);
               console.log('hi')
           } catch (error) {
@@ -86,7 +104,7 @@ const Philoneist = () => {
       navigate('/article');
   };
 
-  const reversedArticles = [...articles].reverse();
+
 
   return (
       <>
@@ -96,12 +114,12 @@ const Philoneist = () => {
                   <div className="pb-12">
                       <h2 className="text-3xl font-medium font-serif pt-16 pb-2 text-[#222f3d] underline underline-offset-8">Philoneist ARTICLES -</h2>
                       <div className="p-10 flex justify-center">
-                          {reversedArticles.slice(0, 1).map((article, index) => (
+                          {articles.slice(0, 1).map((article, index) => (
                               <Card key={index} {...article} onReadMore={() => handleReadMore(article.type)} large />
                           ))}
                       </div>
                       <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
-                          {reversedArticles.slice(1, 7).map((article, index) => (
+                          {articles.slice(1, 7).map((article, index) => (
                               <Card key={index} {...article} onReadMore={() => handleReadMore(article.type)} />
                           ))}
                       </div>
@@ -109,7 +127,7 @@ const Philoneist = () => {
                   <div className="pb-12 border-t border-black pt-10">
                       <h2 className="text-3xl font-medium pb-8 font-serif text-[#222f3d] underline underline-offset-8">MORE IN Philoneist -</h2>
                       <div className="grid grid-cols-1 gap-4">
-                          {reversedArticles.slice(4).map((article, index) => (
+                          {articles.slice(4).map((article, index) => (
                               <MoreInPhiloneistCard key={index} {...article} onReadMore={() => handleReadMore(article.type)} />
                           ))}
                       </div>
