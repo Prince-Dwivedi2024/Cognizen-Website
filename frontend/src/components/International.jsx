@@ -100,7 +100,7 @@ const International = () => {
   useEffect(() => {
     const fetchInternationalArticles = async () => {
       try {
-        const response = await fetch('https://cognizen-backend-pearl.vercel.app/getarticle?type=Article', {
+        const response = await fetch('https://cognizen-website.onrender.com/getarticle?type=Article', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'

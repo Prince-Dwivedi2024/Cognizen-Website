@@ -100,7 +100,7 @@ const Philoneist = () => {
   useEffect(() => {
     const fetchPhiloneistArticles = async () => {
       try {
-        const response = await fetch('https://cognizen-backend-pearl.vercel.app/getarticle?type=Article', {
+        const response = await fetch('https://cognizen-backend.onrender.com/getarticle?type=Article', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
