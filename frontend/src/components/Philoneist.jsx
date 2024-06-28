@@ -59,95 +59,65 @@ const MoreInPhiloneistCard = ({ type, highlight, detail, imageUrl, author, date,
 
 const Philoneist = () => {
   const [articles, setArticles] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [showNoticeBoard, setShowNoticeBoard] = useState(false);
-  const noticeRef = useRef(null);
-  const iconRef = useRef(null);
   const navigate = useNavigate();
 
-  const handleSearch = () => {
-    // Perform search logic here
-  };
-
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        noticeRef.current &&
-        !noticeRef.current.contains(event.target) &&
-        iconRef.current &&
-        !iconRef.current.contains(event.target)
-      ) {
-        setShowNoticeBoard(false);
-      }
-    };
+      const fetchPhiloneistArticles = async () => {
+          try {
+              const response = await fetch('https://cognizen-backend.onrender.com/getphiloneist?type=Article');
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+              if (!response.ok) {
+                  throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+
+              const articlesData = await response.json();
+              setArticles(articlesData);
+              console.log('hi')
+          } catch (error) {
+              console.error('Error fetching Philoneist articles:', error);
+          }
+      };
+
+      fetchPhiloneistArticles();
   }, []);
 
   const handleReadMore = (type) => {
-    localStorage.setItem('articleType', type);
-    navigate('/article');
+      localStorage.setItem('articleType', type);
+      navigate('/article');
   };
-
-  useEffect(() => {
-    const fetchPhiloneistArticles = async () => {
-      try {
-        const response = await fetch('https://cognizen-backend.onrender.com/getphiloneist?type=Article', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const articlesData = await response.json();
-        setArticles(articlesData);
-      } catch (error) {
-        console.error('Error fetching Philoneist articles:', error);
-      }
-    };
-
-    fetchPhiloneistArticles();
-  }, []);
 
   const reversedArticles = [...articles].reverse();
 
   return (
-    <>
-      <Nav />
-      <div className="min-h-screen bg-[#F0F4F8] p-10 pt-2 flex justify-center shadow-sm">
-        <div className="w-4/5">
-          <div className="pb-12">
-            <h2 className="text-3xl font-medium font-serif pt-16 pb-2 text-[#222f3d] underline underline-offset-8">Philoneist ARTICLES -</h2>
-            <div className="p-10 flex justify-center">
-              {reversedArticles.slice(0, 1).map((article, index) => (
-                <Card key={index} {...article} onReadMore={handleReadMore} large />
-              ))}
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
-              {reversedArticles.slice(1, 7).map((article, index) => (
-                <Card key={index} {...article} onReadMore={handleReadMore} />
-              ))}
-            </div>
+      <>
+          <Nav />
+          <div className="min-h-screen bg-[#F0F4F8] p-10 pt-2 flex justify-center shadow-sm">
+              <div className="w-4/5">
+                  <div className="pb-12">
+                      <h2 className="text-3xl font-medium font-serif pt-16 pb-2 text-[#222f3d] underline underline-offset-8">Philoneist ARTICLES -</h2>
+                      <div className="p-10 flex justify-center">
+                          {reversedArticles.slice(0, 1).map((article, index) => (
+                              <Card key={index} {...article} onReadMore={() => handleReadMore(article.type)} large />
+                          ))}
+                      </div>
+                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
+                          {reversedArticles.slice(1, 7).map((article, index) => (
+                              <Card key={index} {...article} onReadMore={() => handleReadMore(article.type)} />
+                          ))}
+                      </div>
+                  </div>
+                  <div className="pb-12 border-t border-black pt-10">
+                      <h2 className="text-3xl font-medium pb-8 font-serif text-[#222f3d] underline underline-offset-8">MORE IN Philoneist -</h2>
+                      <div className="grid grid-cols-1 gap-4">
+                          {reversedArticles.slice(4).map((article, index) => (
+                              <MoreInPhiloneistCard key={index} {...article} onReadMore={() => handleReadMore(article.type)} />
+                          ))}
+                      </div>
+                  </div>
+              </div>
           </div>
-          <div className="pb-12 border-t border-black pt-10">
-            <h2 className="text-3xl font-medium pb-8 font-serif text-[#222f3d] underline underline-offset-8">MORE IN Philoneist -</h2>
-            <div className="grid grid-cols-1 gap-4">
-              {reversedArticles.slice(4).map((article, index) => (
-                <MoreInPhiloneistCard key={index} {...article} onReadMore={handleReadMore} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-      <Footer />
-    </>
+          <Footer />
+      </>
   );
 };
 
