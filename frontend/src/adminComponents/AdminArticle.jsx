@@ -338,7 +338,7 @@ const AdminArticle = () => {
               />
             </div>
             <div className='mb-2'>
-              <label className='block font-semibold'>Category (e.g. Philoneist,Reviews)</label>
+              <label className='block font-semibold'>Category (e.g. Philoneist,Reviews,Opinion,World)</label>
               <input
                 type='text'
                 name='category'
@@ -348,7 +348,7 @@ const AdminArticle = () => {
               />
             </div>
             <div className='mb-2'>
-              <label className='block font-semibold'>Topic (e.g. Economics, Politics)</label>
+              <label className='block font-semibold'>Topic (e.g. Economics,Politics,History)</label>
               <input
                 type='text'
                 name='topic'

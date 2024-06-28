@@ -91,7 +91,7 @@ const Philoneist = () => {
   useEffect(() => {
       const fetchPhiloneistArticles = async () => {
           try {
-              const response = await fetch('http://localhost:5000/getphiloneist?type=Article');
+              const response = await fetch('https://cognizen-website.onrender.com/getphiloneist?type=Article');
 
               if (!response.ok) {
                   throw new Error(`HTTP error! Status: ${response.status}`);
