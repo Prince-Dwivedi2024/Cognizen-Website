@@ -254,6 +254,21 @@ app.post('/article', async (req, res) => {
     }
 });
 
+// Search article by id
+app.get('/article/:id', async (req, res) => {
+    try {
+      const id = req.params.id;
+      const item = await getItemModel(req.query.type).findOne({ id });
+      if (!item) {
+        return res.status(404).send({ error: "Item not found" });
+      }
+      res.status(200).send(item);
+    } catch (error) {
+      console.error("Error fetching item:", error);
+      res.status(500).send({ error: "Something went wrong" });
+    }
+  });
+
 // Render all articles
 app.get('/getarticle', async (req, res) => {
     try {
@@ -290,7 +305,7 @@ app.get('/getphiloneist', async (req, res) => {
             Item = ArchieveArticle;
         }
 
-        const articles = await Item.find({category:"Philoneist"});
+        const articles = await Item.find({ category: "Philoneist" });
 
         if (!articles.length) {
             return res.status(404).json({ message: "No articles found" });
@@ -314,7 +329,7 @@ app.get('/getreviews', async (req, res) => {
             Item = ArchieveArticle;
         }
 
-        const articles = await Item.find({category:"Reviews"});
+        const articles = await Item.find({ category: "Reviews" });
 
         if (!articles.length) {
             return res.status(404).json({ message: "No articles found" });
@@ -338,7 +353,7 @@ app.get('/getopinion', async (req, res) => {
             Item = ArchieveArticle;
         }
 
-        const articles = await Item.find({category:"Opinion"});
+        const articles = await Item.find({ category: "Opinion" });
 
         if (!articles.length) {
             return res.status(404).json({ message: "No articles found" });
@@ -362,7 +377,7 @@ app.get('/gethistory', async (req, res) => {
             Item = ArchieveArticle;
         }
 
-        const articles = await Item.find({topic:"History"});
+        const articles = await Item.find({ topic: "History" });
 
         if (!articles.length) {
             return res.status(404).json({ message: "No articles found" });
@@ -386,7 +401,7 @@ app.get('/getinternational', async (req, res) => {
             Item = ArchieveArticle;
         }
 
-        const articles = await Item.find({category:"International"});
+        const articles = await Item.find({ category: "International" });
 
         if (!articles.length) {
             return res.status(404).json({ message: "No articles found" });
@@ -410,7 +425,7 @@ app.get('/getpolitics', async (req, res) => {
             Item = ArchieveArticle;
         }
 
-        const articles = await Item.find({topic:"Politics"});
+        const articles = await Item.find({ topic: "Politics" });
 
         if (!articles.length) {
             return res.status(404).json({ message: "No articles found" });
@@ -434,7 +449,7 @@ app.get('/geteconomics', async (req, res) => {
             Item = ArchieveArticle;
         }
 
-        const articles = await Item.find({topic:"Economics"});
+        const articles = await Item.find({ topic: "Economics" });
 
         if (!articles.length) {
             return res.status(404).json({ message: "No articles found" });

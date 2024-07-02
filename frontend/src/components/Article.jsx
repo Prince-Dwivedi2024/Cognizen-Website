@@ -4,13 +4,16 @@ import { useNavigate } from "react-router-dom";
 import Card6 from '../assets/Card6.webp';
 
 const Article = () => {
-  const [articleType, setArticleType] = useState('');
   const navigate = useNavigate();
+  const [loader,setLoader] = useState(false);
 
   useEffect(() => {
-    const storedType = localStorage.getItem('articleType');
-    if (storedType) {
-      setArticleType(storedType);
+    const storedType = localStorage.getItem('articleId');
+    try{
+
+    }
+    catch{
+
     }
   }, []);
 

@@ -61,91 +61,106 @@ const MoreInPhiloneistCard = ({ type, description, title, photo, author, publish
     }
     return description;
   };
-  return(
-  <div className="flex border-b border-gray-300 py-4" onClick={() => handleReadMore}>
-    <div className="flex-shrink-0 mr-4">
-      <img src={photo} alt={title} className="w-24 h-24 object-cover" />
-    </div>
-    <div className="flex-grow">
-      <h3
-        className="text-xl font-semibold mb-2 cursor-pointer hover:text-orange-400"
-        onClick={() => onReadMore(type)}
-      >
-        {title}
-      </h3>
-      <p className="text-gray-700 mb-2">{limitedDescription(description)}</p>
-      <div className="flex justify-between items-center text-sm">
-        <div>
-          <span>{author}</span> | <span>{publishDate}</span>
+  return (
+    <div className="flex border-b border-gray-300 py-4" onClick={() => handleReadMore}>
+      <div className="flex-shrink-0 mr-4">
+        <img src={photo} alt={title} className="w-24 h-24 object-cover" />
+      </div>
+      <div className="flex-grow">
+        <h3
+          className="text-xl font-semibold mb-2 cursor-pointer hover:text-orange-400"
+          onClick={() => onReadMore(type)}
+        >
+          {title}
+        </h3>
+        <p className="text-gray-700 mb-2">{limitedDescription(description)}</p>
+        <div className="flex justify-between items-center text-sm">
+          <div>
+            <span>{author}</span> | <span>{publishDate}</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   );
 }
 
 const Philoneist = () => {
+  const [loader, setLoader] = useState(false);
   const [articles, setArticles] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-      const fetchPhiloneistArticles = async () => {
-          try {
-              const response = await fetch('https://cognizen-website.onrender.com/getphiloneist?type=Article');
+    const fetchPhiloneistArticles = async () => {
+      try {
+        setLoader(true);
+        const response = await fetch('https://cognizen-website.onrender.com/getphiloneist?type=Article');
 
-              if (!response.ok) {
-                  throw new Error(`HTTP error! Status: ${response.status}`);
-              }
+        if (!response.ok) {
+          setLoader(false);
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
-              const articlesData = await response.json();
-              console.log(articlesData);
-              setArticles(articlesData);
-              console.log('hi')
-          } catch (error) {
-              console.error('Error fetching Philoneist articles:', error);
-          }
-      };
+        const articlesData = await response.json();
+        console.log(articlesData);
+        setArticles(articlesData);
+        setLoader(false);
+      } catch (error) {
+        setLoader(false);
+        console.error('Error fetching Philoneist articles:', error);
+      }
+    };
 
-      fetchPhiloneistArticles();
+    fetchPhiloneistArticles();
   }, []);
 
-  const handleReadMore = (type) => {
-      localStorage.setItem('articleType', type);
-      navigate('/article');
+  const handleReadMore = (id) => {
+    localStorage.clear();
+    localStorage.setItem('articleId', id);
+    navigate('/article');
   };
+  
 
 
 
   return (
-      <>
-          <Nav />
+    <>
+      <Nav />
+      {loader ? (
+        <div className="flex justify-center items-center h-[90vh]">
+          <div className="w-48 h-48 border-4 border-blue-500 border-t-transparent border-t-4 border-r-transparent border-r-4 rounded-full animate-spin"></div>
+        </div>
+      )
+        :
+         (
           <div className="min-h-screen bg-[#F0F4F8] p-10 pt-2 flex justify-center shadow-sm">
-              <div className="w-4/5">
-                  <div className="pb-12">
-                      <h2 className="text-3xl font-medium font-serif pt-16 pb-2 text-[#222f3d] underline underline-offset-8">Philoneist ARTICLES -</h2>
-                      <div className="p-10 flex justify-center">
-                          {articles.slice(0, 1).map((article, index) => (
-                              <Card key={index} {...article} onReadMore={() => handleReadMore(article.type)} large />
-                          ))}
-                      </div>
-                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
-                          {articles.slice(1, 7).map((article, index) => (
-                              <Card key={index} {...article} onReadMore={() => handleReadMore(article.type)} />
-                          ))}
-                      </div>
-                  </div>
-                  <div className="pb-12 border-t border-black pt-10">
-                      <h2 className="text-3xl font-medium pb-8 font-serif text-[#222f3d] underline underline-offset-8">MORE IN Philoneist -</h2>
-                      <div className="grid grid-cols-1 gap-4">
-                          {articles.slice(4).map((article, index) => (
-                              <MoreInPhiloneistCard key={index} {...article} onReadMore={() => handleReadMore(article.type)} />
-                          ))}
-                      </div>
-                  </div>
+            <div className="w-4/5">
+              <div className="pb-12">
+                <h2 className="text-3xl font-medium font-serif pt-16 pb-2 text-[#222f3d] underline underline-offset-8">PHILONEIST ARTICLES -</h2 >
+                <div className="p-10 flex justify-center">
+                  {articles.slice(0, 1).map((article, index) => (
+                    <Card key={index} {...article} onReadMore={() => handleReadMore(article.id)} large />
+                  ))}
+                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
+                  {articles.slice(1, 7).map((article, index) => (
+                    <Card key={index} {...article} onReadMore={() => handleReadMore(article.id)} />
+                  ))}
+                </div>
+              </div >
+              <div className="pb-12 border-t border-black pt-10">
+                <h2 className="text-3xl font-medium pb-8 font-serif text-[#222f3d] underline underline-offset-8">MORE IN PHILONEIST -</h2>
+                <div className="grid grid-cols-1 gap-4">
+                  {articles.slice(4).map((article, index) => (
+                    <MoreInPhiloneistCard key={index} {...article} onReadMore={() => handleReadMore(article.id)} />
+                  ))}
+                </div>
               </div>
-          </div>
-          <Footer />
-      </>
+            </div >
+          </div >
+        )
+      }
+      <Footer />
+    </>
   );
 };
 
