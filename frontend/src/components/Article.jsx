@@ -65,7 +65,7 @@ const Article = () => {
             </div>
           </div>
           <div className="flex justify-center mb-6">
-            <img src={article.photo} alt="Main" className="w-[900px] h-[500px] object-cover" />
+            <img src={article.photo} alt="Main" className="w-[900px] h-[506.25px] object-cover" />
           </div>
           <div className="article-content text-gray-800">
             <p className="mb-4">
