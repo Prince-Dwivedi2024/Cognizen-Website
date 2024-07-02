@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Card6 from '../assets/Card6.webp';
+import Footer from './Footer';
 
 const Article = () => {
   const navigate = useNavigate();
@@ -37,12 +37,16 @@ const Article = () => {
     };
 
     fetchArticle();
-  }, []);
+  }, [navigate]);
+
+  const formatAuthors = (authors) => {
+    return authors.filter(author => author.trim() !== '').join(' & ');
+  };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 mt-4 relative">
-      {!loader ? (
-        <>
+    !loader ? (
+      <>
+        <div className="max-w-4xl mx-auto p-4 mt-4 mb-[10vh] relative">
           <button onClick={() => navigate('/')} className="bg-orange-500 text-white px-4 py-2 rounded absolute top-0 left-0">
             Home
           </button>
@@ -50,13 +54,13 @@ const Article = () => {
           <h1 className="text-4xl font-bold mb-4">
             {article.title}
           </h1>
-          <p className="text-lg text-gray-600 mb-4">
+          <p className="text-md text-gray-600 mb-4">
             {article.description}
           </p>
           <div className="flex items-center mb-6">
             <img src={article.photo} alt="Author" className="w-10 h-10 rounded-full mr-4" />
             <div>
-              <p className="text-gray-700 font-bold">{article.author}</p>
+              <p className="text-gray-700 font-bold">{formatAuthors(article.author || [])}</p>
               <p className="text-gray-500">{article.publishDate}</p>
             </div>
           </div>
@@ -69,13 +73,14 @@ const Article = () => {
             </p>
             {/* Add more article content as needed */}
           </div>
-        </>
-      ) : (
-        <div className="flex justify-center items-center h-[90vh]">
-          <div className="w-48 h-48 border-4 border-blue-500 border-t-transparent border-t-4 border-r-transparent border-r-4 rounded-full animate-spin"></div>
         </div>
-      )}
-    </div>
+        <Footer />
+      </>
+    ) : (
+      <div className="flex justify-center items-center h-[90vh]">
+        <div className="w-48 h-48 border-4 border-blue-500 border-t-transparent border-t-4 border-r-transparent border-r-4 rounded-full animate-spin"></div>
+      </div>
+    )
   );
 };
 
