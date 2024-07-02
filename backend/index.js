@@ -263,7 +263,8 @@ app.get('/article/:id', async (req, res) => {
       let item;
       if (type === 'Article') {
         item = await Article.findOne({ id });
-      } else {
+      } 
+      else {
         item = await ArchieveArticle.findOne({ id });
       }
   

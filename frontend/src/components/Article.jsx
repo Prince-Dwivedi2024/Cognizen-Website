@@ -13,14 +13,14 @@ const Article = () => {
       const storedType = localStorage.getItem('articleType');
 
       if (!storedId || !storedType) {
-        // Redirect or handle the case when articleId or articleType is missing
         navigate('/');
         return;
       }
 
       setLoader(true);
       try {
-        const response = await fetch(`https://cognizen-website.onrender.com/article/${storedId}type=${storedType}`);
+        console.warn(storedId, storedType);
+        const response = await fetch(`https://cognizen-website.onrender.com/article/${storedId}?type=${storedType}`);
 
         if (!response.ok) {
           setLoader(false);
@@ -37,7 +37,7 @@ const Article = () => {
     };
 
     fetchArticle();
-  }, [navigate]);
+  }, []);
 
   return (
     <div className="max-w-4xl mx-auto p-4 mt-4 relative">
@@ -46,7 +46,7 @@ const Article = () => {
           <button onClick={() => navigate('/')} className="bg-orange-500 text-white px-4 py-2 rounded absolute top-0 left-0">
             Home
           </button>
-          <div className="text-sm text-orange-500 mb-2 mt-12">Politics: General Elections</div>
+          <div className="text-sm text-orange-500 mb-2 mt-12">{article.topic}</div>
           <h1 className="text-4xl font-bold mb-4">
             {article.title}
           </h1>
@@ -54,25 +54,18 @@ const Article = () => {
             {article.description}
           </p>
           <div className="flex items-center mb-6">
-            <img src={Card6} alt="Author" className="w-10 h-10 rounded-full mr-4" />
+            <img src={article.photo} alt="Author" className="w-10 h-10 rounded-full mr-4" />
             <div>
-              <p className="text-gray-700 font-bold">SHEKHAR GUPTA</p>
-              <p className="text-gray-500">25 May, 2024 12:11 pm IST</p>
+              <p className="text-gray-700 font-bold">{article.author}</p>
+              <p className="text-gray-500">{article.publishDate}</p>
             </div>
           </div>
           <div className="flex justify-center mb-6">
-            <img src={Card6} alt="Main" className="w-[900px] h-[500px] object-cover" />
+            <img src={article.photo} alt="Main" className="w-[900px] h-[500px] object-cover" />
           </div>
           <div className="article-content text-gray-800">
             <p className="mb-4">
-              <span className="text-5xl float-left mr-2 leading-none">W</span>
-              ritingsOnTheWall is a metaphor that emerged through about three decades of travel, mostly in poll-bound India. This instalment comes to you from the Kashmir Valley. It is also my first experience of watching an election in so sensitive, vital, and fascinating a region.
-            </p>
-            <p className="mb-4">
-              First, what is WritingsOnTheWall? It means literally looking at the walls to see what’s changing and what isn’t, what the people want and what they absolutely don’t want.
-            </p>
-            <p className="mb-4">
-              The walls also tell us what the people are buying (branded underwear, Nitish’s Bihar, 2010), or if they are too broke to be buying anything at all (Lalu’s Bihar, 2005). That gives a quick peek into the state of an economy and change. In Kashmir, for the better. You can read all the earlier...
+              {article.content}
             </p>
             {/* Add more article content as needed */}
           </div>
