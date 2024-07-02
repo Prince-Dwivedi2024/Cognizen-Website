@@ -11,7 +11,7 @@ import Card2 from '../assets/Card2.webp';
 import Card3 from '../assets/Card3.webp';
 import Card4 from '../assets/Card4.webp';
 import Card5 from '../assets/Card5.webp';
-import Card6 from '../assets/Card6.webp';
+// import Card6 from '../assets/Card6.webp';
 import Card7 from '../assets/Card7.webp';
 import Card8 from '../assets/Card8.webp';
 import Card9 from '../assets/Card9.jpg';
@@ -88,7 +88,7 @@ const articles = [
   { type: 'Politics', highlight: "As Indians Vote, Modi's Party Misleads Online", imageUrl: Card3, author: 'Author3', date: '2024-05-14' },
   { type: 'Pheloneist', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card4, author: 'Author4', date: '2024-05-16' },
   { type: 'Reviews', highlight: "The 20 Best Period Dramas to Watch ", imageUrl: Card5, author: 'Author5', date: '2024-05-15' },
-  { type: 'World', highlight: "Women Say They Were Pressured Into Long-Term Birth Control", imageUrl: Card6, author: 'Author6', date: '2024-05-14' },
+  { type: 'World', highlight: "Women Say They Were Pressured Into Long-Term Birth Control", imageUrl: Card5, author: 'Author6', date: '2024-05-14' },
   { type: 'Opinion', highlight: "Best High-Yield Savings Accounts for May 2024", imageUrl: Card7, author: 'Author6', date: '2024-05-14' },
   { type: 'Politics', highlight: "India is holding a mammoth election with nearlya billion voters", imageUrl: Card8, author: 'Author6', date: '2024-05-14' },
 ];

@@ -12,7 +12,6 @@ import Card2 from '../assets/Card2.webp';
 import Card3 from '../assets/Card3.webp';
 import Card4 from '../assets/Card4.webp';
 import Card5 from '../assets/Card5.webp';
-import Card6 from '../assets/Card6.webp';
 import Card7 from '../assets/Card7.webp';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -20,11 +19,11 @@ const articles = [
   { type: 'Archives', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", imageUrl: Card1, author: 'Author1', date: '2024-05-16' },
   { type: 'Archives', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card7, author: 'Author4', date: '2024-05-16' },
   { type: 'Archives', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", passage: "This is a passage for the first article to give more detail.", imageUrl: Card5, author: 'Author1', date: '2024-05-16' },
-  { type: 'Archives', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card6, author: 'Author4', date: '2024-05-16' },
+  { type: 'Archives', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card5, author: 'Author4', date: '2024-05-16' },
   { type: 'Archives', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", passage: "This is a passage for the first article to give more detail.", imageUrl: Card7, author: 'Author1', date: '2024-05-16' },
   { type: 'Archives', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card7, author: 'Author4', date: '2024-05-16' },
   { type: 'Archives', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", passage: "This is a passage for the first article to give more detail.", imageUrl: Card5, author: 'Author1', date: '2024-05-16' },
-  { type: 'Archives', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card6, author: 'Author4', date: '2024-05-16' },
+  { type: 'Archives', highlight: "Do You Need More Sunscreen When It's Hot?", imageUrl: Card5, author: 'Author4', date: '2024-05-16' },
 ];
 
 const moreInArchives = [
