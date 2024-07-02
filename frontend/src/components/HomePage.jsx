@@ -1,6 +1,7 @@
 //Home page
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useInView } from 'react-intersection-observer';
 import Nav from './Nav';
 import Footer from './Footer';
 import NoticeBoard from './NoticeBoard';
@@ -20,6 +21,66 @@ import TrendCard3 from '../assets/TrendCard3.jpg';
 import TrendCard4 from '../assets/TrendCard4.jpg';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
+
+const MilestoneCard = ({ icon, number, label, inView }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (inView) {
+      let start = 0;
+      const end = number;
+      if (start === end) return;
+
+      let totalDuration = 2000;
+      let incrementTime = 50;
+      let step = (end - start) / (totalDuration / incrementTime);
+
+      let timer = setInterval(() => {
+        start += step;
+        if (start >= end) {
+          start = end;
+          clearInterval(timer);
+        }
+        setCount(Math.ceil(start));
+      }, incrementTime);
+
+      return () => clearInterval(timer);
+    }
+  }, [inView, number]);
+
+  return (
+    <div className="flex flex-col items-center font-raleway bg-transparent p-4">
+      <div className="text-6xl">{icon}</div>
+      <div className="text-4xl font-bold mt-2">{count}</div>
+      <div className="text-lg mt-1">{label}</div>
+    </div>
+  );
+};
+
+const OurMilestones = () => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const milestones = [
+    { icon: <i className="fas fa-users"></i>, number: 1256, label: "Our Alumni" },
+    { icon: <i className="fas fa-users"></i>, number: 900, label: "Current Members" },
+    { icon: <i className="fas fa-trophy"></i>, number: 50, label: "Total Recognition" },
+    { icon: <i className="fas fa-book"></i>, number: 200, label: "Total Articles" }
+  ];
+
+  return (
+    <div ref={ref} className="w-full bg-blue-500 py-10">
+      <div className="flex justify-around items-center h-1/2">
+        {milestones.map((milestone, index) => (
+          <MilestoneCard key={index} {...milestone} inView={inView} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 
 const articles = [
   { type: 'Pheloneist', highlight: "AI is a black box maybe not for long", detail: "No One Truly Knows How AI Systems Work. A New Discovery Could Change That", imageUrl: Card1, author: 'Author1', date: '2024-05-16' },
@@ -274,6 +335,8 @@ const HomePage = () => {
           )}
         </div>
       </div>
+      <OurMilestones />
+
       <Footer />
     </div>
   );
