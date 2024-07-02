@@ -116,6 +116,7 @@ const Philoneist = () => {
   const handleReadMore = (id) => {
     localStorage.clear();
     localStorage.setItem('articleId', id);
+    localStorage.setItem('articleType', 'Article');
     navigate('/article');
   };
   

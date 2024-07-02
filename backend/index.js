@@ -258,16 +258,26 @@ app.post('/article', async (req, res) => {
 app.get('/article/:id', async (req, res) => {
     try {
       const id = req.params.id;
-      const item = await getItemModel(req.query.type).findOne({ id });
+      const type = req.query.type;
+      
+      let item;
+      if (type === 'Article') {
+        item = await Article.findOne({ id });
+      } else {
+        item = await ArchiveArticle.findOne({ id });
+      }
+  
       if (!item) {
         return res.status(404).send({ error: "Item not found" });
       }
+  
       res.status(200).send(item);
     } catch (error) {
       console.error("Error fetching item:", error);
       res.status(500).send({ error: "Something went wrong" });
     }
   });
+  
 
 // Render all articles
 app.get('/getarticle', async (req, res) => {
