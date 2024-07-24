@@ -37,8 +37,12 @@ const articleSchema = new mongoose.Schema({
         type: [String],
         required: true
     },
-    photo: {
-        type: String,
+    photo1: {
+        type: String,                 //16:9
+        required: true,
+    } ,
+    photo2: {
+        type: String,                 //2:1
         required: true,
     },
     specialCategorisation: {          //categorisation as "author's pick","trending","must read","featured"...

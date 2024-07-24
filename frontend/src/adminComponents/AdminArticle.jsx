@@ -1,5 +1,5 @@
 import AdminNav from './AdminNav';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -9,7 +9,8 @@ const AdminArticle = () => {
   const [publishLoader, setPublishLoader] = useState(false);
   const [deleteLoader, setDeleteLoader] = useState(false);
   const [updateLoader, setUpdateLoader] = useState(false);
-  const [specialCat, setSpecialCat] = useState([])
+  const [specialCat, setSpecialCat] = useState([]);
+  const [authors, setAuthors] = useState([]);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -18,21 +19,55 @@ const AdminArticle = () => {
     content: '',
     category: '',
     topic: '',
-    author: ['','',''],
-    authorId: ['','',''], 
+    author: ['', '', ''],
+    authorId: ['', '', ''],
     type: 'Article', // Default value
-    photo: null
+    photo1: null,
+    photo2: null
   });
+
+  const fetchAuthors = async () => {
+    try {
+      const url = formData.type === 'Article'
+        ? 'https://cognizen-website.onrender.com/members?type=currentMember'
+        : 'https://cognizen-website.onrender.com/members?type=pastMember';
+
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Failed to fetch authors');
+      }
+      const data = await response.json();
+
+      let array = [];
+      for (let i = 0; i < data.length; i++) {
+        array.push({ name: data[i].name, id: data[i].id });
+        // console.warn(array[i]); // Log each name as it's added
+      }
+
+      setAuthors(array);
+    } catch (error) {
+      console.error('Error fetching authors:', error);
+    }
+  };
+
+
+
+  useEffect(() => {
+    fetchAuthors();
+  }, [formData.type]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const nameParts = name.split('_');
+    const nameParts = name.split('_'); // Split the name to get the field and index
 
-    if (nameParts[0] === 'author' || nameParts[0] === 'authorId') {
+    if (nameParts[0] === 'author') {
       const index = parseInt(nameParts[1], 10);
+      const [selectedName, selectedId] = value.split('|'); // Split the value into name and id
+
       setFormData((prevData) => ({
         ...prevData,
-        [nameParts[0]]: prevData[nameParts[0]].map((item, i) => i === index ? value : item)
+        author: prevData.author.map((item, i) => (i === index ? selectedName : item)),
+        authorId: prevData.authorId.map((item, i) => (i === index ? selectedId : item))
       }));
     } else {
       setFormData((prevData) => ({
@@ -42,17 +77,19 @@ const AdminArticle = () => {
     }
   };
 
+
   const handleImageChange = (e) => {
+    const { name, files } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      photo: e.target.files[0]
+      [name]: files[0]
     }));
   };
 
   const handlePublishSubmit = async (e) => {
     setPublishLoader(true);
     e.preventDefault();
-    if (!formData.photo || !formData.title || !formData.description || !formData.publishDate || !formData.content || !formData.category || !formData.topic || !formData.author || !formData.authorId || !formData.type) {
+    if (!formData.photo1 || !formData.photo2 || !formData.title || !formData.description || !formData.publishDate || !formData.content || !formData.category || !formData.topic || !formData.author || !formData.type) {
       setPublishLoader(false);
       toast.error(
         'Enter all fields!', {
@@ -78,7 +115,10 @@ const AdminArticle = () => {
     formDataToSend.append('author', JSON.stringify(formData.author));
     formDataToSend.append('authorId', JSON.stringify(formData.authorId));
     formDataToSend.append('type', formData.type);
-    formDataToSend.append('photo', formData.photo);
+    formDataToSend.append('photo1', formData.photo1);
+    formDataToSend.append('photo2', formData.photo2);
+
+    console.log(formData);
 
     try {
       const response = await fetch('https://cognizen-website.onrender.com/article', {
@@ -298,6 +338,7 @@ const AdminArticle = () => {
         <section className='py-[5vh] p-4 px-[10vw] rounded'>
           <div className='text-3xl font-bold mb-4'>Publish Article</div>
           <form onSubmit={handlePublishSubmit} className='border bg-white rounded-lg shadow-xl p-8 font-inter font-sans'>
+
             <div className='mb-2'>
               <label className='block font-semibold'>Title</label>
               <input
@@ -308,6 +349,7 @@ const AdminArticle = () => {
                 className='w-full border border-gray-300 p-1 rounded'
               />
             </div>
+
             <div className='mb-2'>
               <label className='block font-semibold'>Description</label>
               <input
@@ -318,6 +360,7 @@ const AdminArticle = () => {
                 className='w-full border border-gray-300 p-1 rounded'
               />
             </div>
+
             <div className='mb-2'>
               <label className='block font-semibold'>Publish Date</label>
               <input
@@ -328,61 +371,86 @@ const AdminArticle = () => {
                 className='w-full border border-gray-300 p-1 rounded'
               />
             </div>
-            <div className='mb-2'>
-              <label className='block font-semibold'>Content</label>
+
+            <div className="mb-2">
+              <label className="block font-semibold">Content</label>
               <textarea
-                name='content'
+                name="content"
                 value={formData.content}
                 onChange={handleChange}
-                className='w-full border border-gray-300 p-1 rounded'
+                className="w-full border border-gray-300 p-1 rounded"
+                style={{ whiteSpace: 'pre-wrap' }} // Ensures line breaks and spaces are preserved in the display
               />
             </div>
-            <div className='mb-2'>
-              <label className='block font-semibold'>Category (e.g. Philoneist,Reviews,Opinion,World)</label>
-              <input
-                type='text'
+
+
+            <div className='mb-4'>
+              <label className='block mb-2'>Category</label>
+              <select
                 name='category'
                 value={formData.category}
                 onChange={handleChange}
-                className='w-full border border-gray-300 p-1 rounded'
-              />
+                className='w-full p-2 border border-gray-300 rounded'
+              >
+                <option>Select any one</option>
+                <option value='Philoneist'>Philoneist</option>
+                <option value='Reviews'>Reviews</option>
+                <option value='Opinion'>Opinion</option>
+                <option value='World'>World</option>
+              </select>
             </div>
+
             <div className='mb-2'>
               <label className='block font-semibold'>Topic (e.g. Economics,Politics,History)</label>
-              <input
-                type='text'
+              <select
                 name='topic'
                 value={formData.topic}
                 onChange={handleChange}
-                className='w-full border border-gray-300 p-1 rounded'
-              />
+                className='w-full p-2 border border-gray-300 rounded'
+              >
+                <option>Select any one</option>
+                <option value='Economics'>Economics</option>
+                <option value='Politics'>Politics</option>
+                <option value='History'>History</option>
+              </select>
             </div>
-            <div className='mb-2'>
-              <label className='block font-semibold'>Author/s Name</label>
-              {formData.author.map((author, index) => (
-                <input
-                  key={index}
-                  type='text'
-                  name={`author_${index}`}
-                  value={author}
-                  onChange={handleChange}
-                  className='w-full border border-gray-300 p-1 my-1 rounded'
-                />
-              ))}
+
+            <div className="mb-2">
+              <label className="block font-semibold">Author/s Name</label>
+              <div className="flex flex-col gap-2">
+                {[0, 1, 2].map((index) => (
+                  <select
+                    key={index}
+                    name={`author_${index}`} // Format for author fields
+                    value={`${formData.author[index]}|${formData.authorId[index]}`} // Access the current value for each author
+                    onChange={handleChange} // Use handleChange to update state
+                    className="w-full border border-gray-300 p-1 rounded"
+                  >
+                    <option value="">Select an author</option>
+                    {authors.map((auth) => (
+                      <option key={auth.id} value={`${auth.name}|${auth.id}`}>
+                        {auth.name} - {auth.id}
+                      </option>
+                    ))}
+                  </select>
+                ))}
+              </div>
             </div>
-            <div className='mb-2'>
+
+            {/* <div className='mb-2'>
               <label className='block font-semibold'>Author ID</label>
               {formData.authorId.map((authorId, index) => (
                 <input
                   key={index}
                   type='text'
-                  name={`authorId_${index}`} 
+                  name={`authorId_${index}`}
                   value={authorId}
                   onChange={handleChange}
                   className='w-full border border-gray-300 p-1 my-1 rounded'
                 />
               ))}
-            </div>
+            </div> */}
+
             <div className='flex justify-evenly'>
               <div className='mb-4'>
                 <label className='block font-semibold'>Type</label>
@@ -397,10 +465,19 @@ const AdminArticle = () => {
                 </select>
               </div>
               <div className='mb-4'>
-                <label className='block font-semibold'>Image Upload</label>
+                <label className='block font-semibold'>Image Upload for 16:9 ratio</label>
                 <input
                   type='file'
-                  name='image'
+                  name='photo1'
+                  onChange={handleImageChange}
+                  className='border bg-[#33215c] text-white font-semibold text-sm border-gray-300 p-1 rounded'
+                />
+              </div>
+              <div className='mb-4'>
+                <label className='block font-semibold'>Image Upload for 2:1 ratio</label>
+                <input
+                  type='file'
+                  name='photo2'
                   onChange={handleImageChange}
                   className='border bg-[#33215c] text-white font-semibold text-sm border-gray-300 p-1 rounded'
                 />

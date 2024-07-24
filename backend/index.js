@@ -223,9 +223,15 @@ function getItemModel(type) {
 
 //create article
 app.post('/article', async (req, res) => {
-    const file = req.files.photo;
     try {
-        const result = await cloudinary.uploader.upload(file.tempFilePath);
+        // Check if both photo files are present
+        if (!req.files.photo1 || !req.files.photo2) {
+            return res.status(400).send({ message: "Both photo1 and photo2 are required" });
+        }
+
+        // Upload both photos to Cloudinary
+        const result1 = await cloudinary.uploader.upload(req.files.photo1.tempFilePath);
+        const result2 = await cloudinary.uploader.upload(req.files.photo2.tempFilePath);
 
         // Parse author and authorId from JSON strings
         const authors = JSON.parse(req.body.author);
@@ -238,21 +244,24 @@ app.post('/article', async (req, res) => {
             Item = ArchieveArticle;
         }
 
+        // Create a new article with both photo URLs
         const newArticle = new Item({
             ...req.body,
             author: authors,
             authorId: authorIds,
-            photo: result.secure_url, // Ensure secure URL is used
+            photo1: result1.secure_url, // First photo URL
+            photo2: result2.secure_url, // Second photo URL
             id: generateRandomCode() // Assign random ID
         });
 
         await newArticle.save();
-        res.status(200).send({ message: "Image uploaded and article created successfully" });
+        res.status(200).send({ message: "Images uploaded and article created successfully" });
     } catch (error) {
-        console.error("Error uploading image and creating article:", error);
+        console.error("Error uploading images and creating article:", error);
         res.status(500).send({ message: "Something went wrong" });
     }
 });
+
 
 // Search article by id
 app.get('/article/:id', async (req, res) => {
@@ -488,34 +497,33 @@ app.delete('/deletearticle/:id', async (req, res) => {
 
         if (article1) {
             Item = Article;
-            article = article1
-        }
-        else if (article2) {
+            article = article1;
+        } else if (article2) {
             Item = ArchieveArticle;
-            article = article2
-        }
-        else {
+            article = article2;
+        } else {
             return res.status(404).json({ message: "Article not found" });
         }
 
-        // Extract public ID from the photo URL
-        if (article.photo) {
-            const photoUrl = article.photo;
-            const publicId = photoUrl.split('/').pop().split('.')[0];
-
-            // Delete the photo from Cloudinary
-            await cloudinary.uploader.destroy(publicId);
+        // Extract public IDs from the photo URLs and delete the photos from Cloudinary
+        const photos = [article.photo1, article.photo2];
+        for (const photoUrl of photos) {
+            if (photoUrl) {
+                const publicId = photoUrl.split('/').pop().split('.')[0];
+                await cloudinary.uploader.destroy(publicId);
+            }
         }
 
         // Delete the article from the database
         await Item.deleteOne({ id: articleId });
 
-        res.status(200).json({ message: "Article and associated photo deleted successfully" });
+        res.status(200).json({ message: "Article and associated photos deleted successfully" });
     } catch (error) {
         console.error("Error deleting article:", error);
         res.status(500).json({ message: "Something went wrong" });
     }
 });
+
 
 // Update article for special categorisation
 app.put('/categorisation/:id', async (req, res) => {
