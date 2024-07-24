@@ -68,11 +68,12 @@ const Article = () => {
             <img src={article.photo} alt="Main" className="w-[900px] h-[506.25px] object-cover" />
           </div>
           <div className="article-content text-gray-800">
-            <p className="mb-4">
+            <div style={{ whiteSpace: 'pre-wrap' }}>
               {article.content}
-            </p>
+            </div>
             {/* Add more article content as needed */}
           </div>
+
         </div>
         <Footer />
       </>

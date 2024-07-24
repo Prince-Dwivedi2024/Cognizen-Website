@@ -11,6 +11,7 @@ const AdminArticle = () => {
   const [updateLoader, setUpdateLoader] = useState(false);
   const [specialCat, setSpecialCat] = useState([]);
   const [authors, setAuthors] = useState([]);
+  const [articleData,setArticleData] = useState([]);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -50,10 +51,21 @@ const AdminArticle = () => {
     }
   };
 
+  const fetchArticleData = async ()=>{
+    try{
+      const response = await fetch('https://cognizen-website.onrender.com/getarticle');
+      const data = await response.json();
+      console.log(data);
+    }
+    catch(e){
+console.error(e);
+    }
+  }
 
 
   useEffect(() => {
     fetchAuthors();
+    fetchArticleData();
   }, [formData.type]);
 
   const handleChange = (e) => {
@@ -117,8 +129,6 @@ const AdminArticle = () => {
     formDataToSend.append('type', formData.type);
     formDataToSend.append('photo1', formData.photo1);
     formDataToSend.append('photo2', formData.photo2);
-
-    console.log(formData);
 
     try {
       const response = await fetch('https://cognizen-website.onrender.com/article', {
@@ -372,14 +382,14 @@ const AdminArticle = () => {
               />
             </div>
 
-            <div className="mb-2">
-              <label className="block font-semibold">Content</label>
+            <div className='mb-2'>
+              <label className='block font-semibold'>Content</label>
               <textarea
-                name="content"
+                name='content'
                 value={formData.content}
                 onChange={handleChange}
-                className="w-full border border-gray-300 p-1 rounded"
-                style={{ whiteSpace: 'pre-wrap' }} // Ensures line breaks and spaces are preserved in the display
+                className='w-full border border-gray-300 p-1 rounded'
+                style={{ whiteSpace: 'pre-wrap' }}
               />
             </div>
 
@@ -436,20 +446,6 @@ const AdminArticle = () => {
                 ))}
               </div>
             </div>
-
-            {/* <div className='mb-2'>
-              <label className='block font-semibold'>Author ID</label>
-              {formData.authorId.map((authorId, index) => (
-                <input
-                  key={index}
-                  type='text'
-                  name={`authorId_${index}`}
-                  value={authorId}
-                  onChange={handleChange}
-                  className='w-full border border-gray-300 p-1 my-1 rounded'
-                />
-              ))}
-            </div> */}
 
             <div className='flex justify-evenly'>
               <div className='mb-4'>

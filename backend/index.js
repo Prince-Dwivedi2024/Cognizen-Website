@@ -224,6 +224,7 @@ function getItemModel(type) {
 //create article
 app.post('/article', async (req, res) => {
     try {
+        console.log("Received content:", req.body.content);
         // Check if both photo files are present
         if (!req.files.photo1 || !req.files.photo2) {
             return res.status(400).send({ message: "Both photo1 and photo2 are required" });
