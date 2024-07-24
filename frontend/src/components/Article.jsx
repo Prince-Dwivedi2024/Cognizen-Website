@@ -6,37 +6,61 @@ const Article = () => {
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
   const [article, setArticle] = useState({});
+  const [photoData, setPhotoData] = useState({});
 
-  useEffect(() => {
-    const fetchArticle = async () => {
-      const storedId = localStorage.getItem('articleId');
-      const storedType = localStorage.getItem('articleType');
+  const fetchArticle = async () => {
+    const storedId = localStorage.getItem('articleId');
+    const storedType = localStorage.getItem('articleType');
 
-      if (!storedId || !storedType) {
-        navigate('/');
-        return;
+    if (!storedId || !storedType) {
+      navigate('/');
+      return;
+    }
+
+    setLoader(true);
+    try {
+      console.warn(storedId, storedType);
+      const response = await fetch(`https://cognizen-website.onrender.com/article/${storedId}?type=${storedType}`);
+
+      if (!response.ok) {
+        setLoader(false);
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      setLoader(true);
-      try {
-        console.warn(storedId, storedType);
-        const response = await fetch(`https://cognizen-website.onrender.com/article/${storedId}?type=${storedType}`);
+      const articleData = await response.json();
+      setArticle(articleData);
+      setLoader(false);
+      return articleData; // Return the fetched article data
+    } catch (error) {
+      console.error('Error fetching article:', error);
+      setLoader(false);
+      return null;
+    }
+  };
 
-        if (!response.ok) {
-          setLoader(false);
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+  const fetchPhoto = async (authorId) => {
+    try {
+      if (!authorId) return; // Ensure authorId is provided
 
-        const articleData = await response.json();
-        setArticle(articleData);
-        setLoader(false);
-      } catch (error) {
-        console.error('Error fetching article:', error);
-        setLoader(false);
+      const response = await fetch(`https://cognizen-website.onrender.com/member/${authorId}`);
+      const data = await response.json();
+      setPhotoData(data);
+      console.warn(data);
+    }
+    catch (e) {
+      console.warn(e);
+    }
+  }
+
+  useEffect(() => {
+    const loadData = async () => {
+      const articleData = await fetchArticle();
+      if (articleData && articleData.authorId) {
+        fetchPhoto(articleData.authorId);
       }
     };
 
-    fetchArticle();
+    loadData();
   }, [navigate]);
 
   const formatAuthors = (authors) => {
@@ -58,7 +82,7 @@ const Article = () => {
             {article.description}
           </p>
           <div className="flex items-center mb-6">
-            <img src={article.photo} alt="Author" className="w-10 h-10 rounded-full mr-4" />
+            <img src={photoData.photo} alt="Author" className="w-10 h-10 rounded-full mr-4" />
             <div>
               <p className="text-gray-700 font-bold">{formatAuthors(article.author || [])}</p>
               <p className="text-gray-500">{article.publishDate}</p>

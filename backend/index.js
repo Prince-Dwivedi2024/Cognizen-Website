@@ -135,6 +135,33 @@ app.get("/members", async (req, res) => {
     }
 });
 
+// Get member by id
+app.get('/member/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        let item;
+
+        if(CurrentMember.findOne({ id })) {
+             item = await CurrentMember.findOne({ id });
+        }
+        else if(PastMember.findOne({ id })) {
+             item = await PastMember.findOne({ id });
+        }
+        else{
+             item = await EBMember.findOne({ id });
+        }
+
+        if (!item) {
+            return res.status(404).send({ error: "Item not found" });
+        }
+
+        res.status(200).send(item);
+    } catch (error) {
+        console.error("Error fetching item:", error);
+        res.status(500).send({ error: "Something went wrong" });
+    }
+});
+
 // Update member profile
 app.put("/update/:id", async (req, res) => {
     try {
@@ -267,28 +294,28 @@ app.post('/article', async (req, res) => {
 // Search article by id
 app.get('/article/:id', async (req, res) => {
     try {
-      const id = req.params.id;
-      const type = req.query.type;
-      
-      let item;
-      if (type === 'Article') {
-        item = await Article.findOne({ id });
-      } 
-      else {
-        item = await ArchieveArticle.findOne({ id });
-      }
-  
-      if (!item) {
-        return res.status(404).send({ error: "Item not found" });
-      }
-  
-      res.status(200).send(item);
+        const id = req.params.id;
+        const type = req.query.type;
+
+        let item;
+        if (type === 'Article') {
+            item = await Article.findOne({ id });
+        }
+        else {
+            item = await ArchieveArticle.findOne({ id });
+        }
+
+        if (!item) {
+            return res.status(404).send({ error: "Item not found" });
+        }
+
+        res.status(200).send(item);
     } catch (error) {
-      console.error("Error fetching item:", error);
-      res.status(500).send({ error: "Something went wrong" });
+        console.error("Error fetching item:", error);
+        res.status(500).send({ error: "Something went wrong" });
     }
-  });
-  
+});
+
 
 // Render all articles
 app.get('/getarticle', async (req, res) => {
@@ -552,19 +579,15 @@ app.put('/categorisation/:id', async (req, res) => {
     }
 });
 
-
-
-
-
 //create achievement
 app.post('/achievement', async (req, res) => {
     const file = req.files.photo;
     try {
         const result = await cloudinary.uploader.upload(file.tempFilePath);
 
-          // Parse achiever and achieverId from JSON strings
-          const achievers = JSON.parse(req.body.achiever);
-          const achieverIds = JSON.parse(req.body.achieverId);
+        // Parse achiever and achieverId from JSON strings
+        const achievers = JSON.parse(req.body.achiever);
+        const achieverIds = JSON.parse(req.body.achieverId);
 
         const newAchievement = new Achievement({
             ...req.body,
@@ -624,7 +647,6 @@ app.delete('/deleteachievement/:id', async (req, res) => {
         res.status(500).json({ message: "Something went wrong" });
     }
 });
-
 
 
 

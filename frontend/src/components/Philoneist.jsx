@@ -42,7 +42,7 @@ const Card = ({ type, title, photo, author, publishDate, description, onReadMore
               className="text-sm font-semibold text-blue-400 hover:text-[#c9c6c6]"
               onClick={() => onReadMore(type)}
             >
-              Read more
+              More...
             </button>
           </div>
         </div>
