@@ -1,5 +1,5 @@
 import AdminNav from './AdminNav';
-import { useState } from "react";
+import { useState,useEffect} from "react";
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -7,6 +7,8 @@ const AdminNotice = () => {
   const [deleteID, setDeleteID] = useState('');
   const [publishLoader, setPublishLoader] = useState(false);
   const [deleteLoader, setDeleteLoader] = useState(false);
+  const [noticeData,setNoticeData] = useState([]);
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -14,6 +16,27 @@ const AdminNotice = () => {
     content: '',
     photo: null
   });
+
+  const fetchNoticeData = async () => {
+    try {
+      const response = await fetch('https://cognizen-website.onrender.com/getnotice');
+      const data = await response.json();
+
+      const notices = data.map(notice => ({
+        title: notice.title,
+        id: notice.id
+      }));
+
+      setNoticeData(notices);
+      console.log(notices);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchNoticeData();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -199,6 +222,7 @@ const AdminNotice = () => {
     <div>
       <AdminNav />
       <div className='py-[5vh] pb-[12vh] bg-[#e7e3e3]'>
+
         <section className='py-[5vh] p-4 px-[10vw] rounded'>
           <div className='text-3xl font-bold mb-4'>Publish Notice</div>
           <form onSubmit={handlePublishSubmit} className='border bg-white rounded-lg shadow-xl p-8 font-inter font-sans'>
@@ -266,21 +290,21 @@ const AdminNotice = () => {
           <form onSubmit={handleDeleteSubmit} className='border w-[30vw] bg-white rounded-lg shadow-xl p-8 font-inter font-sans'>
             <div className='mb-2'>
               <label className='block font-semibold'>Unique Notice ID</label>
-              <input
-                type='text'
+              <select
                 name='deleteID'
                 value={deleteID}
                 onChange={handleDeleteChange}
                 className='w-full border border-gray-300 p-1 rounded'
-              />
+              >
+                <option value='' disabled>Select an ID to delete</option>
+                {noticeData.map((ntc) => (
+                  <option key={ntc.id} value={ntc.id}>
+                    {ntc.title} - {ntc.id}
+                  </option>
+                ))}
+              </select>
             </div>
-            <div className='mb-2'>
-              <label className='block font-semibold'>Re-Enter ID</label>
-              <input
-                type='text'
-                className='w-full border border-gray-300 p-1 rounded'
-              />
-            </div>
+            
             {!deleteLoader ?
               <button type='submit' className='bg-red-600 shadow-xl text-white font-semibold px-3 py-2 rounded'>
                 DELETE

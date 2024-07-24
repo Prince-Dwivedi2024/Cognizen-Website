@@ -11,7 +11,7 @@ const AdminArticle = () => {
   const [updateLoader, setUpdateLoader] = useState(false);
   const [specialCat, setSpecialCat] = useState([]);
   const [authors, setAuthors] = useState([]);
-  const [articleData,setArticleData] = useState([]);
+  const [articleData, setArticleData] = useState([]);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -51,17 +51,29 @@ const AdminArticle = () => {
     }
   };
 
-  const fetchArticleData = async ()=>{
-    try{
-      const response = await fetch('https://cognizen-website.onrender.com/getarticle');
-      const data = await response.json();
-      console.log(data);
-    }
-    catch(e){
-console.error(e);
+  const fetchArticleData = async () => {
+    try {
+      const response1 = await fetch('https://cognizen-website.onrender.com/getarticle?type=Article');
+      const data1 = await response1.json();
+
+      const response2 = await fetch('https://cognizen-website.onrender.com/getarticle?type=ArchieveArticle');
+      const data2 = await response2.json();
+
+      // Ensure data1 and data2 are arrays, or set to empty arrays if they contain "no articles available"
+      const articles1 = Array.isArray(data1) ? data1 : [];
+      const articles2 = Array.isArray(data2) ? data2 : [];
+
+      let combinedArray = [...articles1, ...articles2];
+      const articleData = combinedArray.map(article => ({
+        title: article.title,
+        id: article.id
+      }));
+      console.warn(articleData)
+      setArticleData(articleData);
+    } catch (e) {
+      console.error(e);
     }
   }
-
 
   useEffect(() => {
     fetchAuthors();
@@ -206,7 +218,7 @@ console.error(e);
       return;
     }
     try {
-      const response = await fetch(`https://cognizen-website.onrender.com/${deleteID}`, {
+      const response = await fetch(`https://cognizen-website.onrender.com/deletearticle/${deleteID}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -494,21 +506,22 @@ console.error(e);
           <form onSubmit={handleDeleteSubmit} className='border w-[30vw] bg-white rounded-lg shadow-xl p-8 font-inter font-sans'>
             <div className='mb-2'>
               <label className='block font-semibold'>Unique Article ID</label>
-              <input
-                type='text'
+              <select
                 name='deleteID'
                 value={deleteID}
                 onChange={handleDeleteChange}
                 className='w-full border border-gray-300 p-1 rounded'
-              />
+              >
+                <option value='' disabled>Select an ID to delete</option>
+                {articleData.map((article) => (
+                  <option key={article.id} value={article.id}>
+                    {article.title} - {article.id}
+                  </option>
+                ))}
+              </select>
+
             </div>
-            <div className='mb-2'>
-              <label className='block font-semibold'>Re-Enter ID</label>
-              <input
-                type='text'
-                className='w-full border border-gray-300 p-1 rounded'
-              />
-            </div>
+
             {!deleteLoader ?
               <button type='submit' className='bg-red-600 shadow-xl text-white font-semibold px-3 py-2 rounded'>
                 DELETE
@@ -525,13 +538,20 @@ console.error(e);
             <div className='mb-2'>
               <div className='mb-2'>
                 <label className='block font-semibold'>Unique Article ID</label>
-                <input
-                  type='text'
+                <select
                   name='updateID'
                   value={updateID}
                   onChange={(e) => setUpdateID(e.target.value)}
                   className='w-full border border-gray-300 p-1 rounded'
-                />
+                >
+                  <option value='' disabled>Select an ID to categorize</option>
+                  {articleData.map((article) => (
+                    <option key={article.id} value={article.id}>
+                      {article.title} - {article.id}
+                    </option>
+                  ))}
+                </select>
+
               </div>
               <label className='block font-semibold py-4'>Select Special Categorisation</label>
               <div className='flex flex-col'>

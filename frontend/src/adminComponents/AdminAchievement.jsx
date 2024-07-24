@@ -1,5 +1,5 @@
 import AdminNav from './AdminNav';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -7,6 +7,9 @@ const AdminAchievement = () => {
   const [deleteID, setDeleteID] = useState('');
   const [publishLoader, setPublishLoader] = useState(false);
   const [deleteLoader, setDeleteLoader] = useState(false);
+  const [achievers, setAchievers] = useState([]);
+  const [achievementData, setAchievementData] = useState([]);
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -17,15 +20,59 @@ const AdminAchievement = () => {
     photo: null
   });
 
+  const fetchArticleData = async () => {
+    try {
+      const response = await fetch('https://cognizen-website.onrender.com/getachievement');
+      const data = await response.json();
+
+      const achievementData = data.map(article => ({
+        title: article.title,
+        id: article.id
+      }));
+      setAchievementData(achievementData);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+
+  const fetchachievers = async () => {
+    try {
+
+      const response = await fetch('https://cognizen-website.onrender.com/members?type=currentMember');
+      if (!response.ok) {
+        throw new Error('Failed to fetch authors');
+      }
+      const data = await response.json();
+
+      let array = [];
+      for (let i = 0; i < data.length; i++) {
+        array.push({ name: data[i].name, id: data[i].id });
+      }
+
+      setAchievers(array);
+    } catch (error) {
+      console.error('Error fetching authors:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchachievers();
+    fetchArticleData();
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const nameParts = name.split('_');
+    const nameParts = name.split('_'); // Split the name to get the field and index
 
-    if (nameParts[0] === 'achiever' || nameParts[0] === 'achieverId') {
+    if (nameParts[0] === 'achiever') {
       const index = parseInt(nameParts[1], 10);
+      const [selectedName, selectedId] = value.split('|'); // Split the value into name and id
+
       setFormData((prevData) => ({
         ...prevData,
-        [nameParts[0]]: prevData[nameParts[0]].map((item, i) => i === index ? value : item)
+        achiever: prevData.achiever.map((item, i) => (i === index ? selectedName : item)),
+        achieverId: prevData.achieverId.map((item, i) => (i === index ? selectedId : item))
       }));
     } else {
       setFormData((prevData) => ({
@@ -34,6 +81,7 @@ const AdminAchievement = () => {
       }));
     }
   };
+
 
   const handleImageChange = (e) => {
     setFormData((prevData) => ({
@@ -212,6 +260,7 @@ const AdminAchievement = () => {
     <div>
       <AdminNav />
       <div className='py-[5vh] pb-[12vh] bg-[#e7e3e3]'>
+
         <section className='py-[5vh] p-4 px-[10vw] rounded'>
           <div className='text-3xl font-bold mb-4'>Publish Achievement</div>
           <form onSubmit={handlePublishSubmit} className='border bg-white rounded-lg shadow-xl p-8 font-inter font-sans'>
@@ -254,32 +303,29 @@ const AdminAchievement = () => {
                 className='w-full border border-gray-300 p-1 rounded'
               />
             </div>
-            <div className='mb-2'>
-              <label className='block font-semibold'>Achiever/s Name</label>
-              {formData.achiever.map((achiever, index) => (
-                <input
-                  key={index}
-                  type='text'
-                  name={`achiever_${index}`}
-                  value={achiever}
-                  onChange={handleChange}
-                  className='w-full border border-gray-300 p-1 my-1 rounded'
-                />
-              ))}
+
+            <div className="mb-2">
+              <label className="block font-semibold">Achiever/s Name</label>
+              <div className="flex flex-col gap-2">
+                {[0, 1, 2].map((index) => (
+                  <select
+                    key={index}
+                    name={`achiever_${index}`} // Format for author fields
+                    value={`${formData.achiever[index]}|${formData.achieverId[index]}`} // Access the current value for each author
+                    onChange={handleChange} // Use handleChange to update state
+                    className="w-full border border-gray-300 p-1 rounded"
+                  >
+                    <option value="">Select an achiever</option>
+                    {achievers.map((auth) => (
+                      <option key={auth.id} value={`${auth.name}|${auth.id}`}>
+                        {auth.name} - {auth.id}
+                      </option>
+                    ))}
+                  </select>
+                ))}
+              </div>
             </div>
-            <div className='mb-2'>
-              <label className='block font-semibold'>Achiever ID</label>
-              {formData.achieverId.map((achieverId, index) => (
-                <input
-                  key={index}
-                  type='text'
-                  name={`achieverId_${index}`} // Updated field name
-                  value={achieverId}
-                  onChange={handleChange}
-                  className='w-full border border-gray-300 p-1 my-1 rounded'
-                />
-              ))}
-            </div>
+
             <div className='flex justify-evenly'>
               <div className='mb-4'>
                 <label className='block font-semibold'>Image Upload</label>
@@ -291,6 +337,7 @@ const AdminAchievement = () => {
                 />
               </div>
             </div>
+
             {!publishLoader ?
               <button type='submit' className='bg-green-600 shadow-xl text-white font-semibold px-3 py-2 rounded'>
                 PUBLISH
@@ -305,21 +352,22 @@ const AdminAchievement = () => {
           <form onSubmit={handleDeleteSubmit} className='border w-[30vw] bg-white rounded-lg shadow-xl p-8 font-inter font-sans'>
             <div className='mb-2'>
               <label className='block font-semibold'>Unique Achievement ID</label>
-              <input
-                type='text'
+              <select
                 name='deleteID'
                 value={deleteID}
                 onChange={handleDeleteChange}
                 className='w-full border border-gray-300 p-1 rounded'
-              />
+              >
+                <option value='' disabled>Select an ID to delete</option>
+                {achievementData.map((achievement) => (
+                  <option key={achievement.id} value={achievement.id}>
+                    {achievement.title} - {achievement.id}
+                  </option>
+                ))}
+              </select>
+
             </div>
-            <div className='mb-2'>
-              <label className='block font-semibold'>Re-Enter ID</label>
-              <input
-                type='text'
-                className='w-full border border-gray-300 p-1 rounded'
-              />
-            </div>
+
             {!deleteLoader ?
               <button type='submit' className='bg-red-600 shadow-xl text-white font-semibold px-3 py-2 rounded'>
                 DELETE

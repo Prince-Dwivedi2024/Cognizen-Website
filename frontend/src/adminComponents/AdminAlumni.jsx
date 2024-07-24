@@ -1,5 +1,5 @@
 import AdminNav from './AdminNav';
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -7,6 +7,8 @@ const AdminAlumni = () => {
   const [deleteID, setDeleteID] = useState('');
   const [publishLoader, setPublishLoader] = useState(false);
   const [deleteLoader, setDeleteLoader] = useState(false);
+  const [members,setMembers] = useState([]);
+
   const [formData, setFormData] = useState({
     type: "pastMember",
     name: '',
@@ -20,6 +22,27 @@ const AdminAlumni = () => {
     position: '',
     photo: null
   });
+
+  const fetchMembers = async () => {
+    try {
+      const response = await fetch('https://cognizen-website.onrender.com/members?type=pastMember');
+      const data = await response.json();
+
+      const memberData = data.map(member => ({
+        name: member.name,
+        id: member.id
+      }));
+
+      setMembers(memberData);
+      // console.log(members);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchMembers();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -230,6 +253,7 @@ const AdminAlumni = () => {
     <div>
       <AdminNav />
       <div className='py-[5vh] pb-[12vh] bg-[#e7e3e3]'>
+
         <section className='py-[5vh] p-4 px-[10vw] rounded'>
           <div className='text-3xl font-bold mb-4'>Create Alumni</div>
           <form onSubmit={handlePublishSubmit} className='border bg-white rounded-lg shadow-xl p-8 font-inter font-san flex flex-col gap-4'>
@@ -359,21 +383,21 @@ const AdminAlumni = () => {
           <form onSubmit={handleDeleteSubmit} className='border w-[30vw] bg-white rounded-lg shadow-xl p-8 font-inter font-sans'>
             <div className='mb-2'>
               <label className='block font-semibold'>Unique Member ID</label>
-              <input
-                type='text'
+              <select
                 name='deleteID'
                 value={deleteID}
                 onChange={handleDeleteChange}
                 className='w-full border border-gray-300 p-1 rounded'
-              />
+              >
+                <option value='' disabled>Select an ID to delete</option>
+                {members.map((member) => (
+                  <option key={member.id} value={member.id}>
+                    {member.name} - {member.id}
+                  </option>
+                ))}
+              </select>
             </div>
-            <div className='mb-2'>
-              <label className='block font-semibold'>Re-Enter ID</label>
-              <input
-                type='text'
-                className='w-full border border-gray-300 p-1 rounded'
-              />
-            </div>
+            
             {!deleteLoader ?
               <button type='submit' className='bg-red-600 shadow-xl text-white font-semibold px-3 py-2 rounded'>
                 DELETE

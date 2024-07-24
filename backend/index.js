@@ -562,8 +562,14 @@ app.post('/achievement', async (req, res) => {
     try {
         const result = await cloudinary.uploader.upload(file.tempFilePath);
 
+          // Parse achiever and achieverId from JSON strings
+          const achievers = JSON.parse(req.body.achiever);
+          const achieverIds = JSON.parse(req.body.achieverId);
+
         const newAchievement = new Achievement({
             ...req.body,
+            achiever: achievers,
+            achieverId: achieverIds,
             photo: result.secure_url, // Ensure secure URL is used
             id: generateRandomCode() // Assign random ID
         });
