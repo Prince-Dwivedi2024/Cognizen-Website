@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from './Footer';
+import CognizenLogo2 from '../assets/CognizenLogo2.png'
 
 const Article = () => {
   const navigate = useNavigate();
@@ -41,7 +42,8 @@ const Article = () => {
     try {
       if (!authorId) return; 
   
-      const response = await fetch(`https://cognizen-website.onrender.com/member/${authorId}`);
+      const response = await fetch(`https://cognizen-website.onrender.com/member/${authorId[0]}`);
+      console.warn(authorId)
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -85,7 +87,9 @@ const Article = () => {
             {article.description}
           </p>
           <div className="flex items-center mb-6">
-            <img src={photoData.photo} alt="Author" className="w-10 h-10 rounded-full mr-4" />
+            {photoData.photo ?
+           (<img src={photoData.photo} alt="Author" className="w-10 h-10 rounded-full mr-4" />):
+           (<img   src={CognizenLogo2} alt="Author" className="w-10 h-10 rounded-full mr-4" />)}
             <div>
               <p className="text-gray-700 font-bold">{formatAuthors(article.author || [])}</p>
               <p className="text-gray-500">{article.publishDate}</p>
