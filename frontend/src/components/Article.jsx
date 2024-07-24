@@ -19,7 +19,6 @@ const Article = () => {
 
     setLoader(true);
     try {
-      console.warn(storedId, storedType);
       const response = await fetch(`https://cognizen-website.onrender.com/article/${storedId}?type=${storedType}`);
 
       if (!response.ok) {
@@ -41,14 +40,18 @@ const Article = () => {
   const fetchPhoto = async (authorId) => {
     try {
       if (!authorId) return; 
-
+  
       const response = await fetch(`https://cognizen-website.onrender.com/member/${authorId}`);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
       const data = await response.json();
       setPhotoData(data);
       console.warn(data);
-    }
-    catch (e) {
-      console.warn(e);
+    } catch (e) {
+      console.warn('Error fetching photo:', e);
     }
   }
 
@@ -56,12 +59,12 @@ const Article = () => {
     const loadData = async () => {
       const articleData = await fetchArticle();
       if (articleData && articleData.authorId) {
-        fetchPhoto(articleData.authorId);
+        await fetchPhoto(articleData.authorId);
       }
     };
 
     loadData();
-  }, [navigate]);
+  }, []); // No dependencies unless necessary
 
   const formatAuthors = (authors) => {
     return authors.filter(author => author.trim() !== '').join(' & ');
@@ -97,7 +100,6 @@ const Article = () => {
             </div>
             {/* Add more article content as needed */}
           </div>
-
         </div>
         <Footer />
       </>

@@ -47,7 +47,7 @@ const Team = () => {
           </div>
           <div className="ml-4">
             <h3 className="text-base font-semibold">{name}</h3>
-            <p className="text-gray-600 text-sm">batch - {passingBatch}</p>
+            <p className="text-gray-600 text-sm">batch of  {passingBatch}</p>
             {/* <p className="text-gray-800 font-semibold text-sm mb-2">id - {id}</p> */}
           </div>
         </div>

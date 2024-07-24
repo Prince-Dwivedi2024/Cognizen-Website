@@ -54,8 +54,8 @@ const Leadership = () => {
 
           <div className="ml-4">
             <h3 className="text-xl font-semibold">{name}</h3>
-            <p className="text-gray-600">batch - {passingBatch}</p>
-            <p className="text-gray-800 font-semibold mb-2">id - {id}</p>
+            <p className="text-gray-600">batch of {passingBatch}</p>
+   
           </div>
         </div>
         <p className="text-gray-800 font-bold mb-2">{position}</p>
