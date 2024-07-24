@@ -139,16 +139,14 @@ app.get("/members", async (req, res) => {
 app.get('/member/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        let item;
+        let item = null;
 
-        if(CurrentMember.findOne({ id })) {
-             item = await CurrentMember.findOne({ id });
+        item = await CurrentMember.findOne({ id });
+        if (!item) {
+            item = await PastMember.findOne({ id });
         }
-        else if(PastMember.findOne({ id })) {
-             item = await PastMember.findOne({ id });
-        }
-        else{
-             item = await EBMember.findOne({ id });
+        if (!item) {
+            item = await EBMember.findOne({ id });
         }
 
         if (!item) {
@@ -161,6 +159,7 @@ app.get('/member/:id', async (req, res) => {
         res.status(500).send({ error: "Something went wrong" });
     }
 });
+
 
 // Update member profile
 app.put("/update/:id", async (req, res) => {

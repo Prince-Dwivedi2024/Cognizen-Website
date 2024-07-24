@@ -40,7 +40,7 @@ const Article = () => {
 
   const fetchPhoto = async (authorId) => {
     try {
-      if (!authorId) return; // Ensure authorId is provided
+      if (!authorId) return; 
 
       const response = await fetch(`https://cognizen-website.onrender.com/member/${authorId}`);
       const data = await response.json();
