@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const NoticeBoard = () => {
   const [notices, setNotices] = useState([]);
   const [loading, setLoading] = useState(true); 
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getNotices = async () => {
@@ -21,16 +23,21 @@ const NoticeBoard = () => {
 
         const noticesData = await response.json();
         setNotices(noticesData);
-        setLoading(false); // Set loading to false when data is fetched
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching notices:", error);
         setError("Something went wrong while fetching notices.");
-        setLoading(false); // Set loading to false in case of error
+        setLoading(false);
       }
     };
 
     getNotices();
   }, []);
+
+  const handleMoreClick = (notice) => {
+    localStorage.setItem('selectedNotice', JSON.stringify(notice));
+    navigate('/notice-detail');
+  };
 
   return (
     <div className="p-4 h-[80vh] w-[40vw] bg-[#FFFFF5] rounded-lg shadow-lg overflow-y-auto">
@@ -53,7 +60,12 @@ const NoticeBoard = () => {
                   <span className='font-semibold'>{notice.title}</span>
                   <span className="text-sm mt-10" style={{ color: '#979797' }}>{notice.publishDate}</span>
                 </div>
-                <button className="text-sm font-semibold text-blue-400 hover:text-[#c9c6c6] transition-all">more&gt;&gt;</button>
+                <button 
+                  className="text-sm font-semibold text-blue-400 hover:text-[#c9c6c6] transition-all" 
+                  onClick={() => handleMoreClick(notice)}
+                >
+                  more&gt;&gt;
+                </button>
               </div>
             ))
           )}

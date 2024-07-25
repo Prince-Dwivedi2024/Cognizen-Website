@@ -5,7 +5,7 @@ import AdminLogin from './components/AdminLogin';
 import Article from './components/Article';
 import Team from './components/Team';
 import Leadership from './components/Leadership';
-import Alumni from './components/Alumni'
+import Alumni from './components/Alumni';
 import NoticeBoard from './components/NoticeBoard';
 import AdminAchievement from './adminComponents/AdminAchievement';
 import AdminAlumni from './adminComponents/AdminAlumni';
@@ -21,7 +21,8 @@ import Archives from './components/Archives';
 import Reviews from './components/Reviews';
 import Achievements from './components/Achievements';
 import More from './components/More';
-import Politics from './components/Politics.jsx';
+import Politics from './components/Politics';
+import Notice from './components/Notice'; // Import the Notice component
 
 const App = () => {
   return (
@@ -48,8 +49,9 @@ const App = () => {
           <Route path="/leadership" element={<Leadership />} />
           <Route path="/alumni" element={<Alumni />} />
           <Route path="/notice" element={<NoticeBoard />} />
-          <Route path="achievement" element={<Achievements />} />
-          <Route path="more" element={<More />} />
+          <Route path="/achievement" element={<Achievements />} />
+          <Route path="/more" element={<More />} />
+          <Route path="/notice-detail" element={<Notice />} /> {/* Add this line */}
         </Routes>
       </BrowserRouter>
     </div>
