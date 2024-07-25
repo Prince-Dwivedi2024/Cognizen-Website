@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Card6 from '../assets/Card6.webp'; // Replace this with an appropriate image
+import Card6 from '../assets/Card5.webp'; // Replace this with an appropriate image
 
 const Notice = () => {
   const [notice, setNotice] = useState(null);
