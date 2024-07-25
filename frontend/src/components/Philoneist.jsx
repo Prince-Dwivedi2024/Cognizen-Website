@@ -4,7 +4,7 @@ import Nav from './Nav';
 import Footer from './Footer';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
-const Card = ({ type, title, photo, author, publishDate, description, onReadMore, large }) => {
+const Card = ({ type, title, photo1,photo2, author, publishDate, description, onReadMore, large }) => {
   // Function to limit description to 25 words
   const limitedDescription = (description) => {
     const words = description.split(' ');
@@ -29,7 +29,7 @@ const Card = ({ type, title, photo, author, publishDate, description, onReadMore
           className="relative bg-cover bg-center"
           style={{ height: large ? '350px' : '240px' }}
         >
-          <img src={photo} alt={title} className="w-full h-full object-cover" />
+          <img src={large ? photo1:photo2} alt={title} className="w-full h-full object-cover" />
         </div>
         <div className="p-4 flex flex-col justify-between" style={{ minHeight: '150px' }}>
           <h2 className="text-lg font-semibold mb-2 font-sans" style={{ color: '#212121' }}>{title}</h2>
@@ -53,7 +53,7 @@ const Card = ({ type, title, photo, author, publishDate, description, onReadMore
 
 
 
-const MoreInPhiloneistCard = ({ type, description, title, photo, author, publishDate, onReadMore }) => {
+const MoreInPhiloneistCard = ({ type, description, title, photo1, author, publishDate, onReadMore }) => {
   const limitedDescription = (description) => {
     const words = description.split(' ');
     if (words.length > 25) {
@@ -64,7 +64,7 @@ const MoreInPhiloneistCard = ({ type, description, title, photo, author, publish
   return (
     <div className="flex border-b border-gray-300 py-4" onClick={() => handleReadMore}>
       <div className="flex-shrink-0 mr-4">
-        <img src={photo} alt={title} className="w-24 h-24 object-cover" />
+        <img src={photo1} alt={title} className="w-24 h-24 object-cover" />
       </div>
       <div className="flex-grow">
         <h3

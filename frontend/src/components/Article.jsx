@@ -89,14 +89,14 @@ const Article = () => {
           <div className="flex items-center mb-6">
             {photoData.photo ?
            (<img src={photoData.photo} alt="Author" className="w-10 h-10 rounded-full mr-4" />):
-           (<img   src={CognizenLogo2} alt="Author" className="w-10 h-10 rounded-full mr-4" />)}
+           (<img src={CognizenLogo2} alt="Author" className="w-10 h-10 rounded-full mr-4" />)}
             <div>
               <p className="text-gray-700 font-bold">{formatAuthors(article.author || [])}</p>
               <p className="text-gray-500">{article.publishDate}</p>
             </div>
           </div>
           <div className="flex justify-center mb-6">
-            <img src={article.photo} alt="Main" className="w-[900px] h-[506.25px] object-cover" />
+            <img src={article.photo1} alt="Main" className="w-[900px] h-[506.25px] object-cover" />
           </div>
           <div className="article-content text-gray-800">
             <div style={{ whiteSpace: 'pre-wrap' }}>

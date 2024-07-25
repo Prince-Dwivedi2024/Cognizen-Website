@@ -16,12 +16,12 @@ import AdminTeam from './adminComponents/AdminTeam';
 import Philoneist from './components/Philoneist';
 import Opinion from './components/Opinion';
 import History from './components/History';
-import International from './components/International';
 import Archives from './components/Archives';
 import Reviews from './components/Reviews';
 import Achievements from './components/Achievements';
 import More from './components/More';
 import Politics from './components/Politics.jsx';
+import World from './components/World.jsx';
 
 const App = () => {
   return (
@@ -40,7 +40,7 @@ const App = () => {
           <Route path="opinion" element={<Opinion />} />
           <Route path="reviews" element={<Reviews />} />
           <Route path="history" element={<History />} />
-          <Route path="international" element={<International />} />
+          <Route path="world" element={<World />} />
           <Route path="archives" element={<Archives />} />
           <Route path="/adminlogin" element={<AdminLogin />} />
           <Route path="/article" element={<Article />} />

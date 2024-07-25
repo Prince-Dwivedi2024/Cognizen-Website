@@ -53,7 +53,7 @@ const Card = ({ type, title, photo1,photo2, author, publishDate, description, on
 
 
 
-const MoreInArchivesCard = ({ type, description, title, photo1, author, publishDate, onReadMore }) => {
+const MoreInWorldCard = ({ type, description, title, photo1, author, publishDate, onReadMore }) => {
   const limitedDescription = (description) => {
     const words = description.split(' ');
     if (words.length > 25) {
@@ -84,16 +84,16 @@ const MoreInArchivesCard = ({ type, description, title, photo1, author, publishD
   );
 }
 
-const Archives = () => {
+const World = () => {
   const [loader, setLoader] = useState(false);
   const [articles, setArticles] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchArchivesArticles = async () => {
+    const fetchWorldArticles = async () => {
       try {
         setLoader(true);
-        const response = await fetch('https://cognizen-website.onrender.com/getarchives?type=Article');
+        const response = await fetch('https://cognizen-website.onrender.com/getworld?type=Article');
 
         if (!response.ok) {
           setLoader(false);
@@ -106,11 +106,11 @@ const Archives = () => {
         setLoader(false);
       } catch (error) {
         setLoader(false);
-        console.error('Error fetching Archives articles:', error);
+        console.error('Error fetching World articles:', error);
       }
     };
 
-    fetchArchivesArticles();
+    fetchWorldArticles();
   }, []);
 
   const handleReadMore = (id) => {
@@ -137,7 +137,7 @@ const Archives = () => {
           <div className="min-h-screen bg-[#F0F4F8] p-10 pt-2 flex justify-center shadow-sm">
             <div className="w-4/5">
               <div className="pb-12">
-                <h2 className="text-3xl font-medium font-serif pt-16 pb-2 text-[#222f3d] underline underline-offset-8">ARCHIVES ARTICLES -</h2 >
+                <h2 className="text-3xl font-medium font-serif pt-16 pb-2 text-[#222f3d] underline underline-offset-8">WORLD ARTICLES -</h2 >
                 <div className="p-10 flex justify-center">
                   {articles.slice(0, 1).map((article, index) => (
                     <Card key={index} {...article} onReadMore={() => handleReadMore(article.id)} large />
@@ -150,10 +150,10 @@ const Archives = () => {
                 </div>
               </div >
               <div className="pb-12 border-t border-black pt-10">
-                <h2 className="text-3xl font-medium pb-8 font-serif text-[#222f3d] underline underline-offset-8">MORE IN ARCHIVES -</h2>
+                <h2 className="text-3xl font-medium pb-8 font-serif text-[#222f3d] underline underline-offset-8">MORE IN WORLD -</h2>
                 <div className="grid grid-cols-1 gap-4">
                   {articles.slice(4).map((article, index) => (
-                    <MoreInArchivesCard key={index} {...article} onReadMore={() => handleReadMore(article.id)} />
+                    <MoreInWorldCard key={index} {...article} onReadMore={() => handleReadMore(article.id)} />
                   ))}
                 </div>
               </div>
@@ -166,4 +166,4 @@ const Archives = () => {
   );
 };
 
-export default Archives;
+export default World;
