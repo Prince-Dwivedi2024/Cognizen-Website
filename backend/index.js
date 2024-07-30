@@ -315,6 +315,28 @@ app.get('/article/:id', async (req, res) => {
     }
 });
 
+app.get("/search/:key", async (req, resp) => {
+    try {
+        const searchKey = req.params.key;
+        let result = await Article.find({
+            "$or": [
+                { title: { $regex: searchKey, $options: 'i' } },
+                { publishDate: { $regex: searchKey, $options: 'i' } },
+                { category: { $regex: searchKey, $options: 'i' } },
+                { topic: { $regex: searchKey, $options: 'i' } },
+                { author: { $elemMatch: { $regex: searchKey, $options: 'i' } } },
+                { specialCategorisation: { $elemMatch: { $regex: searchKey, $options: 'i' } } },
+            ]
+        });
+        resp.send(result);
+    }
+    catch (e) {
+        console.log(e);
+        resp.status(500).send("Internal Server Error");
+    }
+});
+
+
 
 // Render all articles
 app.get('/getarticle', async (req, res) => {
