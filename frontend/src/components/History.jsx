@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Nav from './Nav';
 import Footer from './Footer';
+import ThemeToggle from './ThemeToggle';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const Card = ({ type, title, photo, author, publishDate, description, onReadMore, large }) => {
@@ -22,12 +23,12 @@ const Card = ({ type, title, photo, author, publishDate, description, onReadMore
   return (
     <div
       className={`bg-transparent bg-[#F0F4F8] shadow-xl overflow-hidden transform transition-transform hover:scale-[1.008] hover:shadow-2xl ${large ? 'large-card' : ''}`}
-      style={large ? { width: '800px', height: '500px', margin: '0 auto' } : {}}
+      style={large ? { width: 'auto', height: 'auto', margin: '0 auto' } : {}}
     >
       <div>
         <div
           className="relative bg-cover bg-center"
-          style={{ height: large ? '350px' : '240px' }}
+          style={{ height: large ? '500' : 'auto' }}
         >
           <img src={photo} alt={title} className="w-full h-full object-cover" />
         </div>
@@ -119,6 +120,9 @@ const History = () => {
   return (
       <>
           <Nav />
+          <div className="absolute top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
           <div className="min-h-screen bg-[#F0F4F8] p-10 pt-2 flex justify-center shadow-sm">
               <div className="w-4/5">
                   <div className="pb-12">

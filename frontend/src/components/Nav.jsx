@@ -1,9 +1,9 @@
-//Nav bar section.
-
+// Nav.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import CognizenLogo2 from '../assets/CognizenLogo2.png';
 import CampusNITR from '../assets/CampusNITR.jpg';
+import ThemeToggle from './ThemeToggle';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 export default function Nav() {
@@ -32,7 +32,7 @@ export default function Nav() {
 
   return (
     <header>
-      <div className="bg-white">
+      <div className="bg-white dark:bg-gray-900">
         {/* top */}
         <div
           className="relative h-[250px] bg-cover bg-center flex items-center"
@@ -52,6 +52,7 @@ export default function Nav() {
             <p className="font-semibold">The official politics and economics</p>
             <p className="font-semibold">awareness club of NIT Rourkela.</p>
           </div>
+          
         </div>
 
         {/* nav */}
