@@ -1,5 +1,6 @@
 // Nav.jsx
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link, NavLink } from 'react-router-dom';
 import CognizenLogo2 from '../assets/CognizenLogo2.png';
 import CampusNITR from '../assets/CampusNITR.jpg';
@@ -10,6 +11,7 @@ export default function Nav() {
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [aboutUsOpen, setAboutUsOpen] = useState(false); // State for About Us dropdown
+  const [searchResults,setSearchResults] = useState([{}]);
   const searchBarRef = useRef(null);
 
   const handleClickOutside = (event) => {
@@ -17,6 +19,31 @@ export default function Nav() {
       setShowSearchBar(false);
     }
   };
+
+  const handleSearch = async (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior if it's triggered from a form
+    const searchKey = e.target.searchInput.value;
+    const navigate = useNavigate(); // Initialize useNavigate
+
+    try {
+        const response = await fetch(`https://cognizen-website.onrender.com/search/${encodeURIComponent(searchKey)}`);
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+        console.log(data);
+
+        setSearchResults(data);
+        navigate('/search', { state: { searchResults: data } });
+
+    } catch (error) {
+        console.error('Error during search:', error);
+    }
+};
+
 
   useEffect(() => {
     if (showSearchBar) {
@@ -203,7 +230,7 @@ export default function Nav() {
                       className="bg-white text-black p-2 flex-grow focus:outline-none focus:ring-2 focus:ring-orange-500"
                       placeholder="Search..."
                     />
-                    <button className="bg-orange-500 text-white p-2 ml-2">
+                    <button className="bg-orange-500 text-white p-2 ml-2" onClick={handleSearch(e)}>
                       Search
                     </button>
                   </div>
