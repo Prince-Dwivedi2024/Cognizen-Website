@@ -1,8 +1,5 @@
-//Nav bar section.
-
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link, NavLink } from 'react-router-dom';
+import { useNavigate, Link, NavLink } from 'react-router-dom';
 import CognizenLogo2 from '../assets/CognizenLogo2.png';
 import CampusNITR from '../assets/CampusNITR.jpg';
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -11,8 +8,9 @@ export default function Nav() {
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [aboutUsOpen, setAboutUsOpen] = useState(false); // State for About Us dropdown
-  const [searchResults,setSearchResults] = useState([{}]);
+  const [searchResults, setSearchResults] = useState([]);
   const searchBarRef = useRef(null);
+  const navigate = useNavigate(); // Initialize useNavigate at the top level
 
   const handleClickOutside = (event) => {
     if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
@@ -22,28 +20,26 @@ export default function Nav() {
 
   const handleSearch = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior if it's triggered from a form
-    const searchKey = e.target.searchInput.value;
-    const navigate = useNavigate(); // Initialize useNavigate
+    const searchKey = e.target.searchInput.value; // Access the input value
 
     try {
-        const response = await fetch(`https://cognizen-website.onrender.com/search/${encodeURIComponent(searchKey)}`);
+      const response = await fetch(`https://cognizen-website.onrender.com/search/${encodeURIComponent(searchKey)}`);
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
 
-        const data = await response.json();
+      const data = await response.json();
 
-        console.log(data);
+      console.log(data);
 
-        setSearchResults(data);
-        navigate('/search', { state: { searchResults: data } });
+      setSearchResults(data);
+      navigate('/search', { state: { searchResults: data } });
 
     } catch (error) {
-        console.error('Error during search:', error);
+      console.error('Error during search:', error);
     }
-};
-
+  };
 
   useEffect(() => {
     if (showSearchBar) {
@@ -97,7 +93,7 @@ export default function Nav() {
                   `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
                 }
               >
-                <i className="fas fa-home mr-2"></i> 
+                <i className="fas fa-home mr-2"></i>
               </NavLink>
 
               <NavLink
@@ -108,7 +104,6 @@ export default function Nav() {
               >
                 Politics
               </NavLink>
-
 
               <NavLink
                 to="/philoneist"
@@ -154,6 +149,7 @@ export default function Nav() {
               >
                 World
               </NavLink>
+
               <NavLink
                 to="/archives"
                 className={({ isActive }) =>
@@ -224,14 +220,20 @@ export default function Nav() {
                 </div>
                 {showSearchBar && (
                   <div className="absolute right-0 mt-2 w-64 p-2 flex items-center bg-transparent z-50">
-                    <input
-                      type="text"
-                      className="bg-white text-black p-2 flex-grow focus:outline-none focus:ring-2 focus:ring-orange-500"
-                      placeholder="Search..."
-                    />
-                    <button className="bg-orange-500 text-white p-2 ml-2" onClick={handleSearch(e)}>
-                      Search
-                    </button>
+                    <form onSubmit={handleSearch}>
+                      <input
+                        type="text"
+                        name="searchInput" // Ensure this matches the input name used in handleSearch
+                        className="bg-white text-black p-2 flex-grow focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        placeholder="Search..."
+                      />
+                      <button
+                        type="submit" // Ensure the button is of type submit to trigger form submission
+                        className="bg-orange-500 text-white p-2 ml-2"
+                      >
+                        Search
+                      </button>
+                    </form>
                   </div>
                 )}
               </div>
@@ -246,130 +248,17 @@ export default function Nav() {
                 &times;
               </button>
               <nav className="flex flex-col items-center">
-                <NavLink
-                  to="/"
-                  className="text-white text-2xl py-2"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Home
-                </NavLink>
-                <NavLink
-                  to="/philoneist"
-                  className="text-white text-2xl py-2"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Philoneist
-                </NavLink>
-                <NavLink
-                  to="/opinion"
-                  className="text-white text-2xl py-2"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Opinion
-                </NavLink>
-                <NavLink
-                  to="/reviews"
-                  className="text-white text-2xl py-2"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Reviews
-                </NavLink>
-                <NavLink
-                  to="/history"
-                  className="text-white text-2xl py-2"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  History
-                </NavLink>
-                <NavLink
-                  to="/international"
-                  className="text-white text-2xl py-2"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  World
-                </NavLink>
-                <NavLink
-                  to="/archives"
-                  className="text-white text-2xl py-2"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Archive
-                </NavLink>
-                <NavLink
-                  to="/achievement"
-                  className="text-white text-2xl py-2"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Achievements
-                </NavLink>
-                <div className="relative">
-                  <div
-                    className="text-white text-2xl py-2 cursor-pointer flex items-center"
-                    onClick={() => setAboutUsOpen(!aboutUsOpen)}
-                  >
-                    About Us
-                    <i className="fas fa-caret-down ml-2"></i>
-                  </div>
-                  {aboutUsOpen && (
-                    <div className="absolute left-0 mt-2 w-30 bg-black text-white text-sm z-40">
-                      <NavLink
-                        to="/leadership"
-                        className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
-                        onClick={() => setMenuOpen(false)}
-                      >
-                        Leadership
-                      </NavLink>
-                      <NavLink
-                        to="/team"
-                        className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
-                        onClick={() => setMenuOpen(false)}
-                      >
-                        Team
-                      </NavLink>
-                      <NavLink
-                        to="/alumni"
-                        className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
-                        onClick={() => setMenuOpen(false)}
-                      >
-                        Alumni
-                      </NavLink>
-                      <NavLink
-                        to="/more"
-                        className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[14px]"
-                        onClick={() => setMenuOpen(false)}
-                      >
-                        More
-                      </NavLink>
-                    </div>
-                  )}
-                </div>
-                <NavLink
-                  to="/adminlogin"
-                  className="text-white text-2xl py-2"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Admin
-                </NavLink>
-                <div className="relative ml-8" ref={searchBarRef}>
-                  <div
-                    className="text-white text-2xl py-2 cursor-pointer"
-                    onClick={() => setShowSearchBar(!showSearchBar)}
-                  >
-                    <i className="fas fa-search"></i>
-                  </div>
-                  {showSearchBar && (
-                    <div className="absolute right-0 mt-2 w-64 p-2 flex items-center bg-transparent z-50">
-                      <input
-                        type="text"
-                        className="bg-white text-black p-2 flex-grow focus:outline-none focus:ring-2 focus:ring-orange-500"
-                        placeholder="Search..."
-                      />
-                      <button className="bg-orange-500 text-white p-2 ml-2">
-                        Search
-                      </button>
-                    </div>
-                  )}
-                </div>
+                {/* Mobile NavLinks here */}
+                <NavLink to="/" className="text-white text-lg py-2" onClick={() => setMenuOpen(false)}>Home</NavLink>
+                <NavLink to="/politics" className="text-white text-lg py-2" onClick={() => setMenuOpen(false)}>Politics</NavLink>
+                <NavLink to="/philoneist" className="text-white text-lg py-2" onClick={() => setMenuOpen(false)}>Philoneist</NavLink>
+                <NavLink to="/opinion" className="text-white text-lg py-2" onClick={() => setMenuOpen(false)}>Opinion</NavLink>
+                <NavLink to="/reviews" className="text-white text-lg py-2" onClick={() => setMenuOpen(false)}>Reviews</NavLink>
+                <NavLink to="/history" className="text-white text-lg py-2" onClick={() => setMenuOpen(false)}>History</NavLink>
+                <NavLink to="/world" className="text-white text-lg py-2" onClick={() => setMenuOpen(false)}>World</NavLink>
+                <NavLink to="/archives" className="text-white text-lg py-2" onClick={() => setMenuOpen(false)}>Archives</NavLink>
+                <NavLink to="/achievement" className="text-white text-lg py-2" onClick={() => setMenuOpen(false)}>Achievements</NavLink>
+                <NavLink to="/adminlogin" className="text-white text-lg py-2" onClick={() => setMenuOpen(false)}>Admin</NavLink>
               </nav>
             </div>
           )}

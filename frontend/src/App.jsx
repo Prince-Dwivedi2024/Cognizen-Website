@@ -23,6 +23,7 @@ import More from './components/More';
 import Politics from './components/Politics.jsx';
 import Notice from './components/Notice.jsx';
 import World from './components/World.jsx';
+import Search from './components/Search.jsx';
 
 const App = () => {
   return (
@@ -35,7 +36,9 @@ const App = () => {
           <Route path="/adminLeadership" element={<AdminLeadership />} />
           <Route path="/adminNotice" element={<AdminNotice />} />
           <Route path="/adminTeam" element={<AdminTeam />} />
+
           <Route path="/" element={<HomePage />} />
+
           <Route path="politics" element={<Politics />} />
           <Route path="/philoneist" element={<Philoneist />} />
           <Route path="opinion" element={<Opinion />} />
@@ -43,6 +46,7 @@ const App = () => {
           <Route path="history" element={<History />} />
           <Route path="world" element={<World />} />
           <Route path="archives" element={<Archives />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/adminlogin" element={<AdminLogin />} />
           <Route path="/article" element={<Article />} />
           <Route path="/team" element={<Team />} />
