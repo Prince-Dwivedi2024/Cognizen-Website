@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import Nav from './Nav';
 import Footer from './Footer';
+import ThemeToggle from './ThemeToggle';
 import NoticeBoard from './NoticeBoard';
 
 import Card1 from '../assets/Card1.webp';
@@ -19,6 +20,9 @@ import TrendCard1 from '../assets/TrendCard1.jpg';
 import TrendCard2 from '../assets/TrendCard2.jpg';
 import TrendCard3 from '../assets/TrendCard3.jpg';
 import TrendCard4 from '../assets/TrendCard4.jpg';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -304,26 +308,12 @@ const HomePage = () => {
     ) : (
       <div className="">
         <Nav />
+        <div className="absolute top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
         <div className="min-h-screen bg-[#F0F4F8] p-10 flex justify-center py-[10vh] shadow-sm">
           <div className="w-4/5">
-            {/* search bar */}
-            {/* <div className="flex justify-center pt-7">
-              <div className="flex w-full h-10 bg-[#FFFFFE] shadow-md rounded overflow-hidden hover:outline hover:outline-blue-200 transform hover:bg-white hover:shadow-2xl hover:scale-[1.0001] transition-all">
-                <input
-                  type="text"
-                  className="w-11/12 p-4 text-lg bg-[#FFFFFE] placeholder-center flex items-center justify-center focus:outline-none font-sans"
-                  placeholder="Search for articles..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                <button
-                  className="w-1/12 bg-blue-400 text-white text-lg hover:bg-blue-600 transition-all font-extrabold font-sans"
-                  onClick={handleSearch}
-                >
-                  Search
-                </button>
-              </div>
-            </div> */}
+            
 
             <div className="pb-12">
               <h2 className="text-3xl font-medium mb-4 font-serif pt-2 pb-8 text-[#222f3d] underline underline-offset-8">
@@ -381,7 +371,11 @@ const HomePage = () => {
               className="relative cursor-pointer text-[#222f3d] hover:text-[#5e6b79] hover:text-lg hover:text-extrabold"
               onClick={toggleNoticeBoard}
             >
-              <i className="fas fa-bullhorn text-4xl text-[#463f3f]"></i>
+              <FontAwesomeIcon
+        icon={faBell}
+        className="text-gray-500 hover:text-gray-700 transition duration-200 ease-in-out"
+        size="lg"
+      />
               <span className="announcement-popup absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 px-2 py-1 text-sm bg-black text-white rounded opacity-0 transition-opacity duration-300">
                 Announcements
               </span>

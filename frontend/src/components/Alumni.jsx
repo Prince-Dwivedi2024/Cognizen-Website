@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
 import CognizenLogo2 from '../assets/CognizenLogo2.png';
@@ -7,9 +7,26 @@ import CampusNITR from '../assets/CampusNITR.jpg';
 const Alumni = () => {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const menuButtonRef = useRef(null);
 
   useEffect(() => {
     fetchMembers();
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target) && !menuButtonRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   const fetchMembers = async () => {
@@ -45,7 +62,6 @@ const Alumni = () => {
           <div className="ml-4">
             <h3 className="text-xl font-semibold">{name}</h3>
             <p className="text-gray-600">batch of {passingBatch}</p>
-
           </div>
         </div>
         <p className="text-gray-800 font-bold mb-2">{position}</p>
@@ -64,24 +80,44 @@ const Alumni = () => {
       <div className="min-h-screen bg-[#F0F4F8]">
         <div className="relative h-[280px] bg-cover bg-center" style={{ backgroundImage: `url(${CampusNITR})` }}>
           <div className="absolute inset-0 bg-black opacity-50"></div>
-          <div className="relative z-10 flex items-center justify-between h-full px-16 text-white">
+          <div className="relative z-10 flex items-center justify-between h-full px-4 md:px-16 text-white">
             <img src={CognizenLogo2} alt="Cognizen Club Logo" className="h-1/2" />
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1/3 text-center font-raleway space-y-4">
-              <h1 className="text-4xl font-medium">Let's meet</h1>
-              <h1 className="text-4xl font-medium">our</h1>
-              <h1 className="text-4xl font-medium">Alumni</h1>
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-full md:w-1/3 text-center font-raleway space-y-4">
+              <h1 className="text-2xl md:text-4xl font-medium">Let's meet</h1>
+              <h1 className="text-2xl md:text-4xl font-medium">our</h1>
+              <h1 className="text-2xl md:text-4xl font-medium">Alumni</h1>
             </div>
-            <div className="absolute top-4 right-4 flex space-x-4">
+            <div className="hidden lg:flex absolute top-4 right-4 space-x-4 z-10">
               <Link to="/" className="text-md font-medium px-4 py-2 hover:underline">home</Link>
               <Link to="/leadership" className="text-md font-medium px-4 py-2 hover:underline">leadership</Link>
               <Link to="/team" className="text-md font-medium px-4 py-2 hover:underline">team</Link>
               <Link to="/more" className="text-md font-medium px-4 py-2 hover:underline">more</Link>
             </div>
+            <div className="lg:hidden flex items-center z-10">
+              <button
+                ref={menuButtonRef}
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-md font-medium px-4 py-2 hover:underline"
+              >
+                &#x22EE;
+              </button>
+              {isMenuOpen && (
+                <div
+                  ref={dropdownRef}
+                  className="absolute top-12 right-0 bg-transparent shadow-md rounded-lg p-4 z-30"
+                >
+                  <Link to="/" className="block text-md font-medium text-white px-4 py-2 hover:underline">home</Link>
+                  <Link to="/leadership" className="block text-md font-medium text-white px-4 py-2 hover:underline">leadership</Link>
+                  <Link to="/team" className="block text-md font-medium text-white px-4 py-2 hover:underline">team</Link>
+                  <Link to="/more" className="block text-md font-medium text-white px-4 py-2 hover:underline">more</Link>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
         <div className="flex justify-center py-[8vh] bg-[#e9e7e7]">
-          <div className="py-8 ">
+          <div className="py-8 w-4/5">
             <h2 className="text-3xl font-bold text-center mb-8 text-[#222f3d] font-raleway">"Innovate, Collaborate, Succeed"</h2>
             <div className="flex flex-col items-center space-y-8">
               {loading ? (
@@ -90,15 +126,15 @@ const Alumni = () => {
                 </div>
               ) : (
                 <>
-                  {members.length > 0 ?
-                    <div className=" flex flex-wrap justify-center gap-8 pt-8">
+                  {members.length > 0 ? (
+                    <div className="flex flex-wrap justify-center gap-8 pt-8">
                       {members.map((member, index) => (
                         <MemberCard key={index} member={member} />
                       ))}
                     </div>
-                    :
-                    <div></div>
-                  }
+                  ) : (
+                    <div>No members found</div>
+                  )}
                 </>
               )}
             </div>

@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Nav from './Nav';
 import Footer from './Footer';
+import ThemeToggle from './ThemeToggle';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const Card = ({ type, title, photo1,photo2, author, publishDate, description, onReadMore, large }) => {
@@ -22,12 +23,12 @@ const Card = ({ type, title, photo1,photo2, author, publishDate, description, on
   return (
     <div
       className={`bg-transparent bg-[#F0F4F8] shadow-xl overflow-hidden transform transition-transform hover:scale-[1.008] hover:shadow-2xl ${large ? 'large-card' : ''}`}
-      style={large ? { width: '800px', height: '500px', margin: '0 auto' } : {}}
+      style={large ? { width: 'auto', height: 'auto', margin: '0 auto' } : {}}
     >
       <div>
         <div
           className="relative bg-cover bg-center"
-          style={{ height: large ? '350px' : '240px' }}
+          style={{ height: large ? '500px' : 'auto' }}
         >
           <img src={large ? photo1:photo2} alt={title} className="w-full h-full object-cover" />
         </div>
@@ -127,6 +128,9 @@ const Opinion = () => {
   return (
     <>
       <Nav />
+      <div className="absolute top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
       {loader ? (
         <div className="flex justify-center items-center h-[90vh]">
           <div className="w-48 h-48 border-4 border-blue-500 border-t-transparent border-t-4 border-r-transparent border-r-4 rounded-full animate-spin"></div>
