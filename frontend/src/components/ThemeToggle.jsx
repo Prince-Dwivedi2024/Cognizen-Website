@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 const ThemeToggle = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const savedMode = localStorage.getItem('theme');
-    return savedMode ? JSON.parse(savedMode) : false;
+    return savedMode === 'true'; // Directly compare the string instead of parsing it
   });
 
   useEffect(() => {
@@ -12,7 +12,7 @@ const ThemeToggle = () => {
     } else {
       document.body.classList.remove('dark');
     }
-    localStorage.setItem('theme', JSON.stringify(isDarkMode));
+    localStorage.setItem('theme', isDarkMode.toString()); // Save the boolean as a string
   }, [isDarkMode]);
 
   const toggleTheme = () => {

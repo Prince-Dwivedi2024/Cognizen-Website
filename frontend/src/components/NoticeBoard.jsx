@@ -40,11 +40,11 @@ const NoticeBoard = () => {
   };
 
   return (
-    <div className="p-4 h-[80vh] w-[40vw] bg-[#FFFFF5] rounded-lg shadow-lg overflow-y-auto">
-      <h2 className="bg-[#FFFFFE] text-left text-lg text-gray-700 font-bold mb-4 hover:text-gray900 hover:font-extrabold">Latest Updates</h2>
+    <div className="p-4 h-[80vh] w-[40vw] bg-[#FFFFF5] dark:bg-[#1A202C] rounded-lg shadow-lg overflow-y-auto">
+      <h2 className="bg-[#FFFFFE] dark:bg-[#1A202C] text-left text-lg text-gray-700 dark:text-gray-300 font-bold mb-4 hover:text-gray900 hover:font-extrabold">Latest Updates</h2>
       {loading ? (
         <div className="flex items-center justify-center h-full">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-900"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-900 dark:border-gray-700 "></div>
         </div>
       ) : (
         <>
@@ -54,14 +54,14 @@ const NoticeBoard = () => {
             notices.map((notice, index) => (
               <div
                 key={index}
-                className="flex justify-between items-center p-2 bg-[#FFFFFE] hover:bg-white hover:shadow-2xl shadow-none hover:scale-[1.0001] border-b border-[#c9c6c6]"
+                className="flex justify-between items-center p-2 bg-[#FFFFFE] dark:bg-[#1A202C] hover:bg-white dark:hover:bg-[#2D3748] hover:shadow-2xl shadow-none hover:scale-[1.0001] border-b border-[#c9c6c6] dark:border-[#4A5568]"
               >
                 <div className="flex flex-col font-raleway">
                   <span className='font-semibold'>{notice.title}</span>
                   <span className="text-sm mt-10" style={{ color: '#979797' }}>{notice.publishDate}</span>
                 </div>
                 <button 
-                  className="text-sm font-semibold text-blue-400 hover:text-[#c9c6c6] transition-all" 
+                  className="text-sm font-semibold text-blue-400 dark:text-blue-300 hover:text-[#c9c6c6] dark:hover:text-[#CBD2D9] transition-all" 
                   onClick={() => handleMoreClick(notice)}
                 >
                   more&gt;&gt;

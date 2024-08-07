@@ -123,31 +123,31 @@ body {
 
 /* Dark theme */
 body.dark {
-  --bg-color: #121212;
-  --text-color: #e0e0e0;
-  --card-bg-color: #1e1e1e;
-  --card-text-color: #e0e0e0;
-  --button-text-color: #80d8ff;
-  --button-hover-color: #82b1ff;
+  --bg-color: #1E1E1E;
+  --text-color: #F5F5F5;
+  --card-bg-color: #2E2E2E;
+  --card-text-color: #CFCFCF;
+  --button-text-color: #66C2FF;
+  --button-hover-color: #5AAEFF;
 }
 
-body {
+ body {
   background-color: var(--bg-color);
   color: var(--text-color);
-}
+} 
 
-.card {
+ .card {
   background-color: var(--card-bg-color);
   color: var(--card-text-color);
-}
+} 
 
-button {
+ button {
   color: var(--button-text-color);
-}
+} 
 
-button:hover {
+ button:hover {
   color: var(--button-hover-color);
-}
+} 
 
 .sun-icon, .moon-icon {
   color: #FFD700; /* Gold color, or any other color you prefer */
@@ -160,4 +160,9 @@ body.dark .sun-icon {
 
 body:not(.dark) .moon-icon {
   color: #FFD700; /* Color for the moon icon in light mode */
+}
+
+
+body {
+  overflow-x: hidden;
 }

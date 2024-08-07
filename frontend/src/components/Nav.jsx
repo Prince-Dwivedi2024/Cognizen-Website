@@ -44,6 +44,13 @@ export default function Nav() {
   };
 
   useEffect(() => {
+
+    // Added this block to retrieve and apply the saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+
     if (showSearchBar) {
       document.addEventListener('mousedown', handleClickOutside);
     } else {
@@ -77,6 +84,11 @@ export default function Nav() {
             <p className="font-semibold">The official politics and economics</p>
             <p className="font-semibold">awareness club of NIT Rourkela.</p>
           </div>
+
+          {/* Added the ThemeToggle component */}
+      <div className="absolute top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
           
         </div>
 
@@ -223,21 +235,22 @@ export default function Nav() {
                 </div>
                 {showSearchBar && (
                   <div className="absolute right-0 mt-2 w-64 p-2 flex items-center bg-transparent z-50">
-                    <form onSubmit={handleSearch}>
-                      <input
-                        type="text"
-                        name="searchInput" // Ensure this matches the input name used in handleSearch
-                        className="bg-white text-black p-2 flex-grow focus:outline-none focus:ring-2 focus:ring-orange-500"
-                        placeholder="Search..."
-                      />
-                      <button
-                        type="submit" // Ensure the button is of type submit to trigger form submission
-                        className="bg-orange-500 text-white p-2 ml-2"
-                      >
-                        Search
-                      </button>
-                    </form>
-                  </div>
+                  <form onSubmit={handleSearch} className="flex w-full items-center">
+                    <input
+                      type="text"
+                      name="searchInput" // Ensure this matches the input name used in handleSearch
+                      className="bg-white text-black p-2 flex-grow focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-l-md"
+                      placeholder="Search..."
+                    />
+                    <button
+                      type="submit"
+                      className="bg-orange-500 text-white p-2 ml-2 rounded-r-md"
+                    >
+                      Search
+                    </button>
+                  </form>
+                </div>
+                
                 )}
               </div>
             </div>

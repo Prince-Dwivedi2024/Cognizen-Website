@@ -7,7 +7,6 @@ import Footer from './Footer';
 import NoticeBoard from './NoticeBoard';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
-
 const MilestoneCard = ({ icon, number, label, inView }) => {
   const [count, setCount] = useState(0);
 
@@ -57,7 +56,7 @@ const OurMilestones = () => {
   ];
 
   return (
-    <div ref={ref} className="w-full bg-blue-500 py-10">
+    <div ref={ref} className="w-full bg-blue-500 dark:bg-[#2563EB] py-10">
       <div className="flex justify-around items-center h-1/2">
         {milestones.map((milestone, index) => (
           <MilestoneCard key={index} {...milestone} inView={inView} />
@@ -118,11 +117,11 @@ const Achievements = () => {
 
         const noticesData = await response.json();
         setAchievements(noticesData);
-        setLoading(false);
+        setLoader(false);
       } catch (error) {
         console.error("Error fetching notices:", error);
         setError("Something went wrong while fetching notices.");
-        setLoading(false);
+        setLoader(false);
       }
     };
 
@@ -134,20 +133,20 @@ const Achievements = () => {
   return (
     <>
       <Nav />
-      <div className="min-h-screen bg-[#F0F4F8] p-10 py-[15vh] flex justify-center shadow-sm">
+      <div className="min-h-screen bg-[#F0F4F8] dark:bg-[#1E1E1E] p-10 py-[15vh] flex justify-center shadow-sm">
         <div className="w-4/5">
 
           <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-14">
             {reversedAchievements.map((achievement, index) => (
-              <div className="bg-[#FFFFFE] rounded-lg overflow-hidden shadow-lg p-4 transition-transform hover:shadow-2xl hover:scale-[1.008]" style={{ height: '30vh' }}>
+              <div className="bg-[#FFFFFE] dark:bg-[#2A2A2A] rounded-lg overflow-hidden shadow-lg p-4 transition-transform hover:shadow-2xl hover:scale-[1.008]" style={{ height: '30vh' }}>
                 <div className="flex h-full">
                   <div className="w-1/3 bg-cover bg-center rounded-lg" style={{ backgroundImage: `url(${achievement.photo})` }}>
                     {/* Image section */}
                   </div>
                   <div className="w-2/3 p-4 pl-10 flex flex-col justify-between">
-                    <h1 className="text-xl font-bold" style={{ color: '#212121' }}>{achievement.title}</h1>
+                  <h1 className="text-xl font-bold text-[#212121] dark:text-[#F5F5F5]">{achievement.title}</h1>
 
-                    <div key={index} className="text-sm" style={{ color: '#212121' }}>{achievement.content}</div>
+<div key={index} className="text-sm text-[#212121] dark:text-[#F5F5F5]">{achievement.content}</div>
 
                   </div>
              
@@ -163,7 +162,7 @@ const Achievements = () => {
       {/* <div className="fixed bottom-4 right-4 flex flex-col items-center">
         <div
           ref={iconRef}
-          className="relative cursor-pointer text-[#222f3d] hover:text-[#5e6b79] hover:text-lg hover:text-extrabold"
+          className="relative cursor-pointer text-[#222f3d] dark:text-[#F5F5F5] hover:text-[#5e6b79] hover:text-lg hover:text-extrabold"
           onClick={toggleNoticeBoard}
         >
           <i className="fas fa-bullhorn text-4xl"></i>
@@ -173,7 +172,7 @@ const Achievements = () => {
         </div>
 
         {showNoticeBoard && (
-          <div ref={noticeRef} className="absolute bottom-12 right-0 w-[40vw] h-[80vh] bg-[#FFFFF5] border border-gray-300 rounded shadow-lg z-50">
+          <div ref={noticeRef} className="absolute bottom-12 right-0 w-[40vw] h-[80vh] bg-[#FFFFF5] dark:bg-[#2A2A2A] border border-gray-300 dark:border-gray-700 rounded shadow-lg z-50">
             <NoticeBoard />
           </div>
         )}

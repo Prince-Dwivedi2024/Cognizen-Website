@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Nav from './Nav';
 import Footer from './Footer';
-import ThemeToggle from './ThemeToggle';
+
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const Card = ({ type, title, photo1, photo2, author, publishDate, description, onReadMore, large }) => {
@@ -60,13 +60,13 @@ const MoreInPoliticsCard = ({ type, description, title, photo1, author, publishD
   };
 
   return (
-    <div className="flex border-b border-gray-300 py-4 card" onClick={() => handleReadMore}>
+    <div className="flex border-b border-gray-300 dark:border-gray-600 py-4 card" onClick={() => handleReadMore}>
       <div className="flex-shrink-0 mr-4">
         <img src={photo1} alt={title} className="w-24 h-24 object-cover" />
       </div>
       <div className="flex-grow">
         <h3
-          className="text-xl font-semibold mb-2 cursor-pointer hover:text-orange-400"
+          className="text-xl font-semibold mb-2 cursor-pointer hover:text-orange-400 dark:hover:text-orange-300"
           onClick={() => onReadMore(type)}
         >
           {title}
@@ -88,11 +88,7 @@ const Politics = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Added this block to retrieve and apply the saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      document.documentElement.setAttribute('data-theme', savedTheme);
-    }
+    
     const fetchPoliticsArticles = async () => {
       try {
         setLoader(true);
@@ -127,19 +123,16 @@ const Politics = () => {
   return (
     <>
       <Nav />
-      {/* Added the ThemeToggle component */}
-      <div className="absolute top-4 right-4 z-50">
-        <ThemeToggle />
-      </div>
+     
       {loader ? (
         <div className="flex justify-center items-center h-[90vh]">
-          <div className="w-48 h-48 border-4 border-blue-500 border-t-transparent border-t-4 border-r-transparent border-r-4 rounded-full animate-spin"></div>
+          <div className="w-48 h-48 border-4 border-blue-500 dark:border-blue-400 border-t-transparent border-t-4 border-r-transparent border-r-4 rounded-full animate-spin"></div>
         </div>
       ) : (
         <div className="min-h-screen p-10 pt-2 flex justify-center shadow-sm">
           <div className="w-4/5">
             <div className="pb-12">
-              <h2 className="text-3xl font-medium font-serif pt-16 pb-2 underline underline-offset-8">POLITICS ARTICLES -</h2 >
+              <h2 className="text-3xl font-medium font-serif pt-16 pb-2 underline underline-offset-8 dark:text-[#A0B4C3]">POLITICS ARTICLES -</h2 >
               <div className="p-10 flex justify-center">
                 {articles.slice(0, 1).map((article, index) => (
                   <Card key={index} {...article} onReadMore={() => handleReadMore(article.id)} large />
@@ -151,8 +144,8 @@ const Politics = () => {
                 ))}
               </div>
             </div >
-            <div className="pb-12 border-t border-black pt-10">
-              <h2 className="text-3xl font-medium pb-8 font-serif underline underline-offset-8">MORE IN POLITICS -</h2>
+            <div className="pb-12 border-t border-black dark:border-[#4A4A4A] pt-10">
+              <h2 className="text-3xl font-medium pb-8 font-serif underline underline-offset-8 dark:text-[#A0B4C3]">MORE IN POLITICS -</h2>
               <div className="grid grid-cols-1 gap-4">
                 {articles.slice(4).map((article, index) => (
                   <MoreInPoliticsCard key={index} {...article} onReadMore={() => handleReadMore(article.id)} />
