@@ -53,10 +53,10 @@ const MilestoneCard = ({ icon, number, label, inView }) => {
   }, [inView, number]);
 
   return (
-    <div className="flex flex-col items-center font-raleway bg-transparent p-4">
-      <div className="text-6xl">{icon}</div>
-      <div className="text-4xl font-bold mt-2">{count}</div>
-      <div className="text-lg mt-1">{label}</div>
+    <div className="flex flex-col items-center font-raleway bg-transparent p-2 sm:p-4">
+      <div className="text-4xl sm:text-5xl md:text-6xl">{icon}</div>
+      <div className="text-2xl sm:text-3xl md:text-4xl font-bold mt-2">{count}</div>
+      <div className="text-sm sm:text-lg mt-1">{label}</div>
     </div>
   );
 };
@@ -75,8 +75,8 @@ const OurMilestones = () => {
   ];
 
   return (
-    <div ref={ref} className="w-full bg-blue-500 py-10 dark:bg-[#2563EB]">
-      <div className="flex justify-around items-center h-1/2">
+    <div ref={ref} className="w-full bg-blue-500 dark:bg-[#2563EB] py-8 sm:py-10">
+      <div className="flex flex-col sm:flex-row justify-around items-center">
         {milestones.map((milestone, index) => (
           <MilestoneCard key={index} {...milestone} inView={inView} />
         ))}
@@ -107,29 +107,26 @@ const extraArticles = [
 ];
 
 const CarouselCard = ({ article, onReadMore }) => {
-  // Function to truncate the description to a specific number of words
   const truncateDescription = (description, maxWords) => {
-    if (!description) {
-      return ''; // Return an empty string if description is undefined or null
-    }
+    if (!description) return '';
     const words = description.split(' ');
     return words.length > maxWords ? words.slice(0, maxWords).join(' ') + '...' : description;
   };
 
   return (
-    <div className="relative bg-cover bg-center h-96" style={{ backgroundImage: `url(${article.photo1})` }}>
+    <div className="relative bg-cover bg-center h-60 sm:h-72 md:h-80 lg:h-96" style={{ backgroundImage: `url(${article.photo1})` }}>
       <div className="absolute inset-0 bg-black bg-opacity-50 text-white dark:text-[#F0F4F8] flex flex-col justify-between p-4 font-raleway">
         <div>
-          <h2 className="text-2xl font-semibold mb-2">{article.title}</h2>
-          <p>{truncateDescription(article.description, 15)}</p>
+          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">{article.title}</h2>
+          <p className="text-sm sm:text-base md:text-lg">{truncateDescription(article.description, 15)}</p>
         </div>
-        <div className="flex justify-between items-center text-sm">
+        <div className="flex justify-between items-center text-xs sm:text-sm md:text-base">
           <div>
             <span>{article.author}</span> | <span>{article.publishDate}</span>
           </div>
           <button
             className="font-semibold hover:text-blue-500 dark:text-[#66C2FF]"
-            onClick={() => onReadMore(article.id)} // Assuming each article has a unique id
+            onClick={() => onReadMore(article.id)}
           >
             Read more
           </button>
@@ -141,20 +138,20 @@ const CarouselCard = ({ article, onReadMore }) => {
 
 const Card = ({ id, type, title, photo2, author, publishDate, onReadMore }) => (
   <div className="bg-transparent bg-[#F0F4F8] dark:bg-[#1F2933] shadow-sm overflow-hidden transform transition-transform hover:scale-[1.008] hover:shadow-2xl">
-    <div className="relative bg-cover bg-center h-60" style={{ backgroundImage: `url(${photo2})` }}></div>
-    <div className="p-5">
-      <div className="py-2" style={{ height: '75px' }}>
-      <h2 className="text-mid font-semibold mb-1 font-sans text-[#212121] dark:text-[#CBD2D9]">
-  {title}
-</h2>
+    <div className="relative bg-cover bg-center h-40 sm:h-48 md:h-56 lg:h-60" style={{ backgroundImage: `url(${photo2})` }}></div>
+    <div className="p-4 sm:p-5">
+      <div className="py-2" style={{ minHeight: '50px' }}>
+        <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-1 font-sans text-[#212121] dark:text-[#CBD2D9]">
+          {title}
+        </h2>
       </div>
-      <div className="bg-transparent py-1 flex justify-between items-center" style={{ height: '20.6px' }}>
-        <div className="text-sm" style={{ color: '#979797' }}>
+      <div className="bg-transparent py-1 flex justify-between items-center" style={{ minHeight: '20px' }}>
+        <div className="text-xs sm:text-sm md:text-base" style={{ color: '#979797' }}>
           <span>{author}</span> | <span>{publishDate}</span>
         </div>
         <button
-          className="text-sm font-semibold text-blue-400 hover:text-[#c9c6c6] dark:text-[#5AA9E6] dark:hover:text-[#8DC6FF]"
-          onClick={() => onReadMore(id)} // Make sure each Card has a unique id
+          className="text-xs sm:text-sm font-semibold text-blue-400 hover:text-[#c9c6c6] dark:text-[#5AA9E6] dark:hover:text-[#8DC6FF]"
+          onClick={() => onReadMore(id)}
         >
           Read...
         </button>
@@ -170,7 +167,6 @@ const Carousel = ({ articles, onReadMore }) => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % articles.length);
     }, 5000);
-
     return () => clearInterval(interval);
   }, [articles.length]);
 
@@ -203,18 +199,18 @@ const Carousel = ({ articles, onReadMore }) => {
 };
 
 const YouMustKnowCard = ({ id, title, photo2, author, publishDate, onReadMore }) => (
-  <div className="relative bg-cover bg-center h-80" style={{ backgroundImage: `url(${photo2})` }}>
+  <div className="relative bg-cover bg-center h-64 sm:h-72 md:h-80" style={{ backgroundImage: `url(${photo2})` }}>
     <div className="absolute inset-0 bg-black bg-opacity-50 text-white dark:bg-[#1A202C] dark:bg-opacity-60 dark:text-[#E2E8F0] flex flex-col justify-between p-4 font-raleway">
       <div>
-        <h2 className="text-xl font-semibold mb-2">{title}</h2>
+        <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">{title}</h2>
       </div>
-      <div className="flex justify-between items-center text-sm">
+      <div className="flex justify-between items-center text-xs sm:text-sm md:text-base">
         <div>
           <span>{author}</span> | <span>{publishDate}</span>
         </div>
         <button
           className="font-semibold hover:text-blue-500 dark:text-[#5AA9E6] dark:hover:text-[#8DC6FF]"
-          onClick={() => onReadMore(id)} // Ensure to pass a unique id
+          onClick={() => onReadMore(id)}
         >
           Read more
         </button>
@@ -302,24 +298,20 @@ const HomePage = () => {
   return (
     loader ? (
       <div>
-        
         <div className="flex justify-center items-center h-[90vh]">
-          <div className="w-48 h-48 border-4 border-blue-500 dark:border-[#5AA9E6] border-t-transparent border-t-4 border-r-transparent border-r-4 rounded-full animate-spin"></div>
+          <div className="w-24 h-24 sm:w-36 sm:h-36 md:w-48 md:h-48 border-4 border-blue-500 dark:border-[#5AA9E6] border-t-transparent border-t-4 border-r-transparent border-r-4 rounded-full animate-spin"></div>
         </div>
       </div>
     ) : (
       <div className="">
         <Nav />
-       
-        <div className="min-h-screen  p-10 flex justify-center py-[10vh] shadow-sm">
-          <div className="w-4/5">
-            
-
-            <div className="pb-12">
-              <h2 className="text-3xl font-medium mb-4 font-serif pt-2 pb-8 text-[#222f3d] dark:text-[#CBD2D9] underline underline-offset-8">
+        <div className="min-h-screen p-4 sm:p-6 md:p-10 flex flex-col items-center py-[10vh] shadow-sm">
+          <div className="w-full sm:w-11/12 md:w-4/5">
+            <div className="pb-8 sm:pb-10 md:pb-12">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-medium mb-4 font-serif pt-2 pb-4 sm:pb-6 md:pb-8 text-[#222f3d] dark:text-[#CBD2D9] underline underline-offset-8">
                 TRENDING ARTICLES -
               </h2>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-10 md:gap-14">
                 <div className="lg:col-span-3">
                   <Carousel articles={[trendingArticle[0], ...trendingArticle]} onReadMore={handleReadMore} />
                 </div>
@@ -328,60 +320,58 @@ const HomePage = () => {
                 ))}
               </div>
             </div>
-
-            <div className="pb-12 border-t border-black dark:border-[#4A5568] pt-10">
-              <h2 className="text-3xl font-medium pb-4 font-serif text-[#222f3d] dark:text-[#CBD2D9] underline underline-offset-8">
+  
+            <div className="pb-8 sm:pb-10 md:pb-12 border-t border-black dark:border-[#4A5568] pt-8 sm:pt-10 md:pt-12">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-medium pb-4 sm:pb-6 md:pb-8 font-serif text-[#222f3d] dark:text-[#CBD2D9] underline underline-offset-8">
                 YOU MUST KNOW -
               </h2>
-              <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+              <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-8">
                 {youMustKnowArticle.slice(0, 5).map((article, index) => (
                   <YouMustKnowCard key={index} {...article} onReadMore={handleReadMore} />
                 ))}
               </div>
             </div>
-
-            <div className="pb-12 border-t border-black dark:border-[#4A5568] pt-10">
-              <h2 className="text-3xl font-medium pb-8 font-serif text-[#222f3d] dark:text-[#CBD2D9] underline underline-offset-8">
+  
+            <div className="pb-8 sm:pb-10 md:pb-12 border-t border-black dark:border-[#4A5568] pt-8 sm:pt-10 md:pt-12">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-medium pb-4 sm:pb-6 md:pb-8 font-serif text-[#222f3d] dark:text-[#CBD2D9] underline underline-offset-8">
                 RECENTS -
               </h2>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-10 md:gap-14">
                 {recentArticle.map((article, index) => (
                   <Card key={index} {...article} onReadMore={handleReadMore} />
                 ))}
               </div>
             </div>
-
-            <div className="pb-12 border-t border-black dark:border-[#4A5568] pt-10">
-              <h2 className="text-3xl font-medium pb-8 font-serif text-[#222f3d] dark:text-[#CBD2D9] underline underline-offset-8">
+  
+            <div className="pb-8 sm:pb-10 md:pb-12 border-t border-black dark:border-[#4A5568] pt-8 sm:pt-10 md:pt-12">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-medium pb-4 sm:pb-6 md:pb-8 font-serif text-[#222f3d] dark:text-[#CBD2D9] underline underline-offset-8">
                 MOST READ -
               </h2>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
-                {/* most read count articles to be implemented in future */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-10 md:gap-14">
                 {mostReadArticle.map((article, index) => (
                   <Card key={index} {...article} onReadMore={handleReadMore} />
                 ))}
               </div>
             </div>
           </div>
-
-          {/* Announcements icon section */}
+  
           <div className="fixed bottom-4 right-4 flex flex-col items-center">
             <div
               ref={iconRef}
-              className="relative cursor-pointer text-[#222f3d] hover:text-[#5e6b79] hover:text-lg hover:text-extrabold dark:text-[#CBD2D9] dark:hover:text-[#A0AEC0]"
+              className="relative cursor-pointer text-[#222f3d] hover:text-[#5e6b79] dark:text-[#CBD2D9] dark:hover:text-[#A0AEC0]"
               onClick={toggleNoticeBoard}
             >
               <FontAwesomeIcon
-        icon={faBell}
-        className="text-gray-500 hover:text-gray-700 transition duration-200 ease-in-out dark:text-[#A0AEC0] dark:hover:text-[#E2E8F0]"
-        size="lg"
-      />
-              <span className="announcement-popup absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 px-2 py-1 text-sm bg-black text-white rounded opacity-0 transition-opacity duration-300 dark:bg-[#2D3748] dark:text-[#E2E8F0]">
+                icon={faBell}
+                className="text-gray-500 hover:text-gray-700 transition duration-200 ease-in-out dark:text-[#A0AEC0] dark:hover:text-[#E2E8F0]"
+                size="lg"
+              />
+              <span className="announcement-popup absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 px-2 py-1 text-xs sm:text-sm bg-black text-white rounded opacity-0 transition-opacity duration-300 dark:bg-[#2D3748] dark:text-[#E2E8F0]">
                 Announcements
               </span>
             </div>
             {showNoticeBoard && (
-              <div ref={noticeRef} className="absolute bottom-12 right-0 w-[40vw] h-[80vh] bg-[#FFFFF5] dark:bg-[#2D3748] border border-gray-300 dark:border-[#4A5568] rounded shadow-lg z-50">
+              <div ref={noticeRef} className="absolute bottom-12 right-0 w-[90vw] h-[50vh] md:w-[40vw] md:h-[80vh] bg-[#FFFFF5] dark:bg-[#2D3748] border border-gray-300 dark:border-[#4A5568] rounded shadow-lg z-50 overflow-auto">
                 <NoticeBoard />
               </div>
             )}
@@ -392,6 +382,7 @@ const HomePage = () => {
       </div>
     )
   );
+  
 
 };
 

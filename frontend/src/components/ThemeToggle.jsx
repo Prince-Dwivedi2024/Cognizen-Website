@@ -20,7 +20,7 @@ const ThemeToggle = () => {
   };
 
   return (
-    <button onClick={toggleTheme} className="text-2xl p-2 focus:outline-none">
+    <button onClick={toggleTheme} className="text-xl md:text-2xl p-1 md:p-2 focus:outline-none">
       <i className={`fas ${isDarkMode ? 'fa-sun sun-icon' : 'fa-moon moon-icon'}`}></i>
     </button>
   );

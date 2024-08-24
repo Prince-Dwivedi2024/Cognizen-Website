@@ -23,13 +23,13 @@ const Notice = () => {
         Home
       </button>
       <div className="text-sm text-orange-500 dark:text-orange-600 mb-2 mt-12">{notice.category}</div>
-      <h1 className="text-4xl font-bold mb-4">
+      <h1 className="text-4xl font-bold mb-4 text-center">
         {notice.title}
       </h1>
-      <p className="text-lg text-gray-600 dark:text-gray-400 mb-4">
+      <p className="text-lg text-gray-600 dark:text-gray-400 mb-4 text-center">
         {notice.subtitle}
       </p>
-      <div className="flex items-center mb-6">
+      <div className="flex items-center mb-6 justify-center">
         <img src={Card6} alt="Author" className="w-10 h-10 rounded-full mr-4" />
         <div>
           <p className="text-gray-700 dark:text-gray-200 font-bold">{notice.author}</p>
@@ -37,9 +37,13 @@ const Notice = () => {
         </div>
       </div>
       <div className="flex justify-center mb-6">
-        <img src={Card6} alt="Main" className="w-[900px] h-[500px] object-cover" />
+        <img
+          src={Card6}
+          alt="Main"
+          className="w-full max-w-[900px] h-auto object-cover"
+        />
       </div>
-      <div className="article-content text-gray-800">
+      <div className="article-content text-gray-800 dark:text-gray-200">
         <p className="mb-4">
           <span className="text-5xl float-left mr-2 leading-none">W</span>
           {notice.content}

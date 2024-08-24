@@ -63,14 +63,18 @@ const Leadership = () => {
     const { photo, name, passingBatch, id, position, mediumId, instagramId, XId, email } = member;
 
     return (
-      <div className="bg-[#F0F4F8] p-12 rounded-lg shadow-sm transform transition-transform hover:scale-105 hover:shadow-2xl">
+      <div className="bg-[#F0F4F8] dark:bg-[#2A2A2A] p-6 md:p-12 rounded-lg shadow-sm transform transition-transform hover:scale-105 hover:shadow-2xl w-screen  md:w-[48%] lg:w-[30%]">
         <div className="flex items-center mb-4">
-          <div className="relative h-32 w-32 rounded-full border-4 border-gray-300 overflow-hidden shadow-lg">
-            <img src={photo} alt={name} className="h-full w-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-110" />
+        <div className="relative h-24 w-24 md:h-32 md:w-32 rounded-full border-4 border-gray-300 overflow-hidden shadow-lg">
+        <img
+              src={photo}
+              alt={name}
+              className="h-full w-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-110"
+            />
           </div>
 
           <div className="ml-4">
-            <h3 className="text-xl font-semibold">{name}</h3>
+            <h3 className="text-lg md:text-xl font-semibold text-gray-800 dark:text-gray-200">{name}</h3>
             <p className="text-gray-600">batch of {passingBatch}</p>
           </div>
         </div>
@@ -88,7 +92,7 @@ const Leadership = () => {
   return (
     <>
       <div className="min-h-screen bg-[#F0F4F8]">
-        <div className="relative h-[280px] bg-cover bg-center" style={{ backgroundImage: `url(${CampusNITR})` }}>
+        <div className="relative h-[25vh] md:h-[280px] bg-cover bg-center" style={{ backgroundImage: `url(${CampusNITR})` }}>
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative z-10 flex items-center justify-between h-full px-4 md:px-16 text-white">
             <img src={CognizenLogo2} alt="Cognizen Club Logo" className="h-1/2" />
@@ -98,10 +102,10 @@ const Leadership = () => {
               <h1 className="text-2xl md:text-4xl font-medium">EB Members</h1>
             </div>
             <div className="hidden lg:flex absolute top-4 right-4 space-x-4 z-10">
-              <Link to="/" className="text-md font-medium px-4 py-2 hover:underline">home</Link>
-              <Link to="/team" className="text-md font-medium px-4 py-2 hover:underline">team</Link>
-              <Link to="/alumni" className="text-md font-medium px-4 py-2 hover:underline">alumni</Link>
-              <Link to="/more" className="text-md font-medium px-4 py-2 hover:underline">more</Link>
+              <Link to="/" className="text-md font-medium px-2 md:px-4 py-4 md:py-2 hover:underline">home</Link>
+              <Link to="/team" className="text-md font-medium px-2 md:px-4 py-4 md:py-2 hover:underline">team</Link>
+              <Link to="/alumni" className="text-md font-medium px-2 md:px-4 py-4 md:py-2 hover:underline">alumni</Link>
+              <Link to="/more" className="text-md font-medium px-2 md:px-4 py-4 md:py-2 hover:underline">more</Link>
             </div>
             <div className="lg:hidden flex items-center z-10">
               <button
@@ -113,14 +117,14 @@ const Leadership = () => {
               </button>
               {isMenuOpen && (
                 <div
-                  ref={dropdownRef}
-                  className="absolute top-12 right-0 bg-transparent shadow-md rounded-lg p-4 z-30"
-                >
-                  <Link to="/" className="block text-md font-medium text-white px-4 py-2 hover:underline">home</Link>
-                  <Link to="/team" className="block text-md font-medium text-white px-4 py-2 hover:underline">team</Link>
-                  <Link to="/alumni" className="block text-md font-medium text-white px-4 py-2 hover:underline">alumni</Link>
-                  <Link to="/more" className="block text-md font-medium text-white px-4 py-2 hover:underline">more</Link>
-                </div>
+                ref={dropdownRef}
+                className="absolute top-12 right-0 bg-gray-800 text-white shadow-md rounded-lg p-4 z-30 "
+              >
+                <Link to="/" className="block text-md font-medium text-white px-4 py-2 hover:underline">Home</Link>
+                <Link to="/team" className="block text-md font-medium text-white px-4 py-2 hover:underline">Team</Link>
+                <Link to="/alumni" className="block text-md font-medium text-white px-4 py-2 hover:underline">Alumni</Link>
+                <Link to="/more" className="block text-md font-medium text-white px-4 py-2 hover:underline">More</Link>
+              </div>
               )}
             </div>
           </div>
@@ -128,7 +132,7 @@ const Leadership = () => {
 
         <div className="flex justify-center py-[8vh] bg-[#e9e7e7]">
           <div className="p-8 w-4/5">
-            <h2 className="text-3xl font-bold text-center mb-8 text-[#222f3d] font-raleway">"Innovate, Collaborate, Succeed"</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 text-[#222f3d] font-raleway">"Innovate, Collaborate, Succeed"</h2>
             <div className="flex flex-col items-center space-y-8">
               {loading ? (
                 <div className="flex justify-center items-center h-[70vh]">
@@ -136,14 +140,14 @@ const Leadership = () => {
                 </div>
               ) : (
                 <>
-                  <div className="w-full flex justify-center pt-8">
+                  <div className="md:w-full w-screen flex justify-center pt-6 md:pt-8 pl-6 pr-6 gap-6 md:gap-8">
                     <MemberCard member={president} />
                   </div>
-                  <div className="w-full flex justify-center flex-wrap gap-8 pt-8">
+                  <div className="md:w-full w-screen flex justify-center flex-wrap gap-6 md:gap-8  pl-6 pr-6">
                     <MemberCard member={vicePresident} />
                     <MemberCard member={secretary} />
                   </div>
-                  <div className="w-full flex justify-center flex-wrap gap-8 pt-8">
+                  <div className="md:w-full w-screen flex justify-center flex-wrap gap-6 md:gap-8 pt-6 md:pt-8 pl-6 pr-6">
                     <MemberCard member={treasurer} />
                     <MemberCard member={chiefCoordinator} />
                   </div>

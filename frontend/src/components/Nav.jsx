@@ -67,26 +67,24 @@ export default function Nav() {
       <div className="bg-white dark:bg-gray-900">
         {/* top */}
         <div
-          className="relative h-[250px] bg-cover bg-center flex items-center"
+          className="relative h-[150px] sm:h-[200px] md:h-[250px] bg-cover bg-center flex items-center"
           style={{ backgroundImage: `url(${CampusNITR})` }}
         >
           <Link to="/">
-            <img
-              src={CognizenLogo2}
-              className="h-36 pl-[8vw]"
-              alt="The Cognizen Logo"
-            />
+          <img src={CognizenLogo2} className="h-16 sm:h-20 md:h-36 pl-4 sm:pl-[5vw] md:pl-[8vw]" alt="The Cognizen Logo" />
+
           </Link>
           <div className="ml-4 text-white flex flex-col items-center">
-            <h1 className="text-3xl mb-2 font-extrabold font-raleway">
-              Cognizen Club NITR
-            </h1>
-            <p className="font-semibold">The official politics and economics</p>
-            <p className="font-semibold">awareness club of NIT Rourkela.</p>
+          <h1 className="text-lg sm:text-2xl md:text-3xl mb-1 sm:mb-2 font-extrabold font-raleway text-center sm:text-left">
+  Cognizen Club NITR
+</h1>
+<p className="text-sm sm:text-base md:text-lg font-semibold text-center sm:text-left">The official politics and economics</p>
+<p className="text-sm sm:text-base md:text-lg font-semibold text-center sm:text-left">awareness club of NIT Rourkela.</p>
+
           </div>
 
           {/* Added the ThemeToggle component */}
-      <div className="absolute top-4 right-4 z-50">
+      <div className="absolute top-2 right-2 md:top-4 md:right-4 z-50">
         <ThemeToggle />
       </div>
           
@@ -94,7 +92,8 @@ export default function Nav() {
 
         {/* nav */}
         <div className="relative">
-          <div className="bg-[#222f3d] h-12 flex items-center justify-between px-4 lg:px-0">
+        <div className="bg-[#222f3d] h-10 sm:h-12 flex items-center justify-between px-2 sm:px-4 lg:px-0">
+
             <button
               className="text-[#FFFFFF] text-2xl lg:hidden"
               onClick={() => setMenuOpen(!menuOpen)}
@@ -105,7 +104,7 @@ export default function Nav() {
               <NavLink
                 to="/"
                 className={({ isActive }) =>
-                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
+                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
                 }
               >
                 <i className="fas fa-home mr-2"></i>
@@ -114,7 +113,7 @@ export default function Nav() {
               <NavLink
                 to="/politics"
                 className={({ isActive }) =>
-                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
+                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
                 }
               >
                 Politics
@@ -123,7 +122,7 @@ export default function Nav() {
               <NavLink
                 to="/philoneist"
                 className={({ isActive }) =>
-                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
+                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
                 }
               >
                 Philoneist
@@ -132,7 +131,7 @@ export default function Nav() {
               <NavLink
                 to="/opinion"
                 className={({ isActive }) =>
-                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
+                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
                 }
               >
                 Opinion
@@ -141,7 +140,7 @@ export default function Nav() {
               <NavLink
                 to="/reviews"
                 className={({ isActive }) =>
-                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
+                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
                 }
               >
                 Reviews
@@ -150,7 +149,7 @@ export default function Nav() {
               <NavLink
                 to="/history"
                 className={({ isActive }) =>
-                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
+                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
                 }
               >
                 History
@@ -159,7 +158,7 @@ export default function Nav() {
               <NavLink
                 to="/world"
                 className={({ isActive }) =>
-                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
+                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
                 }
               >
                 World
@@ -168,7 +167,7 @@ export default function Nav() {
               <NavLink
                 to="/archives"
                 className={({ isActive }) =>
-                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
+                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
                 }
               >
                 Archive
@@ -177,14 +176,14 @@ export default function Nav() {
               <NavLink
                 to="/achievement"
                 className={({ isActive }) =>
-                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-sm px-4 py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
+                  `text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2 flex items-center ${isActive ? 'bg-[#222f3d]' : ''}`
                 }
               >
                 Achievements
               </NavLink>
 
               <div className="relative group">
-                <div className="text-[#FFFFFF] hover:text-orange-500 cursor-pointer font-medium text-sm px-4 py-2 flex items-center">
+                <div className="text-[#FFFFFF] hover:text-orange-500 hover:underline cursor-pointer font-medium text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2 flex items-center">
                   About Us
                   <i className="fas fa-caret-down ml-2"></i>
                 </div>
@@ -256,7 +255,7 @@ export default function Nav() {
             </div>
           </div>
           {menuOpen && (
-            <div className="lg:hidden fixed inset-0 bg-[#708364] flex flex-col items-center justify-center z-50">
+            <div className="lg:hidden fixed inset-0 bg-[#708364] flex flex-col items-center justify-center p-4 sm:p-8 z-50">
               <button
                 className="text-white text-3xl absolute top-4 right-4"
                 onClick={() => setMenuOpen(false)}
@@ -274,7 +273,48 @@ export default function Nav() {
                 <NavLink to="/world" className="text-white text-lg py-2" onClick={() => setMenuOpen(false)}>World</NavLink>
                 <NavLink to="/archives" className="text-white text-lg py-2" onClick={() => setMenuOpen(false)}>Archives</NavLink>
                 <NavLink to="/achievement" className="text-white text-lg py-2" onClick={() => setMenuOpen(false)}>Achievements</NavLink>
+                {/* About Us link in mobile view */}
+               <div className="text-white text-lg py-2 cursor-pointer hover:text-orange-200" onClick={() => setAboutUsOpen(!aboutUsOpen)}>
+                  About Us
+                  <i className="fas fa-caret-down ml-2"></i>
+                </div>
+                {aboutUsOpen && (
+                  <div className="flex flex-col items-center">
+                    <NavLink to="/leadership" className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[12px] sm:text-[14px]" onClick={() => setMenuOpen(false)}>Leadership</NavLink>
+                    <NavLink to="/team" className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[12px] sm:text-[14px]" onClick={() => setMenuOpen(false)}>Team</NavLink>
+                    <NavLink to="/alumni" className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[12px] sm:text-[14px]" onClick={() => setMenuOpen(false)}>Alumni</NavLink>
+                    <NavLink to="/more" className="block px-4 py-1 hover:bg-orange-500 hover:text-black text-[12px] sm:text-[14px]" onClick={() => setMenuOpen(false)}>More</NavLink>
+                  </div>
+                )}
                 <NavLink to="/adminlogin" className="text-white text-lg py-2" onClick={() => setMenuOpen(false)}>Admin</NavLink>
+
+                {/* search bar for mobile view */}
+                <div className="relative ml-8" ref={searchBarRef}>
+                  <div
+                    className="text-[#FFFFFF] flex items-center hover:text-orange-500 cursor-pointer font-medium text-sm px-4 py-2"
+                    onClick={() => setShowSearchBar(!showSearchBar)}
+                  >
+                    <i className="fas fa-search"></i>
+                  </div>
+                  {showSearchBar && (
+                    <div className="absolute mt-2 left-1/2 transform -translate-x-1/2 w-64  flex items-center bg-transparent z-50">
+                      <form onSubmit={handleSearch} className="flex w-full items-center">
+                        <input
+                          type="text"
+                          name="searchInput"
+                          className="bg-white text-black text-xs sm:text-sm p-1 sm:p-2 flex-grow focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-l-md"
+                          placeholder="Search..."
+                        />
+                        <button
+                          type="submit"
+                          className="bg-orange-500 text-white p-2 ml-2 rounded-r-md"
+                        >
+                          Search
+                        </button>
+                      </form>
+                    </div>
+                  )}
+                </div>
               </nav>
             </div>
           )}

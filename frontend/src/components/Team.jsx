@@ -81,20 +81,20 @@ const Team = () => {
   return (
     <>
       <div className="min-h-screen bg-[#F0F4F8]">
-        <div className="relative h-[280px] bg-cover bg-center" style={{ backgroundImage: `url(${CampusNITR})` }}>
+      <div className="relative h-[25vh] md:h-[280px] bg-cover bg-center" style={{ backgroundImage: `url(${CampusNITR})` }}>
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative z-10 flex items-center justify-between h-full px-4 md:px-16 text-white">
             <img src={CognizenLogo2} alt="Cognizen Club Logo" className="h-1/2" />
             <div className="absolute left-1/2 transform -translate-x-1/2 w-full md:w-1/3 text-center font-raleway space-y-4">
               <h1 className="text-2xl md:text-4xl font-medium">Let's meet</h1>
               <h1 className="text-2xl md:text-4xl font-medium">our</h1>
-              <h1 className="text-2xl md:text-4xl font-medium">Team Members</h1>
+              <h1 className="text-2xl md:text-4xl font-medium">EB Members</h1>
             </div>
             <div className="hidden lg:flex absolute top-4 right-4 space-x-4 z-10">
-              <Link to="/" className="text-md font-medium px-4 py-2 hover:underline">home</Link>
-              <Link to="/leadership" className="text-md font-medium px-4 py-2 hover:underline">leadership</Link>
-              <Link to="/alumni" className="text-md font-medium px-4 py-2 hover:underline">alumni</Link>
-              <Link to="/more" className="text-md font-medium px-4 py-2 hover:underline">more</Link>
+              <Link to="/" className="text-md font-medium px-2 md:px-4 py-4 md:py-2 hover:underline">home</Link>
+              <Link to="/team" className="text-md font-medium px-2 md:px-4 py-4 md:py-2 hover:underline">team</Link>
+              <Link to="/alumni" className="text-md font-medium px-2 md:px-4 py-4 md:py-2 hover:underline">alumni</Link>
+              <Link to="/more" className="text-md font-medium px-2 md:px-4 py-4 md:py-2 hover:underline">more</Link>
             </div>
             <div className="lg:hidden flex items-center z-10">
               <button
@@ -105,15 +105,15 @@ const Team = () => {
                 &#x22EE;
               </button>
               {isMenuOpen && (
-                <div
-                  ref={dropdownRef}
-                  className="absolute top-12 right-0 bg-transparent shadow-md rounded-lg p-4 z-30"
-                >
-                  <Link to="/" className="block text-md font-medium text-white px-4 py-2 hover:underline">home</Link>
-                  <Link to="/leadership" className="block text-md font-medium text-white px-4 py-2 hover:underline">leadership</Link>
-                  <Link to="/alumni" className="block text-md font-medium text-white px-4 py-2 hover:underline">alumni</Link>
-                  <Link to="/more" className="block text-md font-medium text-white px-4 py-2 hover:underline">more</Link>
-                </div>
+               <div
+               ref={dropdownRef}
+               className="absolute top-12 right-0 bg-gray-800 text-white shadow-md rounded-lg p-4 z-30 "
+             >
+               <Link to="/" className="block text-md font-medium text-white px-4 py-2 hover:underline">Home</Link>
+               <Link to="/team" className="block text-md font-medium text-white px-4 py-2 hover:underline">Team</Link>
+               <Link to="/alumni" className="block text-md font-medium text-white px-4 py-2 hover:underline">Alumni</Link>
+               <Link to="/more" className="block text-md font-medium text-white px-4 py-2 hover:underline">More</Link>
+             </div>
               )}
             </div>
           </div>
@@ -121,7 +121,7 @@ const Team = () => {
 
         <div className="flex justify-center py-[8vh] bg-[#e9e7e7]">
           <div className="py-8 w-4/5">
-            <h2 className="text-3xl font-bold text-center mb-8 text-[#222f3d] font-raleway">"Innovate, Collaborate, Succeed"</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 text-[#222f3d] font-raleway">"Innovate, Collaborate, Succeed"</h2>
             <div className="flex flex-col items-center space-y-8">
               {loading ? (
                 <div className="flex justify-center items-center h-[70vh]">
